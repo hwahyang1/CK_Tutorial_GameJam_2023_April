@@ -32,7 +32,6 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 		public int Uid => uid;
 
 		private Image image;
-		private bool protectModify = false;
 		
 		private System.Action<Vector2Int, bool> overCallback = null;
 		private System.Action clickCallback = null;
@@ -54,8 +53,6 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			this.overCallback = overCallback;
 			this.clickCallback = clickCallback;
 			image.sprite = isSlotActive ? activeSprite : inActiveSprite;
-
-			StartCoroutine(PauseForSeconds());
 		}
 
 		public void SetItemId(int id, int uid)
@@ -63,8 +60,6 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			if (id < 0) return;
 			itemId = id;
 			this.uid = uid;
-
-			StartCoroutine(PauseForSeconds());
 		}
 
 		public void SetSprite(Sprite sprite)
@@ -84,15 +79,7 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 
 		public void OnPointerClick(PointerEventData eventData)
 		{
-			if (protectModify) return;
 			clickCallback?.Invoke();
-		}
-
-		private IEnumerator PauseForSeconds()
-		{
-			protectModify = true;
-			yield return new WaitForSeconds(0.25f);
-			protectModify = false;
 		}
 	}
 }

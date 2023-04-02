@@ -57,6 +57,8 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 
 		[SerializeField]
 		private Sprite duplicateSprite;
+		
+		private bool protectModify = false;
 
 		private ItemStorage itemStorage;
 		private ItemManager itemManager;
@@ -123,11 +125,17 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 
 		private void ProcessMouseClickEvent()
 		{
+			if (protectModify) return;
+			
+			if (itemManager.CurrentItemCode != 0) return;
+			
 			Slot targetSlot = inventory[currentInventoryPosition.x][currentInventoryPosition.y];
 			if (targetSlot.ItemId <= 0) return;
 
 			itemManager.SetCurrentItem(targetSlot.ItemId);
 			DeleteItem(targetSlot.Uid);
+
+			StartCoroutine(PauseForSeconds());
 		}
 
 		private void Update()
@@ -255,6 +263,14 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			float random = Random.Range(0.01f, 1.2f);
 			int uid = Mathf.RoundToInt(timestamp * random);
 
+			StartCoroutine(PauseForSeconds());
+
+			int res = 0;
+			if (replaceSlot)
+			{
+				res = DeleteItem(replaceUid);
+			}
+
 			for (int i = 0; i < targetSlots.Count; i++)
 			{
 				for (int j = 0; j < targetSlots[i].Count; j++)
@@ -267,7 +283,7 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 
 			PlaceOverlay(id, uid);
 
-			return replaceSlot ? DeleteItem(replaceUid) : 0;
+			return res;
 		}
 
 		private void PlaceOverlay(int id, int uid)
@@ -323,6 +339,13 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			overlayImages.Remove(uid);
 
 			return id;
+		}
+
+		private IEnumerator PauseForSeconds()
+		{
+			protectModify = true;
+			yield return new WaitForSeconds(0.25f);
+			protectModify = false;
 		}
 	}
 }
