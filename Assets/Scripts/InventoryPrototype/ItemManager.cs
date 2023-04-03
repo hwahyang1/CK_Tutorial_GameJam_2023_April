@@ -44,20 +44,33 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 
 			overlayImage.rectTransform.anchoredPosition = canvasCursorPosition.CanvasPosition;
 			// 짝수인경우 0.5칸 조정해서 위치시킴
-			if (currentItemSlots.GetLength(1) % 2 == 0) overlayImage.rectTransform.anchoredPosition -= new Vector2(0.5f * overlaySizeMultiply, 0);
-			if (currentItemSlots.GetLength(0) % 2 == 0) overlayImage.rectTransform.anchoredPosition += new Vector2(0, 0.5f * overlaySizeMultiply);
-			
+			if (currentItemSlots.GetLength(1) % 2 == 0)
+				overlayImage.rectTransform.anchoredPosition -= new Vector2(0.5f * overlaySizeMultiply, 0);
+			if (currentItemSlots.GetLength(0) % 2 == 0)
+				overlayImage.rectTransform.anchoredPosition += new Vector2(0, 0.5f * overlaySizeMultiply);
+
 			List<List<Slot>> tiles = slotsManager.ExportAllTargetTiles(currentItemSlots);
 			KeyValuePair<int, int> validateResult = slotsManager.ValidateTiles(tiles);
 			slotsManager.VisualizeTiles(tiles, validateResult.Key);
 
 			if (Input.GetMouseButtonDown(0) && validateResult.Key != 0)
 			{
-				int itemId = slotsManager.PlaceItem(tiles, currentItemCode, validateResult.Key == 2, validateResult.Value);
+				int itemId =
+					slotsManager.PlaceItem(tiles, currentItemCode, validateResult.Key == 2, validateResult.Value);
 				SetCurrentItem(itemId);
 			}
 		}
 
+		/// <summary>
+		/// 현재 선택된 아이템을 교체합니다.
+		/// </summary>
+		/// <param name="code">바꿀 아이템의 ID를 지정합니다.</param>
+		/// <remarks>
+		/// 아래의 ID는 사전 지정된 ID 입니다.
+		/// ItemStorage에 사전 지정된 ID가 존재해도 무시 될 수 있습니다.
+		/// -1 -> 사용 안함
+		/// 0 -> 빈칸
+		/// </remarks>
 		public void SetCurrentItem(int code)
 		{
 			DefineItem currentItem = itemStorage.GetItems()[code];
@@ -67,7 +80,7 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 
 			if (code == 0) return;
 			currentItemSlots = DefineItem.ConvertStringListToBoolArray(currentItem.slotSize);
-			
+
 			overlayImage.sprite = currentItem.sprite;
 			overlayImage.rectTransform.sizeDelta =
 				new Vector2(currentItemSlots.GetLength(1) * overlaySizeMultiply,

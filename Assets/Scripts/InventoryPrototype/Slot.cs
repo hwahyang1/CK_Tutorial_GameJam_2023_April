@@ -44,6 +44,22 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 		// -1 -> 사용안함
 		// 0 -> 빈 슬롯
 		// 1~ -> 아이템
+		/// <summary>
+		/// 슬롯을 초기화 합니다.
+		/// </summary>
+		/// <param name="id">해당 슬롯에 위치하는 아이템의 ID를 지정합니다.</param>
+		/// <param name="uid">ID에 대응하는 UID를 지정합니다.</param>
+		/// <param name="position">현재 슬롯의 위치를 지정합니다.</param>
+		/// <param name="overCallback">현재 슬롯에 마우스가 들어오거나 나갔을 때의 Callback을 지정합니다. 없는 경우, null로 지정합니다.</param>
+		/// <param name="clickCallback">현재 슬롯에 클릭 이벤트가 발생했을 때의 Callback을 지정합니다. 없는 경우, null로 지정합니다.</param>
+		/// <param name="activeSprite">현재 슬롯이 활성화 된 상태일 때의 Sprite를 지정합니다.</param>
+		/// <param name="inActiveSprite">현재 슬롯이 비활성화 된 상태일 때의 Sprite를 지정합니다.</param>
+		/// <remarks>
+		/// 아래의 ID는 사전 지정된 ID 입니다.
+		/// ItemStorage에 사전 지정된 ID가 존재해도 무시 될 수 있습니다.
+		/// -1 -> 사용 안함
+		/// 0 -> 빈칸
+		/// </remarks>
 		public void Init(int id, int uid, Vector2Int position, System.Action<Vector2Int, bool> overCallback, System.Action clickCallback, Sprite activeSprite, Sprite inActiveSprite)
 		{
 			itemId = id;
@@ -55,6 +71,17 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			image.sprite = isSlotActive ? activeSprite : inActiveSprite;
 		}
 
+		/// <summary>
+		/// 현재 칸에 지정된 ID를 변경합니다.
+		/// </summary>
+		/// <param name="id">변경할 ID를 지정합니다.</param>
+		/// <param name="uid">ID에 대응하는 UID를 지정합니다.</param>
+		/// <remarks>
+		/// 아래의 ID는 사전 지정된 ID 입니다.
+		/// ItemStorage에 사전 지정된 ID가 존재해도 무시 될 수 있습니다.
+		/// -1 -> 사용 안함
+		/// 0 -> 빈칸
+		/// </remarks>
 		public void SetItemId(int id, int uid)
 		{
 			if (id < 0) return;
@@ -62,10 +89,16 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			this.uid = uid;
 		}
 
+		/// <summary>
+		/// 현재 칸에 지정된 배경 Sprite를 변경합니다.
+		/// </summary>
+		/// <param name="sprite">변경할 Sprite를 지정합니다.</param>
 		public void SetSprite(Sprite sprite)
 		{
 			image.sprite = sprite;
 		}
+		
+		/* ============ Events ============ */
 		
 		public void OnPointerEnter(PointerEventData eventData)
 		{

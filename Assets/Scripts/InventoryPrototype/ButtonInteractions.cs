@@ -11,7 +11,7 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 	public class ButtonInteractions : MonoBehaviour
 	{
 		private int[,] blankUid = new int[5, 5];
-		
+
 		private SlotsManager slotsManager;
 
 		private void Awake()

@@ -23,6 +23,7 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 		[Header("Status")]
 		[SerializeField, ReadOnly]
 		private Vector2 canvasPosition;
+
 		public Vector2 CanvasPosition => canvasPosition;
 
 		private void Update()
@@ -39,7 +40,7 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			// 화면 크기는 달라지지만 Canvas 상의 좌표값은 바뀌지 않음 -> 보정
 			canvasPosition.x = canvasPosition.x / Screen.width * 1920;
 			canvasPosition.y = canvasPosition.y / Screen.height * 1080;
-			
+
 			mousePositionText.text += "\nCanvas Position: " + canvasPosition.ToString("F1");
 		}
 	}

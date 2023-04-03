@@ -16,10 +16,10 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 	{
 		[SerializeField]
 		private Text inventoryPositionText;
-		
+
 		[SerializeField]
 		private Transform slotsParent;
-		
+
 		[SerializeField]
 		private Transform overlayParent;
 
@@ -57,7 +57,7 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 
 		[SerializeField]
 		private Sprite duplicateSprite;
-		
+
 		private bool protectModify = false;
 
 		private ItemStorage itemStorage;
@@ -70,6 +70,9 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			Init();
 		}
 
+		/// <summary>
+		/// 인벤토리를 초기화 합니다.
+		/// </summary>
 		private void Init()
 		{
 			inventory = new Slot[inventoryMaxSize.x][];
@@ -83,12 +86,18 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 				for (int j = 0; j < inventoryMaxSize.y; j++)
 				{
 					Slot slot = horizontalParent.GetChild(j).gameObject.GetComponent<Slot>();
-					slot.Init(0, 0, new Vector2Int(i, j), ProcessMouseOverEvent, ProcessMouseClickEvent, activeSprite, inactiveSprite);
+					slot.Init(0, 0, new Vector2Int(i, j), ProcessMouseOverEvent, ProcessMouseClickEvent, activeSprite,
+					          inactiveSprite);
 					inventory[i][j] = slot;
 				}
 			}
 		}
 
+		/// <summary>
+		/// 인벤토리를 원하는 형태로 초기화 합니다.
+		/// </summary>
+		/// <param name="array">초기화 할 인벤토리의 배열을 지정합니다.</param>
+		/// <param name="uidArray">각 아이템들의 UID를 지정합니다.</param>
 		public void InitFromArray(int[,] array, int[,] uidArray)
 		{
 			inventory = new Slot[array.GetLength(0)][];
@@ -106,7 +115,8 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 				for (int j = 0; j < inventory[i].Length; j++)
 				{
 					Slot slot = horizontalParent.GetChild(j).gameObject.GetComponent<Slot>();
-					slot.Init(array[i, j], uidArray[i, j], new Vector2Int(i, j), ProcessMouseOverEvent, ProcessMouseClickEvent, activeSprite, inactiveSprite);
+					slot.Init(array[i, j], uidArray[i, j], new Vector2Int(i, j), ProcessMouseOverEvent,
+					          ProcessMouseClickEvent, activeSprite, inactiveSprite);
 					inventory[i][j] = slot;
 
 					if (!usedUid.Contains(uidArray[i, j]))
@@ -118,31 +128,14 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			}
 		}
 
-		private void ProcessMouseOverEvent(Vector2Int position, bool enter)
-		{
-			currentInventoryPosition = enter ? position : new Vector2Int(-1, -1);
-		}
-
-		private void ProcessMouseClickEvent()
-		{
-			if (protectModify) return;
-			
-			if (itemManager.CurrentItemCode != 0) return;
-			
-			Slot targetSlot = inventory[currentInventoryPosition.x][currentInventoryPosition.y];
-			if (targetSlot.ItemId <= 0) return;
-
-			itemManager.SetCurrentItem(targetSlot.ItemId);
-			DeleteItem(targetSlot.Uid);
-
-			StartCoroutine(PauseForSeconds());
-		}
-
 		private void Update()
 		{
 			inventoryPositionText.text = "Inventory Position: " + currentInventoryPosition.ToString("F1");
 		}
 
+		/// <summary>
+		/// 타일의 색상을 초기화 합니다.
+		/// </summary>
 		public void ResetAllTiles()
 		{
 			for (int i = 0; i < inventory.Length; i++)
@@ -155,6 +148,14 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			}
 		}
 
+		/// <summary>
+		/// 특정 블록에서 사용하는 Slot을 반환합니다.
+		/// </summary>
+		/// <param name="itemPosition">아이템의 위치 데이터를 지정합니다.</param>
+		/// <returns>해당되는 Slot의 위치 데이터를 2차원 배열로 반환합니다.</returns>
+		/// <remarks>
+		/// 기준 위치는 마우스의 현재 위치를 기준으로 합니다.
+		/// </remarks>
 		public List<List<Slot>> ExportAllTargetTiles(bool[,] itemPosition)
 		{
 			// 대상 칸 전부 추출
@@ -182,7 +183,19 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			return targetSlots;
 		}
 
-		// 0 -> 불가능 / 1 -> 가능 / 2 -> 중복
+		/// <summary>
+		/// 지정한 타일이 배치 가능한 지 반환합니다.
+		/// </summary>
+		/// <param name="targetSlots">조회할 타일을 모두 지정합니다.</param>
+		/// <returns>
+		/// 상태 코드와, UID(중복되는 경우)가 Key-Value Pair로 반환됩니다.
+		/// </returns>
+		/// <remarks>
+		/// 상태 코드는 아래를 참고하세요.
+		/// 0 -> 배치 불가능한 타일이 존재합니다. (없는 타일이거나, 한 개 이상의 타일에 블록이 두 개 이상 존재하는 경우)
+		/// 1 -> 모든 타일이 배치 가능합니다.
+		/// 2 -> 한 개 이상의 타일에 블록이 한 개 존재합니다.
+		/// </remarks>
 		public KeyValuePair<int, int> ValidateTiles(List<List<Slot>> targetSlots)
 		{
 			if (targetSlots.Count <= 0 || targetSlots[0].Count <= 0) return new KeyValuePair<int, int>(0, -1);
@@ -194,7 +207,7 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 				for (int j = 0; j < targetSlots[i].Count; j++)
 				{
 					Slot currentSlot = targetSlots[i][j];
-					
+
 					if (currentSlot == null)
 					{
 						isAvaliable = 0;
@@ -219,6 +232,7 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 								duplicateUid = targetUid;
 								isAvaliable = 2;
 							}
+
 							break;
 					}
 
@@ -231,6 +245,11 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			return new KeyValuePair<int, int>(isAvaliable, duplicateUid);
 		}
 
+		/// <summary>
+		/// 상태 코드를 바탕으로 타일의 배경 이미지를 교체합니다.
+		/// </summary>
+		/// <param name="targetSlots">해당되는 Slot을 모두 지정합니다.</param>
+		/// <param name="isAvaliable">상태 코드를 지정합니다.</param>
 		public void VisualizeTiles(List<List<Slot>> targetSlots, int isAvaliable)
 		{
 			for (int i = 0; i < targetSlots.Count; i++)
@@ -238,7 +257,7 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 				for (int j = 0; j < targetSlots[i].Count; j++)
 				{
 					Slot currentSlot = targetSlots[i][j];
-					
+
 					if (currentSlot == null || currentSlot.ItemId == -1) continue;
 
 					switch (isAvaliable)
@@ -257,6 +276,17 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			}
 		}
 
+		/// <summary>
+		/// 기준 위치에 아이템을 배치합니다.
+		/// </summary>
+		/// <param name="targetSlots">대상 SLot을 지정합니다.</param>
+		/// <param name="id">배치할 아이템의 ID를 지정합니다.</param>
+		/// <param name="replaceSlot">대상 위치에 아이템이 이미 존재하는지 지정합니다.</param>
+		/// <param name="replaceUid">대상 위치에 아이템이 존재하는 경우, 찾을 UID를 지정합니다.</param>
+		/// <returns>교체된 아이템의 ID가 반환됩니다.</returns>
+		/// <remarks>
+		/// UID는 무작위로 생성됩니디.
+		/// </remarks>
 		public int PlaceItem(List<List<Slot>> targetSlots, int id, bool replaceSlot, int replaceUid = -1)
 		{
 			long timestamp = System.DateTimeOffset.Now.ToUnixTimeSeconds();
@@ -286,6 +316,11 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 			return res;
 		}
 
+		/// <summary>
+		/// 블록의 이미지를 배치합니다.
+		/// </summary>
+		/// <param name="id">배치할 블록의 ID를 지정합니다.</param>
+		/// <param name="uid">배치할 블록의 UID를 지정합니다.</param>
 		private void PlaceOverlay(int id, int uid)
 		{
 			Slot first = null;
@@ -297,7 +332,9 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 					first = slot;
 					break;
 				}
-				if (first != null) break;;
+
+				if (first != null) break;
+				;
 			}
 
 			int length = 0;
@@ -314,17 +351,24 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 
 			Image image = Instantiate(imagePrefab, overlayParent).GetComponent<Image>();
 			image.sprite = item.sprite;
-			RectTransform rectTransform = image.GetComponent<RectTransform>(); 
-			rectTransform.sizeDelta = new Vector2(firstLine.Length * overlaySizeMultiply, item.slotSize.Count * overlaySizeMultiply);
-			rectTransform.anchoredPosition = new Vector2(first.Position.y * overlaySizeMultiply, (first.Position.x + length) * overlaySizeMultiply * -1);
-			
+			RectTransform rectTransform = image.GetComponent<RectTransform>();
+			rectTransform.sizeDelta = new Vector2(firstLine.Length * overlaySizeMultiply,
+			                                      item.slotSize.Count * overlaySizeMultiply);
+			rectTransform.anchoredPosition = new Vector2(first.Position.y * overlaySizeMultiply,
+			                                             (first.Position.x + length) * overlaySizeMultiply * -1);
+
 			overlayImages.Add(uid, image);
 		}
 
+		/// <summary>
+		/// 아이템을 제거합니다.
+		/// </summary>
+		/// <param name="uid">제거할 아이템의 UID를 지정합니다.</param>
+		/// <returns>해당되는 UID에 대응하는 아이템의 ID가 반환됩니다.</returns>
 		public int DeleteItem(int uid)
 		{
 			int id = 0;
-			
+
 			for (int i = 0; i < inventory.GetLength(0); i++)
 			{
 				Slot[] slots = Array.FindAll(inventory[i], target => target.Uid == uid);
@@ -334,18 +378,43 @@ namespace CK_Tutorial_GameJam_April.InventoryPrototype
 					slot.SetItemId(0, -1);
 				}
 			}
-			
+
 			Destroy(overlayImages[uid].gameObject);
 			overlayImages.Remove(uid);
 
 			return id;
 		}
 
+		/// <summary>
+		/// 아이템 배치와 수정 이벤트가 동시에 발생하는 문제를 막기 위해, 0.25초동안 이벤트 처리를 방지시킵니다.
+		/// </summary>
 		private IEnumerator PauseForSeconds()
 		{
 			protectModify = true;
 			yield return new WaitForSeconds(0.25f);
 			protectModify = false;
+		}
+		
+		/* ============ Events ============ */
+
+		private void ProcessMouseOverEvent(Vector2Int position, bool enter)
+		{
+			currentInventoryPosition = enter ? position : new Vector2Int(-1, -1);
+		}
+
+		private void ProcessMouseClickEvent()
+		{
+			if (protectModify) return;
+
+			if (itemManager.CurrentItemCode != 0) return;
+
+			Slot targetSlot = inventory[currentInventoryPosition.x][currentInventoryPosition.y];
+			if (targetSlot.ItemId <= 0) return;
+
+			itemManager.SetCurrentItem(targetSlot.ItemId);
+			DeleteItem(targetSlot.Uid);
+
+			StartCoroutine(PauseForSeconds());
 		}
 	}
 }
