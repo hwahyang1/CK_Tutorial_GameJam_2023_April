@@ -32,7 +32,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene
 		{
 			yield return new WaitForSeconds(1f);
 
-			sceneChange.ChangeScene("GameScene", false, true);
+			sceneChange.ChangeScene("MainStagePrototypeScene", false, true);
 		}
 	}
 }
