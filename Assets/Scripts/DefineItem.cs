@@ -14,11 +14,21 @@ namespace CK_Tutorial_GameJam_April
 	{
 		public string name;
 
-		[Tooltip("공백으로 구분합니다.")]
+		[Tooltip("0과 1만 사용합니다. 공백으로 구분합니다.")]
 		public List<string> slotSize;
+
+		public int rank; // 아이템 등급
+
+		public float hp; // 스태미나 회복치
+		public float exp; // 경험치
 
 		public Sprite sprite;
 
+		/// <summary>
+		/// List<string>인 DefineItem.slotSize를 2차원 bool 배열로 변환합니다.
+		/// </summary>
+		/// <param name="original">변환할 slotSize 변수를 지정합니다.</param>
+		/// <returns>변환된 2차원 bool 배열이 반환됩니다.</returns>
 		public static bool[,] ConvertStringListToBoolArray(List<string> original)
 		{
 			int horizontalCount = original[0].Split(' ').Length;
