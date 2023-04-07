@@ -62,7 +62,7 @@ namespace CK_Tutorial_GameJam_April.MainStagePrototypeScene.InventoryPrototype.S
 		private Sprite duplicateSprite;
 
 		[Header("Status")]
-		private bool isActive = true;
+		private bool isActive = false;
 		public bool IsActive => isActive;
 
 		private bool protectModify = false;
