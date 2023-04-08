@@ -13,7 +13,6 @@ namespace CK_Tutorial_GameJam_April.MainStagePrototypeScene.InventoryPrototype.I
 	public class InputManager : MonoBehaviour
 	{
 		private SlotsManager slotsManager;
-		private CharacterManager characterManager;
 
 		private void Start()
 		{

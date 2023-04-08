@@ -77,11 +77,18 @@ namespace CK_Tutorial_GameJam_April.MainStagePrototypeScene.InventoryPrototype.S
 			Init();
 		}
 
+		/// <summary>
+		/// 인벤토리 탭의 표시 여부를 변경합니다.
+		/// </summary>
+		/// <param name="active">인벤토리 탭의 표시 여부를 지정합니다.</param>
+		/// <remarks>
+		/// ItemManager.CurrentItemCode != 0 인 경우, active 값에 관계없이 무조건 true로 처리됩니다.
+		/// </remarks>
 		public void SetTabActive(bool active)
 		{
-			isActive = active;
-			inventoryParent.SetBool("Show", active);
-			overlayParent.gameObject.SetActive(active);
+			isActive = itemManager.CurrentItemCode != 0 || active;
+			inventoryParent.SetBool("Show", isActive);
+			//overlayParent.gameObject.SetActive(isActive);
 		}
 
 		/// <summary>
