@@ -17,6 +17,8 @@ namespace CK_Tutorial_GameJam_April
 		[Tooltip("0과 1만 사용합니다. 공백으로 구분합니다.")]
 		public List<string> slotSize;
 
+		public bool dropable; // 버릴 수 있는지
+
 		public int rank; // 아이템 등급
 
 		public float hp; // 스태미나 회복치
