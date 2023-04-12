@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - DontDestroyOnLoadRoot
+  - CursorPositionTargetCanvas
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
+  - Layer 1
+  - Layer 2 - Overlay
   - 
   - 
   - 

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TimeSpan = System.TimeSpan;
 
 using UnityEngine;
+
+using Cysharp.Threading.Tasks;
 
 namespace CK_Tutorial_GameJam_April
 {
@@ -11,16 +14,16 @@ namespace CK_Tutorial_GameJam_April
 	public class DestroyThis : MonoBehaviour
 	{
 		[SerializeField]
-		private float timeout;
+		private float timeoutSecond;
 
 		private void Start()
 		{
-			StartCoroutine(nameof(TimeoutCoroutine));
+			Timeout().Forget();
 		}
 
-		private IEnumerator TimeoutCoroutine()
+		private async UniTaskVoid Timeout()
 		{
-			yield return new WaitForSeconds(timeout);
+			await UniTask.Delay(TimeSpan.FromSeconds(timeoutSecond));
 			Destroy(gameObject);
 		}
 	}
