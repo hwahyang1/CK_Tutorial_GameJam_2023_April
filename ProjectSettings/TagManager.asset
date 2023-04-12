@@ -13,8 +13,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - Layer 1
+  - Layer 0 - Background
+  - Layer 1 - Main
   - Layer 2 - Overlay
   - 
   - 
