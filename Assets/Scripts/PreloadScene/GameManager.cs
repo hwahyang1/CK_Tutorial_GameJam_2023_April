@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TimeSpan = System.TimeSpan;
 
 using UnityEngine;
+
+using Cysharp.Threading.Tasks;
 
 using CK_Tutorial_GameJam_April.PreloadScene.Scene;
 
@@ -25,14 +28,13 @@ namespace CK_Tutorial_GameJam_April.PreloadScene
 				DontDestroyOnLoad(obj);
 			}
 
-			StartCoroutine(DelayedStart());
+			DelayedStart().Forget();
 		}
 
-		private IEnumerator DelayedStart()
+		private async UniTaskVoid DelayedStart()
 		{
-			yield return new WaitForSeconds(1f);
-
-			sceneChange.ChangeScene("GameScene", false, true);
+			await UniTask.Delay(TimeSpan.FromSeconds(1));
+			sceneChange.ChangeScene("StageScene", false, true);
 		}
 	}
 }

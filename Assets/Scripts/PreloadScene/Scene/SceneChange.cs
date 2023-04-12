@@ -1,11 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Action = System.Action;
+using TimeSpan = System.TimeSpan;
 
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
+using Cysharp.Threading.Tasks;
 
 namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 {
@@ -28,9 +30,6 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 		[SerializeField]
 		private float transitionTime = 1f;
 
-		private Action addSceneCallback = null;
-		private Action loadSceneCallback = null;
-
 		/// <summary>
 		/// 직전 Scene의 이름을 담습니다.
 		/// SceneChange.Change()를 사용하여 Scene을 변경해야 반영됩니다.
@@ -46,11 +45,10 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 		/// <param name="callback">Scene 변경 이후 Callback을 받으려면 지정합니다.</param>
 		public void ChangeScene(string sceneName, bool fadeIn = true, bool fadeOut = true, Action callback = null)
 		{
-			loadSceneCallback = callback;
-			StartCoroutine(ChangeSceneCoroutine(sceneName, fadeIn, fadeOut));
+			ChangeSceneTask(sceneName, fadeIn, fadeOut, callback).Forget();
 		}
 
-		private IEnumerator ChangeSceneCoroutine(string sceneName, bool fadeIn, bool fadeOut)
+		private async UniTaskVoid ChangeSceneTask(string sceneName, bool fadeIn, bool fadeOut, Action callback)
 		{
 			loadingPercent.gameObject.SetActive(false);
 
@@ -69,10 +67,10 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 					accumulateTime += Time.deltaTime;
 					Color color = new Color(1f, 1f, 1f, accumulateTime / transitionTime);
 					loadingCover.color = color;
-					yield return null;
+					await UniTask.DelayFrame(1);
 				}
 
-				yield return new WaitForSeconds(0.25f);
+				await UniTask.Delay(TimeSpan.FromMilliseconds(250));
 			}
 
 			if (fadeOut)
@@ -80,22 +78,22 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 				loadingPercent.gameObject.SetActive(true);
 				loadingPercent.text = "0%";
 				loadingCover.color = new Color(1f, 1f, 1f, 1f);
-				yield return new WaitForSeconds(0.25f);
+				await UniTask.Delay(TimeSpan.FromMilliseconds(250));
 			}
 
 			AsyncOperation sceneChange = SceneManager.LoadSceneAsync(sceneName);
 			while (!sceneChange.isDone)
 			{
 				loadingPercent.text = string.Format("{0}%", Mathf.Round(sceneChange.progress * 1000) * 0.1f);
-				yield return null;
+				await UniTask.DelayFrame(1);
 			}
 
 			loadingPercent.text = "100%";
-			yield return new WaitForSeconds(0.2f);
+			await UniTask.Delay(TimeSpan.FromMilliseconds(200));
 
 			loadingPercent.gameObject.SetActive(false);
 			loadingPercent.text = "0%";
-			yield return new WaitForSeconds(0.05f);
+			await UniTask.Delay(TimeSpan.FromMilliseconds(50));
 
 			if (fadeOut)
 			{
@@ -105,7 +103,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 					accumulateTime += Time.deltaTime;
 					Color color = new Color(1f, 1f, 1f, 1f - (accumulateTime / transitionTime));
 					loadingCover.color = color;
-					yield return null;
+					await UniTask.DelayFrame(1);
 				}
 			}
 
@@ -115,8 +113,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 				canvas.SetActive(false);
 			}
 
-			loadSceneCallback?.Invoke();
-			loadSceneCallback = null;
+			callback?.Invoke();
 		}
 
 		/// <summary>
@@ -133,28 +130,22 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 					return;
 			#pragma warning restore CS0618 // Type or member is obsolete
 
-			addSceneCallback = callback;
-			StartCoroutine(nameof(AddSceneCoroutine), sceneName);
+			AddSceneTask(sceneName, callback).Forget();
 		}
 
-		private IEnumerator AddSceneCoroutine(string sceneName)
+		private async UniTaskVoid AddSceneTask(string sceneName, Action callback)
 		{
-			AsyncOperation sceneChange = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-			while (!sceneChange.isDone)
-			{
-				yield return null;
-			}
+			await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
-			addSceneCallback?.Invoke();
-			addSceneCallback = null;
+			callback?.Invoke();
 		}
 
 		/// <summary>
 		/// Scene을 Unload 시킵니다.
-		/// Active된 Scene이 한개 일 때만 PreviousScene이 변경됩니다.
 		/// </summary>
 		/// <param name="sceneName">Unload할 Scene의 이름을 입력합니다.</param>
-		public void Unload(string sceneName)
+		/// <param name="callback">Scene 변경 이후 Callback을 받으려면 지정합니다.</param>
+		public void Unload(string sceneName, Action callback = null)
 		{
 			bool found = false;
 			#pragma warning disable CS0618 // Type or member is obsolete
@@ -168,9 +159,15 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 			}
 			#pragma warning restore CS0618 // Type or member is obsolete
 			if (!found) return;
+			
+			UnloadSceneTask(sceneName, callback).Forget();
+		}
 
-			if (SceneManager.sceneCount == 1) PreviousScene = SceneManager.GetActiveScene().name;
-			SceneManager.UnloadSceneAsync(sceneName);
+		private async UniTaskVoid UnloadSceneTask(string sceneName, Action callback)
+		{
+			await SceneManager.UnloadSceneAsync(sceneName);
+
+			callback?.Invoke();
 		}
 	}
 }
