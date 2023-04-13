@@ -7383,7 +7383,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1298803073}
   - component: {fileID: 1298803074}
-  - component: {fileID: 1298803075}
   m_Layer: 5
   m_Name: Player Inventory Area
   m_TagString: Untagged
@@ -7434,21 +7433,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1298803075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298803072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a562abcec7a6284eb7fd94e4485642d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5000
-  maxSpeed: 20
-  jumpSpeed: 5000
 --- !u!1 &1363887914
 GameObject:
   m_ObjectHideFlags: 0
@@ -7859,6 +7843,7 @@ GameObject:
   - component: {fileID: 1617177558}
   - component: {fileID: 1617177561}
   - component: {fileID: 1617177560}
+  - component: {fileID: 1617177562}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -7970,6 +7955,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &1617177562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617177557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a562abcec7a6284eb7fd94e4485642d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2000
+  maxSpeed: 200
+  jumpSpeed: 5000
 --- !u!1001 &1795363853
 PrefabInstance:
   m_ObjectHideFlags: 0
