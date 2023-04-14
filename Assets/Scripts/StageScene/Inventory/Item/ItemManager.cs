@@ -28,7 +28,6 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Item
 
 		[SerializeField, ReadOnly]
 		private int currentItemCode = 0;
-		
 
 		public int CurrentItemCode => currentItemCode;
 
