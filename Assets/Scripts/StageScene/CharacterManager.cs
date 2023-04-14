@@ -40,8 +40,9 @@ namespace CK_Tutorial_GameJam_April
 
 		private int stamina;
 
-		private int maxStamina;
+		private int maxStamina = 500;
 
+		[SerializeField]
 		public int level;
 
 		private bool isJumpable = true;
@@ -53,6 +54,8 @@ namespace CK_Tutorial_GameJam_April
 		private void Awake()
 		{
 			rd = GetComponent<Rigidbody2D>();
+			stamina = 0;
+			level = 0;
 		}
 		
 		private void Update()
@@ -76,7 +79,6 @@ namespace CK_Tutorial_GameJam_April
 			if (Input.GetMouseButtonDown(0) && isNpc)
 			{
 				npcSlotsManager.SetTabActive(true);
-				itemManager.SetCurrentItem(itemCode.itemID);
 			}
 
 			if (Input.GetMouseButton(0) && isTrigger) // 2초간 클릭하면 아이템이 먹어지므로 time에 deltatime을 더해서 구함
