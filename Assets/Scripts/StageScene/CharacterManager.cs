@@ -14,17 +14,23 @@ namespace CK_Tutorial_GameJam_April
 	{
 		[SerializeField]
 		private SlotsManager slotsManager;
+
+		[SerializeField]
+		private SlotsManager npcSlotsManager;
+
 		[SerializeField]
 		private ItemManager itemManager;
-		
+
 		[SerializeField]
 		private float speed;
+
 		[SerializeField]
 		private float maxSpeed;
+
 		[SerializeField]
 		private float jumpSpeed;
 
-		private float time = 0f; 
+		private float time = 0f;
 
 		private Rigidbody2D rd;
 
@@ -35,12 +41,14 @@ namespace CK_Tutorial_GameJam_April
 		private int stamina;
 
 		private int maxStamina;
-		
+
 		public int level;
 
 		private bool isJumpable = true;
 
 		private bool isTrigger = false;
+
+		private bool isNpc = false;
 
 		private void Awake()
 		{
@@ -48,26 +56,32 @@ namespace CK_Tutorial_GameJam_April
 			stamina = 0;
 			level = 0;
 		}
-		
+
 
 		private void Update()
 		{
-			
-			if (Input.GetKey(KeyCode.A) && rd.velocity.x>maxSpeed * (-1))
+			if (Input.GetKey(KeyCode.A) && rd.velocity.x > maxSpeed * (-1))
 			{
 				rd.AddForce(new Vector2(speed * (-1) * Time.deltaTime, 0f));
 			}
-			if (Input.GetKey(KeyCode.D)&&rd.velocity.x<maxSpeed)
+
+			if (Input.GetKey(KeyCode.D) && rd.velocity.x < maxSpeed)
 			{
 				rd.AddForce(new Vector2(speed * Time.deltaTime, 0f));
 			}
 
-			if (Input.GetKey(KeyCode.Space)&&isJumpable)
+			if (Input.GetKey(KeyCode.Space) && isJumpable)
 			{
 				rd.AddForce(new Vector2(0f, jumpSpeed * Time.deltaTime));
 			}
 
-			if (Input.GetMouseButton(0)) // 2초간 클릭하면 아이템이 먹어지므로 time에 deltatime을 더해서 구함
+			if (Input.GetMouseButtonDown(0) && isNpc)
+			{
+				npcSlotsManager.SetTabActive(true);
+				itemManager.SetCurrentItem(itemCode.itemID);
+			}
+
+			if (Input.GetMouseButton(0) && isTrigger) // 2초간 클릭하면 아이템이 먹어지므로 time에 deltatime을 더해서 구함
 			{
 				time += Time.deltaTime;
 			}
@@ -86,13 +100,13 @@ namespace CK_Tutorial_GameJam_April
 				stamina += 2;
 			}
 
-			if (stamina >= maxStamina&&level<=5)
+			if (stamina >= maxStamina && level <= 5)
 			{
 				Debug.Log("진화");
 				level += 1;
 			}
 		}
-		
+
 		private void OnCollisionEnter2D(Collision2D other)
 		{
 			if (other.gameObject.name == "Main Tilemap")
@@ -101,14 +115,14 @@ namespace CK_Tutorial_GameJam_April
 				Debug.Log("can jump");
 			}
 		}
-		
+
 		private void OnCollisionExit2D(Collision2D other)
 		{
 			if (other.gameObject.name == "Main Tilemap")
 			{
 				isJumpable = false;
 				Debug.Log("can't jump");
-			}	
+			}
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
@@ -118,6 +132,11 @@ namespace CK_Tutorial_GameJam_April
 				isTrigger = true;
 				itemCode = other.GetComponent<ItemCode>();
 			}
+
+			if (other.gameObject.name == "npc")
+			{
+				isNpc = true;
+			}
 		}
 
 		private void OnTriggerExit2D(Collider2D other)
@@ -126,7 +145,11 @@ namespace CK_Tutorial_GameJam_April
 			{
 				isTrigger = false;
 			}
-		}
 
+			if (other.gameObject.name == "npc")
+			{
+				isNpc = false;
+			}
+		}
 	}
 }
