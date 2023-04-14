@@ -14,12 +14,12 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Inputs
 	/// </summary>
 	public class InputManager : MonoBehaviour
 	{
+		[SerializeField]
 		private SlotsManager slotsManager;
 		private ItemManager itemManager;
 			
 		private void Start()
 		{
-			slotsManager = GetComponent<SlotsManager>();
 			itemManager = GetComponent<ItemManager>();
 		}
 

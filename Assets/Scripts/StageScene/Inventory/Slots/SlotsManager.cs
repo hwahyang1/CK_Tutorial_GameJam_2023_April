@@ -20,6 +20,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 	public class SlotsManager : MonoBehaviour
 	{
 		[SerializeField]
+		private ItemManager itemManager;
+		
+		[SerializeField]
 		private Animator inventoryParent;
 		
 		[SerializeField]
@@ -70,11 +73,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 
 		private bool protectModify = false;
 
-		private ItemManager itemManager;
-
 		private void Start()
 		{
-			itemManager = GetComponent<ItemManager>();
 			Init();
 		}
 
