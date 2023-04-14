@@ -14,16 +14,13 @@ namespace CK_Tutorial_GameJam_April
 	{
 		[SerializeField]
 		private SlotsManager slotsManager;
-		
 		[SerializeField]
 		private ItemManager itemManager;
 		
 		[SerializeField]
 		private float speed;
-		
 		[SerializeField]
 		private float maxSpeed;
-		
 		[SerializeField]
 		private float jumpSpeed;
 
@@ -39,7 +36,7 @@ namespace CK_Tutorial_GameJam_April
 
 		private int maxStamina;
 		
-		private int level;
+		public int level;
 
 		private bool isJumpable = true;
 
@@ -49,7 +46,7 @@ namespace CK_Tutorial_GameJam_April
 		{
 			rd = GetComponent<Rigidbody2D>();
 			stamina = 0;
-			level = 1;
+			level = 0;
 		}
 		
 
@@ -73,7 +70,6 @@ namespace CK_Tutorial_GameJam_April
 			if (Input.GetMouseButton(0)) // 2초간 클릭하면 아이템이 먹어지므로 time에 deltatime을 더해서 구함
 			{
 				time += Time.deltaTime;
-				
 			}
 
 			if (Input.GetMouseButtonUp(0)) // 마우스 클릭을 그만하면 time을 0으로 초기화
@@ -90,7 +86,7 @@ namespace CK_Tutorial_GameJam_April
 				stamina += 2;
 			}
 
-			if (stamina >= maxStamina)
+			if (stamina >= maxStamina&&level<=5)
 			{
 				Debug.Log("진화");
 				level += 1;

@@ -6530,8 +6530,9 @@ MonoBehaviour:
   slotsManager: {fileID: 3545119063951255148}
   itemManager: {fileID: 3545119063430740537}
   speed: 1000
-  maxSpeed: 200
-  jumpSpeed: 2000
+  maxSpeed: 150
+  jumpSpeed: 3000
+  level: 0
 --- !u!1 &2129211786
 GameObject:
   m_ObjectHideFlags: 0
@@ -93138,7 +93139,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.4575472, g: 1, b: 0.9852739, a: 1}
   m_Origin: {x: -9, y: -5, z: 0}
   m_Size: {x: 102, y: 98, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
