@@ -1,8 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
+
 using UnityEngine;
+
+using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
+using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
 
 namespace CK_Tutorial_GameJam_April
 {
@@ -44,18 +46,15 @@ namespace CK_Tutorial_GameJam_April
 
 		private bool isJumpable = true;
 
-		//private bool isTrigger = false;
+		private bool isTrigger = false;
 		
-		
-
 		private bool isNpc = false;
 
 		private void Awake()
 		{
 			rd = GetComponent<Rigidbody2D>();
 		}
-
-
+		
 		private void Update()
 		{
 			if (Input.GetKey(KeyCode.A) && rd.velocity.x > maxSpeed * (-1))
@@ -70,7 +69,8 @@ namespace CK_Tutorial_GameJam_April
 
 			if (Input.GetKey(KeyCode.Space) && isJumpable)
 			{
-				rd.AddForce(new Vector2(0f, jumpSpeed * Time.deltaTime));
+				rd.AddForce(new Vector2(0f, jumpSpeed));
+				isJumpable = false;
 			}
 
 			if (Input.GetMouseButtonDown(0) && isNpc)
@@ -110,7 +110,6 @@ namespace CK_Tutorial_GameJam_April
 			if (other.gameObject.name == "Main Tilemap")
 			{
 				isJumpable = true;
-				Debug.Log("can jump");
 			}
 		}
 
@@ -119,7 +118,6 @@ namespace CK_Tutorial_GameJam_April
 			if (other.gameObject.name == "Main Tilemap")
 			{
 				isJumpable = false;
-				Debug.Log("can't jump");
 			}
 		}
 

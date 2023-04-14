@@ -11,7 +11,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.MouseCursor
 	/// 현재 마우스의 위치를 Canvas의 좌표로 변환합니다.
 	/// (Tag - MainCanvas로 등록된 Canvas의 Render Mode가 Screen Space - Overlay로 설정 되어 있는 경우에 한함.)
 	/// </summary>
-	public class CanvasCursorPosition : Singleton<CanvasCursorPosition>
+	public class CanvasCursorPosition : SingleTon<CanvasCursorPosition>
 	{
 		private CanvasScaler targetCanvas;
 		private bool runCalculate = false;

@@ -8,7 +8,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Item
 	/// <summary>
 	/// 사용 가능한 아이템 목록을 정의합니다.
 	/// </summary>
-	public class ItemStorage : Singleton<ItemStorage>
+	public class ItemStorage : SingleTon<ItemStorage>
 	{
 		[SerializeField]
 		[Tooltip("0번을 제외하고 입력합니다. (0번은 선택해제로 사용됩니다.)")]

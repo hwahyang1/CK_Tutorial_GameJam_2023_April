@@ -33,7 +33,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Item
 
 		private bool[,] currentItemSlots;
 
-		private void Awake()
+		private void Start()
 		{
 			SetCurrentItem(0);
 		}

@@ -14,7 +14,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 	/// <summary>
 	/// Scene 변경과 트랜지션을 관리합니다.
 	/// </summary>
-	public class SceneChange : Singleton<SceneChange>
+	public class SceneChange : SingleTon<SceneChange>
 	{
 		[Header("GameObject (Canvas)")]
 		[SerializeField]
