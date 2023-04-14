@@ -11746,6 +11746,7 @@ GameObject:
   - component: {fileID: 1530009261}
   - component: {fileID: 1530009260}
   - component: {fileID: 1530009259}
+  - component: {fileID: 1530009262}
   m_Layer: 8
   m_Name: Overlay Tilemap
   m_TagString: Untagged
@@ -12064,6 +12065,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!114 &1530009262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530009255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d42451132cdd1745ae245328f074cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1617177557
 GameObject:
   m_ObjectHideFlags: 0
@@ -12079,6 +12092,7 @@ GameObject:
   - component: {fileID: 1617177560}
   - component: {fileID: 1617177563}
   - component: {fileID: 1617177562}
+  - component: {fileID: 1617177565}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -12243,6 +12257,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &1617177565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617177557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c985c1074049ccc4c9e595caceea70d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterManager: {fileID: 1617177562}
+  slotsManager: {fileID: 3545119063951255148}
 --- !u!1 &2129211786
 GameObject:
   m_ObjectHideFlags: 0
