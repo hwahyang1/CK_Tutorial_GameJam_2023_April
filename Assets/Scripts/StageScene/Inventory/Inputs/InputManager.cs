@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using CK_Tutorial_GameJam_April.PreloadScene.Item;
-using CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Item;
-using CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Slots;
+using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
+using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
 
-namespace CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Inputs
+namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Inputs
 {
 	/// <summary>
 	/// 키 입력을 관리합니다.

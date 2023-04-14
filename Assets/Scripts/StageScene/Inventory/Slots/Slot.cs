@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 using NaughtyAttributes;
 
-namespace CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Slots
+namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 {
 	/// <summary>
 	/// 개별 슬롯을 관리합니다.

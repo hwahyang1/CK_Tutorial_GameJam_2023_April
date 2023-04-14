@@ -8,15 +8,18 @@ using NaughtyAttributes;
 
 using CK_Tutorial_GameJam_April.PreloadScene.Item;
 using CK_Tutorial_GameJam_April.PreloadScene.MouseCursor;
-using CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Slots;
+using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
 
-namespace CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Item
+namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Item
 {
 	/// <summary>
 	/// 아이템의 소환과 배치, 상태를 관리합니다.
 	/// </summary>
 	public class ItemManager : MonoBehaviour
 	{
+		[SerializeField]
+		private List<SlotsManager> slotsManagers;
+		
 		[SerializeField]
 		private Image overlayImage;
 
@@ -30,17 +33,15 @@ namespace CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Item
 
 		private bool[,] currentItemSlots;
 
-		private SlotsManager slotsManager;
-
 		private void Awake()
 		{
-			slotsManager = GetComponent<SlotsManager>();
 			SetCurrentItem(0);
 		}
 
 		private void Update()
 		{
-			slotsManager.ResetAllTiles();
+			foreach (SlotsManager slotsManager in slotsManagers) slotsManager.ResetAllTiles();
+
 			if (currentItemCode == 0) return;
 
 			overlayImage.rectTransform.anchoredPosition = CanvasCursorPosition.CanvasPosition;
@@ -50,15 +51,18 @@ namespace CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Item
 			if (currentItemSlots.GetLength(0) % 2 == 0)
 				overlayImage.rectTransform.anchoredPosition += new Vector2(0, 0.5f * overlaySizeMultiply);
 
-			List<List<Slot>> tiles = slotsManager.ExportAllTargetTiles(currentItemSlots);
-			KeyValuePair<int, int> validateResult = slotsManager.ValidateTiles(tiles);
-			slotsManager.VisualizeTiles(tiles, validateResult.Key);
-
-			if (Input.GetMouseButtonDown(0) && validateResult.Key != 0)
+			foreach (SlotsManager slotsManager in slotsManagers)
 			{
-				int itemId =
-					slotsManager.PlaceItem(tiles, currentItemCode, validateResult.Key == 2, validateResult.Value);
-				SetCurrentItem(itemId);
+				List<List<Slot>> tiles = slotsManager.ExportAllTargetTiles(currentItemSlots);
+				KeyValuePair<int, int> validateResult = slotsManager.ValidateTiles(tiles);
+				slotsManager.VisualizeTiles(tiles, validateResult.Key);
+
+				if (Input.GetMouseButtonDown(0) && validateResult.Key != 0)
+				{
+					int itemId =
+						slotsManager.PlaceItem(tiles, currentItemCode, validateResult.Key == 2, validateResult.Value);
+					SetCurrentItem(itemId);
+				}
 			}
 		}
 

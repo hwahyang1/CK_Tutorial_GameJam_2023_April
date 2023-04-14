@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerInventoryTabHide
+  m_Name: OtherInventoryTabShow
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -22,16 +22,16 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 2578.9548
-        outSlope: 2578.9548
+        value: -900
+        inSlope: 3791.0142
+        outSlope: 3791.0142
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.051976275
+        outWeight: 0.03292181
       - serializedVersion: 3
         time: 0.75
-        value: 900
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -45,34 +45,6 @@ AnimationClip:
     path: Inventory Screen Area
     classID: 224
     script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.41666666
-        value: 100
-        inSlope: -912.6785
-        outSlope: -912.6785
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.063218415
-      - serializedVersion: 3
-        time: 0.75
-        value: 0
-        inSlope: -229.0941
-        outSlope: -229.0941
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.056034565
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_AnchoredPosition.x
-    path: Inventory Tab Area
-    classID: 224
-    script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
@@ -83,13 +55,6 @@ AnimationClip:
     genericBindings:
     - serializedVersion: 2
       path: 1071814786
-      attribute: 1460864421
-      script: {fileID: 0}
-      typeID: 224
-      customType: 28
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 2374412222
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -122,16 +87,16 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 2578.9548
-        outSlope: 2578.9548
+        value: -900
+        inSlope: 3791.0142
+        outSlope: 3791.0142
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.051976275
+        outWeight: 0.03292181
       - serializedVersion: 3
         time: 0.75
-        value: 900
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -143,34 +108,6 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
     path: Inventory Screen Area
-    classID: 224
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.41666666
-        value: 100
-        inSlope: -912.6785
-        outSlope: -912.6785
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.063218415
-      - serializedVersion: 3
-        time: 0.75
-        value: 0
-        inSlope: -229.0941
-        outSlope: -229.0941
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.056034565
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_AnchoredPosition.x
-    path: Inventory Tab Area
     classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []
