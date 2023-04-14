@@ -35,6 +35,12 @@ namespace CK_Tutorial_GameJam_April
 
 		private ItemCode itemCode;
 
+		private int stamina;
+
+		private int maxStamina;
+		
+		private int level;
+
 		private bool isJumpable = true;
 
 		private bool isTrigger = false;
@@ -42,6 +48,8 @@ namespace CK_Tutorial_GameJam_April
 		private void Awake()
 		{
 			rd = GetComponent<Rigidbody2D>();
+			stamina = 0;
+			level = 1;
 		}
 		
 
@@ -79,6 +87,13 @@ namespace CK_Tutorial_GameJam_April
 				slotsManager.SetTabActive(true);
 				itemManager.SetCurrentItem(itemCode.itemID);
 				Destroy(itemCode.gameObject);
+				stamina += 2;
+			}
+
+			if (stamina >= maxStamina)
+			{
+				Debug.Log("진화");
+				level += 1;
 			}
 		}
 		
