@@ -1,18 +1,18 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+
+using UnityEngine;
+
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
-using UnityEngine;
 
 namespace CK_Tutorial_GameJam_April
 {
 	/// <summary>
-	/// 캐릭터를 관리하는 스크립트
+	/// Description
 	/// </summary>
 	public class CharacterManager : MonoBehaviour
 	{
-		[SerializeField]
 		private SlotsManager slotsManager;
 
 		[SerializeField]
@@ -47,17 +47,14 @@ namespace CK_Tutorial_GameJam_April
 		private bool isJumpable = true;
 
 		private bool isTrigger = false;
-
+		
 		private bool isNpc = false;
 
 		private void Awake()
 		{
 			rd = GetComponent<Rigidbody2D>();
-			stamina = 0;
-			level = 0;
 		}
-
-
+		
 		private void Update()
 		{
 			if (Input.GetKey(KeyCode.A) && rd.velocity.x > maxSpeed * (-1))
@@ -72,7 +69,8 @@ namespace CK_Tutorial_GameJam_April
 
 			if (Input.GetKey(KeyCode.Space) && isJumpable)
 			{
-				rd.AddForce(new Vector2(0f, jumpSpeed * Time.deltaTime));
+				rd.AddForce(new Vector2(0f, jumpSpeed));
+				isJumpable = false;
 			}
 
 			if (Input.GetMouseButtonDown(0) && isNpc)
@@ -112,7 +110,6 @@ namespace CK_Tutorial_GameJam_April
 			if (other.gameObject.name == "Main Tilemap")
 			{
 				isJumpable = true;
-				Debug.Log("can jump");
 			}
 		}
 
@@ -121,7 +118,6 @@ namespace CK_Tutorial_GameJam_April
 			if (other.gameObject.name == "Main Tilemap")
 			{
 				isJumpable = false;
-				Debug.Log("can't jump");
 			}
 		}
 

@@ -23,7 +23,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Alert
 	/// <remarks>
 	/// 알림창 버튼의 순서는 왼쪽부터 0번입니다.
 	/// </remarks>
-	public class AlertManager : Singleton<AlertManager>
+	public class AlertManager : SingleTon<AlertManager>
 	{
 		[SerializeField]
 		private Transform parentCanvas;

@@ -28,13 +28,12 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Item
 
 		[SerializeField, ReadOnly]
 		private int currentItemCode = 0;
-		
 
 		public int CurrentItemCode => currentItemCode;
 
 		private bool[,] currentItemSlots;
 
-		private void Awake()
+		private void Start()
 		{
 			SetCurrentItem(0);
 		}
