@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DontDestroyOnLoadRoot
   - CursorPositionTargetCanvas
+  - Item
   layers:
   - Default
   - TransparentFX
