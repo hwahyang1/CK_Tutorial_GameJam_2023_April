@@ -10,15 +10,18 @@ using NaughtyAttributes;
 using Cysharp.Threading.Tasks;
 
 using CK_Tutorial_GameJam_April.PreloadScene.Item;
-using CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Item;
+using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 
-namespace CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Slots
+namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 {
 	/// <summary>
 	/// 전체 슬롯을 관리합니다.
 	/// </summary>
 	public class SlotsManager : MonoBehaviour
 	{
+		[SerializeField]
+		private ItemManager itemManager;
+		
 		[SerializeField]
 		private Animator inventoryParent;
 		
@@ -70,11 +73,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Slots
 
 		private bool protectModify = false;
 
-		private ItemManager itemManager;
-
 		private void Start()
 		{
-			itemManager = GetComponent<ItemManager>();
 			Init();
 		}
 

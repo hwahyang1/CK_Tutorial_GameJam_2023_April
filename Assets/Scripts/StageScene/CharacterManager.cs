@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CK_Tutorial_GameJam_April.StageScene.PlayerInventory.Slots;
+using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
 using UnityEngine;
 
 namespace CK_Tutorial_GameJam_April
