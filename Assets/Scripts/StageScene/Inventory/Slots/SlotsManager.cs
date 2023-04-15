@@ -141,6 +141,18 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 					          ProcessMouseClickEvent, activeSprite, inactiveSprite);
 					inventory[i][j] = slot;
 
+					/*if (!usedUid.Contains(uidArray[i][j]))
+					{
+						PlaceOverlay(array[i][j], uidArray[i][j]);
+						usedUid.Add(uidArray[i][j]);
+					}*/
+				}
+			}
+
+			for (int i = 0; i < inventory.Length; i++)
+			{
+				for (int j = 0; j < inventory[i].Length; j++)
+				{
 					if (!usedUid.Contains(uidArray[i][j]))
 					{
 						PlaceOverlay(array[i][j], uidArray[i][j]);
