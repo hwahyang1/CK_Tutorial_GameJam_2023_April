@@ -45,6 +45,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 
 		public void OpenInventory()
 		{
+			slotsManager.InitFromArray(backup.Item1, backup.Item2);
 			slotsManager.SetTabActive(true);
 		}
 
