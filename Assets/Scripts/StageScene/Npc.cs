@@ -27,7 +27,6 @@ namespace CK_Tutorial_GameJam_April.StageScene
 			int[][] uidData = new int[slotSize.Count][];
 			int[][] slotData = new int[slotSize.Count][];
 
-			print(gameObject.name);
 			for (int i = 0; i < slotSize.Count; i++)
 			{
 				uidData[i] = new int[horizontalCount];
@@ -38,9 +37,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 				{
 					uidData[i][j] = 0;
 					slotData[i][j] = int.Parse(currentData[j]);
-					print(currentData[j]);
 				}
-				print("===================================");
 			}
 
 			backup = new Tuple<int[][], int[][]>(slotData, uidData);
@@ -49,12 +46,15 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		public void OpenInventory()
 		{
 			if (slotsManager.IsActive) return;
+			
 			slotsManager.InitFromArray(backup.Item1, backup.Item2);
 			slotsManager.SetTabActive(true);
 		}
 
 		public void CloseInventory()
 		{
+			if (!slotsManager.IsActive) return;
+			
 			backup = slotsManager.ExportAllTilesIdsUids();
 			slotsManager.SetTabActive(false);
 		}
