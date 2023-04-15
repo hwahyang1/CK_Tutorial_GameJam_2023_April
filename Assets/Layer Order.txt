@@ -5,6 +5,6 @@ Exit - 1
 Box - 2
 Npc - 3
 Main - 4
-Food - 5
+Food(Item) - 5
 Player - 6
 Overlay - 7

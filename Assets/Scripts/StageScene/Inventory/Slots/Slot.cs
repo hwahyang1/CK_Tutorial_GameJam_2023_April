@@ -31,6 +31,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		private int uid = 0;
 		public int Uid => uid;
 
+		private bool init = false;
 		private Image image;
 		
 		private System.Action<Vector2Int, bool> overCallback = null;
@@ -39,6 +40,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		private void Awake()
 		{
 			image = GetComponent<Image>();
+			init = true;
 		}
 
 		/// <summary>
@@ -65,6 +67,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 			isSlotActive = id != -1;
 			this.overCallback = overCallback;
 			this.clickCallback = clickCallback;
+			if (!init) image = GetComponent<Image>();
 			image.sprite = isSlotActive ? activeSprite : inActiveSprite;
 		}
 
