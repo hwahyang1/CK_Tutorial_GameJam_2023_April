@@ -7,6 +7,9 @@ TagManager:
   - DontDestroyOnLoadRoot
   - CursorPositionTargetCanvas
   - Item
+  - ItemPosition
+  - NPC
+  - Ground
   layers:
   - Default
   - TransparentFX

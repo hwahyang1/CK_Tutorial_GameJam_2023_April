@@ -21,8 +21,8 @@ namespace CK_Tutorial_GameJam_April
 
 		public int rank; // 아이템 등급
 
-		public float hp; // 스태미나 회복치
-		public float exp; // 경험치
+		public float stamina; // 스태미나 회복치
+		public int exp; // 경험치
 
 		public Sprite sprite;
 

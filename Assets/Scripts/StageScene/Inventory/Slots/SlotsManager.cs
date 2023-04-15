@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Array = System.Array;
-using TimeSpan = System.TimeSpan;
 
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 using NaughtyAttributes;
 using Cysharp.Threading.Tasks;
@@ -73,7 +73,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 
 		private bool protectModify = false;
 
-		private void Start()
+		private void Awake()
 		{
 			Init();
 		}
@@ -97,15 +97,15 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		/// </summary>
 		private void Init()
 		{
-			inventory = new Slot[inventoryMaxSize.x][];
+			inventory = new Slot[inventoryMaxSize.y][];
 			for (int i = 0; i < inventory.Length; i++)
-				inventory[i] = new Slot[inventoryMaxSize.y];
+				inventory[i] = new Slot[inventoryMaxSize.x];
 			overlayImages = new Dictionary<int, Image>();
 
-			for (int i = 0; i < inventoryMaxSize.x; i++)
+			for (int i = 0; i < inventoryMaxSize.y; i++)
 			{
 				Transform horizontalParent = slotsParent.GetChild(i);
-				for (int j = 0; j < inventoryMaxSize.y; j++)
+				for (int j = 0; j < inventoryMaxSize.x; j++)
 				{
 					Slot slot = horizontalParent.GetChild(j).gameObject.GetComponent<Slot>();
 					slot.Init(0, 0, new Vector2Int(i, j), ProcessMouseOverEvent, ProcessMouseClickEvent, activeSprite,
@@ -120,11 +120,11 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		/// </summary>
 		/// <param name="array">초기화 할 인벤토리의 배열을 지정합니다.</param>
 		/// <param name="uidArray">각 아이템들의 UID를 지정합니다.</param>
-		public void InitFromArray(int[,] array, int[,] uidArray)
+		public void InitFromArray(int[][] array, int[][] uidArray)
 		{
-			inventory = new Slot[array.GetLength(0)][];
+			inventory = new Slot[array.Length][];
 			for (int i = 0; i < inventory.Length; i++)
-				inventory[i] = new Slot[array.GetLength(1)];
+				inventory[i] = new Slot[array[0].Length];
 			List<int> usedUid = new List<int>() { 0 };
 
 			foreach (KeyValuePair<int, Image> currentImage in overlayImages)
@@ -137,17 +137,39 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 				for (int j = 0; j < inventory[i].Length; j++)
 				{
 					Slot slot = horizontalParent.GetChild(j).gameObject.GetComponent<Slot>();
-					slot.Init(array[i, j], uidArray[i, j], new Vector2Int(i, j), ProcessMouseOverEvent,
+					slot.Init(array[i][j], uidArray[i][j], new Vector2Int(i, j), ProcessMouseOverEvent,
 					          ProcessMouseClickEvent, activeSprite, inactiveSprite);
 					inventory[i][j] = slot;
 
-					if (!usedUid.Contains(uidArray[i, j]))
+					if (!usedUid.Contains(uidArray[i][j]))
 					{
-						PlaceOverlay(array[i, j], uidArray[i, j]);
-						usedUid.Add(uidArray[i, j]);
+						PlaceOverlay(array[i][j], uidArray[i][j]);
+						usedUid.Add(uidArray[i][j]);
 					}
 				}
 			}
+		}
+
+		/// <summary>
+		/// 모든 타일의 아이템 ID와 UID를 반환합니다.
+		/// </summary>
+		public Tuple<int[][], int[][]> ExportAllTilesIdsUids()
+		{
+			int[][] tileIds = new int[inventoryMaxSize.y][];
+			int[][] tileUids = new int[inventoryMaxSize.y][];
+			for (int i = 0; i < inventoryMaxSize.y; i++)
+			{
+				tileIds[i] = new int[inventoryMaxSize.x];
+				tileUids[i] = new int[inventoryMaxSize.x];
+				for (int j = 0; j < inventoryMaxSize.x; j++)
+				{
+					Slot current = inventory[i][j];
+					tileIds[i][j] = current.ItemId;
+					tileUids[i][j] = current.Uid;
+				}
+			}
+
+			return new Tuple<int[][], int[][]>(tileIds, tileUids);
 		}
 
 		/// <summary>
@@ -341,7 +363,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		private void PlaceOverlay(int id, int uid)
 		{
 			Slot first = null;
-			for (int i = 0; i < inventory.GetLength(0); i++)
+			for (int i = 0; i < inventory.Length; i++)
 			{
 				Slot[] slots = Array.FindAll(inventory[i], target => target.Uid == uid);
 				foreach (Slot slot in slots)
@@ -385,7 +407,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		{
 			int id = 0;
 
-			for (int i = 0; i < inventory.GetLength(0); i++)
+			for (int i = 0; i < inventory.Length; i++)
 			{
 				Slot[] slots = Array.FindAll(inventory[i], target => target.Uid == uid);
 				foreach (Slot slot in slots)
