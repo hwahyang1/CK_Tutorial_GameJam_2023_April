@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using TimeSpan = System.TimeSpan;
 
 using UnityEngine;
-
-using Cysharp.Threading.Tasks;
 
 using CK_Tutorial_GameJam_April.PreloadScene.Scene;
 
@@ -20,9 +17,11 @@ namespace CK_Tutorial_GameJam_April.OpeningScene
 		
 		private bool protectInput = false;
 
+		private Coroutine active = null;
+		
 		private void Start()
 		{
-			WaitForAnimator().Forget();
+			active = StartCoroutine(WaitForAnimatorCoroutine());
 		}
 
 		private void Update()
@@ -34,14 +33,16 @@ namespace CK_Tutorial_GameJam_April.OpeningScene
 			}
 		}
 
-		private async UniTaskVoid WaitForAnimator()
+		private IEnumerator WaitForAnimatorCoroutine()
 		{
-			await UniTask.Delay(TimeSpan.FromSeconds(time));
+			yield return new WaitForSeconds(time);
+			active = null;
 			GotoMenu();
 		}
 
 		private void GotoMenu()
 		{
+			if (active != null) StopCoroutine(active);
 			SceneChange.Instance.ChangeScene("MenuScene",false, false);
 		}
 	}

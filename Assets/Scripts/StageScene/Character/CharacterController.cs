@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,7 +15,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 	{
 		[SerializeField]
 		private ItemManager itemManager;
-		
+
 		[Header("Walk")]
 		[SerializeField]
 		private float speed;
@@ -37,13 +36,19 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		[SerializeField]
 		private float runMaxSpeed;
-		
+
 		private bool isJumpable = true;
+
+		public bool IsJumpable
+		{
+			get => isJumpable;
+			set => isJumpable = value;
+		}
 
 		private Rigidbody2D rb;
 		private LevelManager levelManager;
 		private SpriteRenderer spriteRenderer;
-		
+
 		private void Start()
 		{
 			rb = GetComponent<Rigidbody2D>();
@@ -56,7 +61,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			if (itemManager.CurrentItemCode != 0)
 			{
 				DefineItem item = ItemStorage.Instance.GetItems()[itemManager.CurrentItemCode];
-				
+
 				// 아이템 버리기
 				if (Input.GetKeyDown(KeyCode.Z) && item.dropable)
 				{
@@ -77,7 +82,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		{
 			// 이동 (걷기 + 점프 + 달리기)
 			levelManager.isPlayerStay = isJumpable;
-			
+
 			if (Input.GetKey(KeyCode.LeftShift) && levelManager.Stamina >= 0)
 			{
 				if (Input.GetKey(KeyCode.A) && rb.velocity.x > runMaxSpeed * (-1))
@@ -120,7 +125,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			}
 		}
 
-		private void OnCollisionEnter2D(Collision2D other)
+		/*private void OnCollisionEnter2D(Collision2D other)
 		{
 			if (other.gameObject.CompareTag("Ground"))
 			{
@@ -134,6 +139,6 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			{
 				isJumpable = false;
 			}
-		}
+		}*/
 	}
 }
