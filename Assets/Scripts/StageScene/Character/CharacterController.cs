@@ -58,6 +58,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		private void Update()
 		{
+			if (GameManager.Instance.status != GameStatus.Playing) return;
+			
 			if (itemManager.CurrentItemCode != 0)
 			{
 				DefineItem item = ItemStorage.Instance.GetItems()[itemManager.CurrentItemCode];
@@ -80,6 +82,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		private void FixedUpdate()
 		{
+			if (GameManager.Instance.status != GameStatus.Playing) return;
+			
 			// 이동 (걷기 + 점프 + 달리기)
 			levelManager.isPlayerStay = isJumpable;
 

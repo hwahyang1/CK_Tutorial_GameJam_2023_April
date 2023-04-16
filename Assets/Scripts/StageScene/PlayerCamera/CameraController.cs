@@ -40,7 +40,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.PlayerCamera
 
 		private void Update()
 		{
-			targetPos = target.position + offset + (leftSlotsManager.IsActive ? -inventoryOffset : Vector3.zero) + (rightSlotsManager.IsActive ? inventoryOffset : Vector3.zero);
+			targetPos = target.position + offset;// + (leftSlotsManager.IsActive ? -inventoryOffset : Vector3.zero) + (rightSlotsManager.IsActive ? inventoryOffset : Vector3.zero);
 
 			if (targetPos.x < deadlineMin.x) targetPos.x = deadlineMin.x;
 			if (targetPos.y < deadlineMin.y) targetPos.y = deadlineMin.y;

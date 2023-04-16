@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using CK_Tutorial_GameJam_April.StageScene.Items;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
 
@@ -32,9 +33,11 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		private void Update()
 		{
+			if (GameManager.Instance.status != GameStatus.Playing) return;
+			
 			if (Input.GetMouseButtonDown(0) && isNpc)
 			{
-				npc.OpenInventory();
+				npc.Interaction();
 			}
 			
 			if (itemManager.CurrentItemCode != 0) return;
@@ -47,11 +50,13 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 			if (Input.GetMouseButton(0) && isTrigger) // 2초간 클릭하면 아이템이 먹어지므로 time에 deltatime을 더해서 구함
 			{
+				item.ChangeProgressBar(true, time/2f);
 				time += Time.deltaTime;
 			}
 
 			if (Input.GetMouseButtonUp(0)) // 마우스 클릭을 그만하면 time을 0으로 초기화
 			{
+				if (isTrigger) item.ChangeProgressBar(false, 0f);
 				time = 0f;
 			}
 
@@ -59,9 +64,11 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			{
 				time = 0f;
 				if (!slotsManager.IsActive) rollbackInventory = true;
+				item.ChangeProgressBar(false, 2f);
 				slotsManager.SetTabActive(true);
-				itemManager.SetCurrentItem(item.itemID);
-				Destroy(item.gameObject);
+				itemManager.SetCurrentItem(item.ItemId);
+				//Destroy(item.gameObject);
+				item.gameObject.SetActive(false);
 			}
 		}
 

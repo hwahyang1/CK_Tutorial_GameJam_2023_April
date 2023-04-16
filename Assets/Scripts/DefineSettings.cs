@@ -75,6 +75,8 @@ namespace CK_Tutorial_GameJam_April
 			}
 		}
 
+		[SerializeField] public bool isFirst;
+
 		public DefineSettings()
 		{
 			resolutionHeight = ResolutionHeight._720;
@@ -83,6 +85,8 @@ namespace CK_Tutorial_GameJam_April
 			Master = 1f;
 			Background = 1f;
 			Effect = 1f;
+
+			isFirst = true;
 		}
 
 		public DefineSettings(
@@ -90,14 +94,18 @@ namespace CK_Tutorial_GameJam_April
 			DisplayMode displayMode,
 			float master,
 			float background,
-			float effect
+			float effect,
+			bool isFirst
 		)
 		{
 			this.resolutionHeight = resolutionHeight;
 			this.displayMode = displayMode;
+			
 			this.Master = master;
 			this.Background = background;
 			this.Effect = effect;
+			
+			this.isFirst = isFirst;
 		}
 	}
 }

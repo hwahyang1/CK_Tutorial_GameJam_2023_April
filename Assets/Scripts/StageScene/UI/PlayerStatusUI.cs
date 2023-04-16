@@ -38,7 +38,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 			staminaFront.sizeDelta = Vector2.Lerp(staminaSizeDelta,
 			                                      new Vector2(1f * levelManager.Stamina / levelManager.MaxStamina * max,
 			                                                  staminaSizeDelta.y), 0.5f);
-			staminaText.text = $"Stat: {levelManager.Stamina}/{levelManager.MaxStamina}";
+			staminaText.text = $"Stat: {levelManager.Stamina:0.#}/{levelManager.MaxStamina:0.#}";
 
 			// 경험치
 			Vector2 expSizeDelta = expFront.sizeDelta;
