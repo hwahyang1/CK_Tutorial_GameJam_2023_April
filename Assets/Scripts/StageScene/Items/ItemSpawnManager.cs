@@ -21,6 +21,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 		[SerializeField]
 		private List<Color> effectColors = new List<Color>();
 		
+		[SerializeField]
 		private List<Item> positions = new List<Item>();
 
 		private void Awake()
@@ -41,7 +42,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 			foreach (GameObject position in spawnPositions)
 			{
 				GameObject child = Instantiate(itemPrefab, position.transform.position, Quaternion.identity, itemParent);
-				positions.Add(child.GetComponent<Item>());
+				Item item = child.GetComponent<Item>();
+				positions.Add(item);
 				child.SetActive(false);
 			}
 		}
@@ -52,10 +54,10 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 		public void RespawnItem()
 		{
 			if (positions.Count == 0) return;
-
+			
 			foreach (Item position in positions) position.gameObject.SetActive(true);
 
-			List<Item> availablePositions = positions;
+			List<Item> availablePositions = new List<Item>(positions);
 			
 			/* 기획서 보니까 하드코딩이 빠르게 생김 */
 			

@@ -87,7 +87,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			// 이동 (걷기 + 점프 + 달리기)
 			levelManager.isPlayerStay = isJumpable;
 
-			if (Input.GetKey(KeyCode.LeftShift) && levelManager.Stamina >= 0)
+			if (Input.GetKey(KeyCode.LeftShift) && levelManager.Stamina > 0)
 			{
 				if (Input.GetKey(KeyCode.A) && rb.velocity.x > runMaxSpeed * (-1))
 				{

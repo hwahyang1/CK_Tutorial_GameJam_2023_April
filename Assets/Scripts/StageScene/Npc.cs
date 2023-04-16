@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 using CK_Tutorial_GameJam_April.StageScene.UI;
+using CK_Tutorial_GameJam_April.StageScene.Inventory;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
 
 namespace CK_Tutorial_GameJam_April.StageScene
@@ -31,6 +33,9 @@ namespace CK_Tutorial_GameJam_April.StageScene
 
 		[SerializeField]
 		private MessageManager messageManager;
+
+		[SerializeField]
+		private NpcAdditional npcAdditional;
 		
 		[Header("Npc Data")]
 		[Tooltip("0과 -1만 사용합니다. 공백으로 구분합니다.")]
@@ -66,12 +71,32 @@ namespace CK_Tutorial_GameJam_April.StageScene
 				string[] currentData = slotSize[i].Split(' ');
 				for (int j = 0; j < currentData.Length; j++)
 				{
-					uidData[i][j] = 0;
+					uidData[i][j] = currentData[j] == "0" ? 0 : -1;
 					slotData[i][j] = int.Parse(currentData[j]);
 				}
 			}
 
 			backup = new Tuple<int[][], int[][]>(slotData, uidData);
+		}
+
+		private void Update()
+		{
+			if (currentFlow != DefineNpcFlow.Inventory) return;
+			
+			Tuple<int[][], int[][]> data = slotsManager.ExportAllTilesIdsUids();
+
+			foreach (int[] currentH in data.Item2)
+			{
+				foreach (int currentV in currentH)
+				{
+					if (currentV == 0) return;
+				}
+			}
+
+			backup = slotsManager.ExportAllTilesIdsUids();
+			slotsManager.SetTabActive(false);
+			currentFlow = DefineNpcFlow.Thanks;
+			Interaction();
 		}
 
 		public void Interaction()
@@ -81,21 +106,31 @@ namespace CK_Tutorial_GameJam_April.StageScene
 				case DefineNpcFlow.Greeting:
 					messageManager.Show(name, greetingMessages, () =>
 					                                            {
-						                                            currentFlow = DefineNpcFlow.Inventory;
+						                                            SetStatus(true, DefineNpcFlow.Inventory);
+						                                            npcAdditional.Set(name, description);
 						                                            OpenInventory();
 					                                            });
 					break;
 				case DefineNpcFlow.Inventory:
+					npcAdditional.Set(name, description);
 					OpenInventory();
 					break;
 				case DefineNpcFlow.Thanks:
-					messageManager.Show(name, thanksMessages, () => currentFlow = DefineNpcFlow.Ended);
-					// TODO: 열쇠 지급 필요
+					messageManager.Show(name, thanksMessages, () =>
+					                                          {
+						                                          // TODO: 열쇠 지급 필요
+						                                          SetStatus(false, DefineNpcFlow.Ended);
+					                                          });
 					break;
 				case DefineNpcFlow.Ended:
-					messageManager.Show(name, thanksMessages);
 					break;
 			}
+		}
+
+		public void SetStatus(bool visible, DefineNpcFlow flow)
+		{
+			currentFlow = flow;
+			GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, visible ? 1f : 0f);
 		}
 
 		private void OpenInventory()
