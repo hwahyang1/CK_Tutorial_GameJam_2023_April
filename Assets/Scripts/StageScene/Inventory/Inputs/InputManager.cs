@@ -25,25 +25,12 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Inputs
 
 		private void Update()
 		{
+			if (GameManager.Instance.status != GameStatus.Playing) return;
+			
 			// 탭 전환
 			if (Input.GetKeyDown(KeyCode.Tab))
 			{
 				slotsManager.SetTabActive(!slotsManager.IsActive);
-			}
-
-			// 아이템 드랍
-			if (Input.GetKeyDown(KeyCode.Z))
-			{
-				// 슬롯 열려 있는지 / 들고 있는 아이템이 있는지 확인
-				if (slotsManager.IsActive && itemManager.CurrentItemCode != 0)
-				{
-					DefineItem item = ItemStorage.Instance.GetItems()[itemManager.CurrentItemCode];
-					// 아이템이 버릴 수 있는 경우 -> 버림
-					if (item.dropable)
-					{
-						itemManager.SetCurrentItem(0);
-					}
-				}
 			}
 		}
 	}

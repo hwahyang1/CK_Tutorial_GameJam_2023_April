@@ -34,7 +34,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene
 		private async UniTaskVoid DelayedStart()
 		{
 			await UniTask.Delay(TimeSpan.FromSeconds(1));
-			sceneChange.ChangeScene("StageScene", false, true);
+			sceneChange.ChangeScene("OpeningScene", false, false);
 		}
 	}
 }

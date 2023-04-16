@@ -6,6 +6,14 @@ using UnityEngine;
 
 namespace CK_Tutorial_GameJam_April
 {
+	[Serializable]
+	public enum ItemRank
+	{
+		Common,
+		Rare,
+		Legendary
+	}
+	
 	/// <summary>
 	/// 아이템을 정의합니다.
 	/// </summary>
@@ -19,7 +27,7 @@ namespace CK_Tutorial_GameJam_April
 
 		public bool dropable; // 버릴 수 있는지
 
-		public int rank; // 아이템 등급
+		public ItemRank rank; // 아이템 등급
 
 		public float stamina; // 스태미나 회복치
 		public int exp; // 경험치
