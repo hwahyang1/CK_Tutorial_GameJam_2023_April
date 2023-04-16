@@ -31,28 +31,28 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 		[SerializeField]
 		private Text expText;
 
-		private void Update()
+		private void FixedUpdate()
 		{
 			// 스태미나
 			Vector2 staminaSizeDelta = staminaFront.sizeDelta;
 			staminaFront.sizeDelta = Vector2.Lerp(staminaSizeDelta,
 			                                      new Vector2(1f * levelManager.Stamina / levelManager.MaxStamina * max,
-			                                                  staminaSizeDelta.y), 0.5f);
-			staminaText.text = $"Stat: {levelManager.Stamina}/{levelManager.MaxStamina}";
+			                                                  staminaSizeDelta.y), 0.25f);
+			staminaText.text = $"Level {levelManager.Level} | Stat: {levelManager.Stamina:0.#}/{levelManager.MaxStamina:0.#}";
 
 			// 경험치
 			Vector2 expSizeDelta = expFront.sizeDelta;
 			if (levelManager.Level == 5)
 			{
 				expFront.sizeDelta = new Vector2(max, expSizeDelta.y);
-				expText.text = "MAX";
+				expText.text = $"Level {levelManager.Level} | MAX";
 			}
 			else
 			{
 				expFront.sizeDelta = Vector2.Lerp(expSizeDelta,
 				                                  new Vector2(1f * levelManager.Exp / levelManager.MaxExp * max,
-				                                              expSizeDelta.y), 0.5f);
-				expText.text = $"Exp: {levelManager.Exp}/{levelManager.MaxExp}";
+				                                              expSizeDelta.y), 0.25f);
+				expText.text = $"Level {levelManager.Level} | Exp: {levelManager.Exp}/{levelManager.MaxExp}";
 			}
 		}
 	}

@@ -97,15 +97,15 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		/// </summary>
 		private void Init()
 		{
-			inventory = new Slot[inventoryMaxSize.y][];
+			inventory = new Slot[inventoryMaxSize.x][];
 			for (int i = 0; i < inventory.Length; i++)
-				inventory[i] = new Slot[inventoryMaxSize.x];
+				inventory[i] = new Slot[inventoryMaxSize.y];
 			overlayImages = new Dictionary<int, Image>();
 
-			for (int i = 0; i < inventoryMaxSize.y; i++)
+			for (int i = 0; i < inventoryMaxSize.x; i++)
 			{
 				Transform horizontalParent = slotsParent.GetChild(i);
-				for (int j = 0; j < inventoryMaxSize.x; j++)
+				for (int j = 0; j < inventoryMaxSize.y; j++)
 				{
 					Slot slot = horizontalParent.GetChild(j).gameObject.GetComponent<Slot>();
 					slot.Init(0, 0, new Vector2Int(i, j), ProcessMouseOverEvent, ProcessMouseClickEvent, activeSprite,
@@ -125,7 +125,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 			inventory = new Slot[array.Length][];
 			for (int i = 0; i < inventory.Length; i++)
 				inventory[i] = new Slot[array[0].Length];
-			List<int> usedUid = new List<int>() { 0 };
+			List<int> usedUid = new List<int>() { 0, -1 };
 
 			foreach (KeyValuePair<int, Image> currentImage in overlayImages)
 				Destroy(currentImage.Value.gameObject);
@@ -141,10 +141,25 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 					          ProcessMouseClickEvent, activeSprite, inactiveSprite);
 					inventory[i][j] = slot;
 
-					if (!usedUid.Contains(uidArray[i][j]))
+					/*if (!usedUid.Contains(uidArray[i][j]))
 					{
 						PlaceOverlay(array[i][j], uidArray[i][j]);
 						usedUid.Add(uidArray[i][j]);
+					}*/
+				}
+			}
+
+			for (int i = 0; i < inventory.Length; i++)
+			{
+				for (int j = 0; j < inventory[i].Length; j++)
+				{
+					if (!usedUid.Contains(uidArray[i][j]))
+					{
+						if (array[i][j] != 0)
+						{
+							PlaceOverlay(array[i][j], uidArray[i][j]);
+							usedUid.Add(uidArray[i][j]);
+						}
 					}
 				}
 			}
@@ -155,13 +170,13 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		/// </summary>
 		public Tuple<int[][], int[][]> ExportAllTilesIdsUids()
 		{
-			int[][] tileIds = new int[inventoryMaxSize.y][];
-			int[][] tileUids = new int[inventoryMaxSize.y][];
-			for (int i = 0; i < inventoryMaxSize.y; i++)
+			int[][] tileIds = new int[inventoryMaxSize.x][];
+			int[][] tileUids = new int[inventoryMaxSize.x][];
+			for (int i = 0; i < inventoryMaxSize.x; i++)
 			{
-				tileIds[i] = new int[inventoryMaxSize.x];
-				tileUids[i] = new int[inventoryMaxSize.x];
-				for (int j = 0; j < inventoryMaxSize.x; j++)
+				tileIds[i] = new int[inventoryMaxSize.y];
+				tileUids[i] = new int[inventoryMaxSize.y];
+				for (int j = 0; j < inventoryMaxSize.y; j++)
 				{
 					Slot current = inventory[i][j];
 					tileIds[i][j] = current.ItemId;
@@ -350,7 +365,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 				}
 			}
 
-			PlaceOverlay(id, uid);
+			if (id != 0) PlaceOverlay(id, uid);
 
 			return res;
 		}
@@ -394,6 +409,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 			                                      item.slotSize.Count * overlaySizeMultiply);
 			rectTransform.anchoredPosition = new Vector2(first.Position.y * overlaySizeMultiply,
 			                                             (first.Position.x + length) * overlaySizeMultiply * -1);
+
+			if (id == 7) rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x - overlaySizeMultiply, rectTransform.anchoredPosition.y + overlaySizeMultiply);
 
 			overlayImages.Add(uid, image);
 		}
