@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -69,7 +70,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				// 아이템 버리기
 				if (Input.GetKeyDown(KeyCode.Z) && item.dropable)
 				{
-					itemManager.SetCurrentItem(0);
+					AlertManager.Instance.Show(AlertType.Double, "확인", "정말로 아이템을 버릴까요?", new Dictionary<string, Action>(){{"예", ()=>itemManager.SetCurrentItem(0)}, {"아니요", null}});
 				}
 
 				// 아이템 먹기
