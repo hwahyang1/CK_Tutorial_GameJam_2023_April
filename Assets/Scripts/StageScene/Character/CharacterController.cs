@@ -46,12 +46,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		}
 
 		private Rigidbody2D rb;
+		private Animator animator;
 		private LevelManager levelManager;
 		private SpriteRenderer spriteRenderer;
 
 		private void Start()
 		{
 			rb = GetComponent<Rigidbody2D>();
+			animator = GetComponent<Animator>();
 			levelManager = GetComponent<LevelManager>();
 			spriteRenderer = GetComponent<SpriteRenderer>();
 		}
@@ -82,6 +84,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		private void FixedUpdate()
 		{
+			animator.SetBool("Idle", true);
+			
 			if (GameManager.Instance.status != GameStatus.Playing) return;
 			
 			// 이동 (걷기 + 점프 + 달리기)
@@ -127,6 +131,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				rb.AddForce(new Vector2(0f, jumpSpeed));
 				isJumpable = false;
 			}
+			
+			animator.SetBool("Idle", levelManager.isPlayerStay);
 		}
 
 		/*private void OnCollisionEnter2D(Collision2D other)
