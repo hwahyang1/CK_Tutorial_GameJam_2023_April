@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a2ec659c-e56e-4afe-8544-b25efb6e29a9}">
+		<property name="assetPath">
+			<value>Hamster_2_BassdrumRhythm, Track 1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>44.799999999999997</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d3dcde8d-c4d2-4455-b1a9-f1a57f04a53b}</destination>
+		</relationship>
+	</object>
+</objects>
