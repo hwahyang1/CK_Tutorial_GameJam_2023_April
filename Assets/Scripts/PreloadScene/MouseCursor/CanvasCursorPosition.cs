@@ -16,7 +16,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.MouseCursor
 		private CanvasScaler targetCanvas;
 		private bool runCalculate = false;
 		private string previousSceneName = "";
-		
+
 		private static Vector2 canvasPosition;
 		public static Vector2 CanvasPosition => canvasPosition;
 
@@ -31,7 +31,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.MouseCursor
 			}
 
 			if (!runCalculate) return;
-			
+
 			// 위치 가져오고 값이 스크린 크기를 못넘어가게 조정
 			canvasPosition = Input.mousePosition;
 
@@ -39,7 +39,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.MouseCursor
 			if (canvasPosition.y < 0) canvasPosition.y = 0;
 			if (canvasPosition.x > Screen.width) canvasPosition.x = Screen.width;
 			if (canvasPosition.y > Screen.height) canvasPosition.y = Screen.height;
-			
+
 			// 화면 크기는 달라지지만 Canvas 상의 좌표값은 바뀌지 않음 -> 보정
 			canvasPosition.x = canvasPosition.x / Screen.width * targetCanvas.referenceResolution.x;
 			canvasPosition.y = canvasPosition.y / Screen.height * targetCanvas.referenceResolution.y;
@@ -56,6 +56,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.MouseCursor
 				runCalculate = false;
 				return;
 			}
+
 			runCalculate = true;
 			targetCanvas = target.GetComponent<CanvasScaler>();
 		}

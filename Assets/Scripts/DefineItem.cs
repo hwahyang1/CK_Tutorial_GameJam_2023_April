@@ -13,7 +13,7 @@ namespace CK_Tutorial_GameJam_April
 		Rare,
 		Legendary
 	}
-	
+
 	/// <summary>
 	/// 아이템을 정의합니다.
 	/// </summary>

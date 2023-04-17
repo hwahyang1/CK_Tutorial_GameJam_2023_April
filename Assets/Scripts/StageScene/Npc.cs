@@ -24,19 +24,22 @@ namespace CK_Tutorial_GameJam_April.StageScene
 
 		[SerializeField]
 		private NpcAdditional npcAdditional;
-		
+
 		[Header("Npc Data")]
 		[Tooltip("0과 -1만 사용합니다. 공백으로 구분합니다.")]
 		public List<string> slotSize;
 
 		[SerializeField]
 		private string name;
+
 		[SerializeField]
 		[Tooltip("줄바꿈은 \\n로 입력합니다.")]
 		private string description;
+
 		[SerializeField]
 		[Tooltip("줄바꿈은 \\n로 입력합니다.")]
 		private List<string> greetingMessages;
+
 		[SerializeField]
 		[Tooltip("줄바꿈은 \\n로 입력합니다.")]
 		private List<string> thanksMessages;
@@ -55,7 +58,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 			{
 				uidData[i] = new int[horizontalCount];
 				slotData[i] = new int[horizontalCount];
-				
+
 				string[] currentData = slotSize[i].Split(' ');
 				for (int j = 0; j < currentData.Length; j++)
 				{
@@ -70,7 +73,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		private void Update()
 		{
 			if (currentFlow != DefineNpcFlow.Inventory) return;
-			
+
 			Tuple<int[][], int[][]> data = slotsManager.ExportAllTilesIdsUids();
 
 			foreach (int[] currentH in data.Item2)
@@ -124,7 +127,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		private void OpenInventory()
 		{
 			if (slotsManager.IsActive) return;
-			
+
 			slotsManager.InitFromArray(backup.Item1, backup.Item2);
 			slotsManager.SetTabActive(true);
 		}
@@ -132,7 +135,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		public void CloseInventory()
 		{
 			if (!slotsManager.IsActive) return;
-			
+
 			backup = slotsManager.ExportAllTilesIdsUids();
 			slotsManager.SetTabActive(false);
 		}

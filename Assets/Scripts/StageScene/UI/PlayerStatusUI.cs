@@ -22,12 +22,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 		[Header("Stamina")]
 		[SerializeField]
 		private RectTransform staminaFront;
+
 		[SerializeField]
 		private Text staminaText;
 
 		[Header("Exp")]
 		[SerializeField]
 		private RectTransform expFront;
+
 		[SerializeField]
 		private Text expText;
 
@@ -38,7 +40,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 			staminaFront.sizeDelta = Vector2.Lerp(staminaSizeDelta,
 			                                      new Vector2(1f * levelManager.Stamina / levelManager.MaxStamina * max,
 			                                                  staminaSizeDelta.y), 0.25f);
-			staminaText.text = $"Level {levelManager.Level} | Stat: {levelManager.Stamina:0.#}/{levelManager.MaxStamina:0.#}";
+			staminaText.text =
+				$"Level {levelManager.Level} | Stat: {levelManager.Stamina:0.#}/{levelManager.MaxStamina:0.#}";
 
 			// 경험치
 			Vector2 expSizeDelta = expFront.sizeDelta;

@@ -21,10 +21,10 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 	{
 		[SerializeField]
 		private ItemManager itemManager;
-		
+
 		[SerializeField]
 		private Animator inventoryParent;
-		
+
 		[SerializeField]
 		private Transform slotsParent;
 
@@ -48,6 +48,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		[Header("Status")]
 		[SerializeField, ReadOnly]
 		private Vector2Int currentInventoryPosition = new Vector2Int(-1, -1);
+
 		public Vector2Int CurrentInventoryPosition => currentInventoryPosition;
 
 		[Header("Sprites - Status")]
@@ -69,6 +70,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 
 		[Header("Status")]
 		private bool isActive = false;
+
 		public bool IsActive => isActive;
 
 		private bool protectModify = false;
@@ -410,7 +412,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 			rectTransform.anchoredPosition = new Vector2(first.Position.y * overlaySizeMultiply,
 			                                             (first.Position.x + length) * overlaySizeMultiply * -1);
 
-			if (id == 7) rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x - overlaySizeMultiply, rectTransform.anchoredPosition.y + overlaySizeMultiply);
+			if (id == 7)
+				rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x - overlaySizeMultiply,
+				                                             rectTransform.anchoredPosition.y + overlaySizeMultiply);
 
 			overlayImages.Add(uid, image);
 		}
@@ -449,7 +453,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 			await UniTask.Delay(TimeSpan.FromMilliseconds(250));
 			protectModify = false;
 		}
-		
+
 		/* ============ Events ============ */
 
 		private void ProcessMouseOverEvent(Vector2Int position, bool enter)

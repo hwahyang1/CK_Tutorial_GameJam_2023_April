@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,23 +17,27 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		[Header("Status")]
 		[SerializeField, ReadOnly]
 		private Vector2Int position;
+
 		public Vector2Int Position => position;
-		
+
 		[SerializeField, ReadOnly]
 		private bool isSlotActive = false;
+
 		public bool IsSlotActive => isSlotActive;
 
 		[SerializeField, ReadOnly]
 		private int itemId = 0;
+
 		public int ItemId => itemId;
 
 		[SerializeField, ReadOnly]
 		private int uid = 0;
+
 		public int Uid => uid;
 
 		private bool init = false;
 		private Image image;
-		
+
 		private System.Action<Vector2Int, bool> overCallback = null;
 		private System.Action clickCallback = null;
 
@@ -60,7 +63,15 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		/// -1 -> 사용 안함
 		/// 0 -> 빈칸
 		/// </remarks>
-		public void Init(int id, int uid, Vector2Int position, System.Action<Vector2Int, bool> overCallback, System.Action clickCallback, Sprite activeSprite, Sprite inActiveSprite)
+		public void Init(
+			int id,
+			int uid,
+			Vector2Int position,
+			System.Action<Vector2Int, bool> overCallback,
+			System.Action clickCallback,
+			Sprite activeSprite,
+			Sprite inActiveSprite
+		)
 		{
 			itemId = id;
 			this.uid = uid;
@@ -100,12 +111,12 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		}
 
 		/* ==================== Events ==================== */
-		
+
 		public void OnPointerEnter(PointerEventData eventData)
 		{
 			overCallback?.Invoke(position, true);
 		}
-		
+
 		public void OnPointerExit(PointerEventData eventData)
 		{
 			overCallback?.Invoke(position, false);

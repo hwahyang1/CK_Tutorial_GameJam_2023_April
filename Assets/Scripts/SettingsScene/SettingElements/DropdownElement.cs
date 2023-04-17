@@ -20,7 +20,7 @@ namespace CK_Tutorial_GameJam_April.SettingsScene.SettingElements
 		[Header("GameObjects")]
 		[SerializeField]
 		protected Dropdown dropdown;
-		
+
 		protected virtual void Awake()
 		{
 			dropdown.onValueChanged.AddListener(OnValueChanged);

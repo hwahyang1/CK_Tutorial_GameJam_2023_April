@@ -19,7 +19,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Item
 	{
 		[SerializeField]
 		private List<SlotsManager> slotsManagers;
-		
+
 		[SerializeField]
 		private Image overlayImage;
 
@@ -52,7 +52,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Item
 				overlayImage.rectTransform.anchoredPosition += new Vector2(0, 0.5f * overlaySizeMultiply);
 
 			if (GameManager.Instance.status != GameStatus.Playing) return;
-			
+
 			foreach (SlotsManager slotsManager in slotsManagers)
 			{
 				List<List<Slot>> tiles = slotsManager.ExportAllTargetTiles(currentItemSlots);

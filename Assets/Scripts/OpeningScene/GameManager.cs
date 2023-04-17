@@ -15,13 +15,13 @@ namespace CK_Tutorial_GameJam_April.OpeningScene
 	{
 		[SerializeField]
 		private float time;
-		
+
 		private bool protectInput = true;
 
 		private Coroutine active = null;
 
 		private bool isFirstRun;
-		
+
 		private void Start()
 		{
 			isFirstRun = SettingsManager.Instance.GetSettings().isFirstRun;
@@ -54,6 +54,7 @@ namespace CK_Tutorial_GameJam_April.OpeningScene
 				SettingsManager.Instance.SetSettings(oldData);
 				SettingsManager.Instance.SaveSettings();
 			}
+
 			active = null;
 			GotoMenu();
 		}
@@ -61,7 +62,7 @@ namespace CK_Tutorial_GameJam_April.OpeningScene
 		private void GotoMenu()
 		{
 			if (active != null) StopCoroutine(active);
-			SceneChange.Instance.ChangeScene("MenuScene",false, false);
+			SceneChange.Instance.ChangeScene("MenuScene", false, false);
 		}
 	}
 }

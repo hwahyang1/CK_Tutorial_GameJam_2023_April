@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using CK_Tutorial_GameJam_April.PreloadScene.Item;
+using CK_Tutorial_GameJam_April.PreloadScene.Alert;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 
 namespace CK_Tutorial_GameJam_April.StageScene.Character
@@ -62,7 +63,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		private void Update()
 		{
 			if (GameManager.Instance.status != GameStatus.Playing) return;
-			
+
 			if (itemManager.CurrentItemCode != 0)
 			{
 				DefineItem item = ItemStorage.Instance.GetItems()[itemManager.CurrentItemCode];
@@ -70,7 +71,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				// 아이템 버리기
 				if (Input.GetKeyDown(KeyCode.Z) && item.dropable)
 				{
-					AlertManager.Instance.Show(AlertType.Double, "확인", "정말로 아이템을 버릴까요?", new Dictionary<string, Action>(){{"예", ()=>itemManager.SetCurrentItem(0)}, {"아니요", null}});
+					AlertManager.Instance.Show(AlertType.Double, "확인", "정말로 아이템을 버릴까요?",
+					                           new Dictionary<string, Action>()
+					                           { { "예", () => itemManager.SetCurrentItem(0) }, { "아니요", null } });
 				}
 
 				// 아이템 먹기
@@ -86,9 +89,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		private void FixedUpdate()
 		{
 			animator.SetBool("Idle", true);
-			
+
 			if (GameManager.Instance.status != GameStatus.Playing) return;
-			
+
 			// 이동 (걷기 + 점프 + 달리기)
 			levelManager.isPlayerStay = isJumpable;
 
@@ -132,7 +135,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				rb.AddForce(new Vector2(0f, jumpSpeed));
 				isJumpable = false;
 			}
-			
+
 			animator.SetBool("Idle", levelManager.isPlayerStay);
 		}
 

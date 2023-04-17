@@ -16,14 +16,16 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 
 		[SerializeField]
 		private float maxSize;
+
 		[SerializeField]
 		private RectTransform progressBackground;
+
 		[SerializeField]
 		private RectTransform progressForeground;
-		
+
 		[SerializeField]
 		private ParticleSystem[] targetEffects;
-		
+
 		private int itemId;
 		public int ItemId => itemId;
 
@@ -35,8 +37,10 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 		// value -> 0f~1f
 		public void ChangeProgressBar(bool active, float value)
 		{
-			progressForeground.sizeDelta = Vector2.Lerp(progressForeground.sizeDelta, new Vector2(maxSize * value, progressForeground.sizeDelta.y), 0.5f);
-			
+			progressForeground.sizeDelta = Vector2.Lerp(progressForeground.sizeDelta,
+			                                            new Vector2(maxSize * value, progressForeground.sizeDelta.y),
+			                                            0.5f);
+
 			progressBackground.gameObject.SetActive(active);
 			progressForeground.gameObject.SetActive(active);
 		}
