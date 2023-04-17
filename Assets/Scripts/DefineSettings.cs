@@ -75,7 +75,7 @@ namespace CK_Tutorial_GameJam_April
 			}
 		}
 
-		[SerializeField] public bool isFirst;
+		public bool isFirstRun;
 
 		public DefineSettings()
 		{
@@ -86,7 +86,7 @@ namespace CK_Tutorial_GameJam_April
 			Background = 1f;
 			Effect = 1f;
 
-			isFirst = true;
+			isFirstRun = true;
 		}
 
 		public DefineSettings(
@@ -95,7 +95,7 @@ namespace CK_Tutorial_GameJam_April
 			float master,
 			float background,
 			float effect,
-			bool isFirst
+			bool isFirstRun
 		)
 		{
 			this.resolutionHeight = resolutionHeight;
@@ -105,7 +105,7 @@ namespace CK_Tutorial_GameJam_April
 			this.Background = background;
 			this.Effect = effect;
 			
-			this.isFirst = isFirst;
+			this.isFirstRun = isFirstRun;
 		}
 	}
 }

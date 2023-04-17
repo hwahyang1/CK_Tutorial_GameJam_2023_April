@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 using CK_Tutorial_GameJam_April.StageScene.UI;
 using CK_Tutorial_GameJam_April.StageScene.Inventory;
@@ -11,17 +10,6 @@ using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
 
 namespace CK_Tutorial_GameJam_April.StageScene
 {
-	/// <summary>
-	/// Npc 상호작용에 대한 흐름을 정의합니다.
-	/// </summary>
-	public enum DefineNpcFlow
-	{
-		Greeting,
-		Inventory,
-		Thanks,
-		Ended
-	}
-	
 	/// <summary>
 	/// 조력자를 관리합니다.
 	/// </summary>

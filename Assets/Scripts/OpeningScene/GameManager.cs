@@ -20,18 +20,18 @@ namespace CK_Tutorial_GameJam_April.OpeningScene
 
 		private Coroutine active = null;
 
-		private bool isFirst;
+		private bool isFirstRun;
 		
 		private void Start()
 		{
-			isFirst = SettingsManager.Instance.GetSettings().isFirst;
+			isFirstRun = SettingsManager.Instance.GetSettings().isFirstRun;
 			StartCoroutine(ToggleProtectCoroutine());
 			active = StartCoroutine(WaitForAnimatorCoroutine());
 		}
 
 		private void Update()
 		{
-			if (!isFirst && !protectInput && Input.anyKeyDown)
+			if (!isFirstRun && !protectInput && Input.anyKeyDown)
 			{
 				protectInput = true;
 				GotoMenu();
@@ -47,10 +47,10 @@ namespace CK_Tutorial_GameJam_April.OpeningScene
 		private IEnumerator WaitForAnimatorCoroutine()
 		{
 			yield return new WaitForSeconds(time);
-			if (isFirst)
+			if (isFirstRun)
 			{
 				DefineSettings oldData = SettingsManager.Instance.GetSettings();
-				oldData.isFirst = false;
+				oldData.isFirstRun = false;
 				SettingsManager.Instance.SetSettings(oldData);
 				SettingsManager.Instance.SaveSettings();
 			}
