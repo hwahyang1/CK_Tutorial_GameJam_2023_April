@@ -28617,6 +28617,7 @@ GameObject:
   - component: {fileID: 1617177566}
   - component: {fileID: 1617177565}
   - component: {fileID: 1617177568}
+  - component: {fileID: 1617177569}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -28825,6 +28826,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1617177569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617177557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775e4891fc1d5e54f8d31169569e6283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Walk:
+  - {fileID: 21300000, guid: 7ff1da9939cc04e4397d4e41293f1ee3, type: 3}
+  - {fileID: 21300000, guid: 707b146e20aac3e47ae4d7ef12d4f593, type: 3}
+  - {fileID: 21300000, guid: 2a04c7b9bd1d31e45abc732194eb1c54, type: 3}
+  Eat:
+  - {fileID: 21300000, guid: c29e48bd3a9460941bdc6cb2b0c7ac9a, type: 3}
+  - {fileID: 21300000, guid: 28cb3f90475053948b33ea6bbea7e74e, type: 3}
+  - {fileID: 21300000, guid: c29e48bd3a9460941bdc6cb2b0c7ac9a, type: 3}
+  pickUp: {fileID: 21300000, guid: d56fec3bfc355ce4fab14b4727b95a86, type: 3}
+  suprized: {fileID: 21300000, guid: 3c2e4ac9c9a4781488c1359d2a2e67ba, type: 3}
+  onWalk: 0
+  onEat: 0
+  onPickUp: 0
+  onSuprized: 0
 --- !u!1 &1634583710
 GameObject:
   m_ObjectHideFlags: 0
