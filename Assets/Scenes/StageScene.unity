@@ -28617,6 +28617,7 @@ GameObject:
   - component: {fileID: 1617177566}
   - component: {fileID: 1617177565}
   - component: {fileID: 1617177568}
+  - component: {fileID: 1617177569}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -28707,7 +28708,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 3.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -28784,7 +28785,7 @@ MonoBehaviour:
   itemManager: {fileID: 3545119063430740537}
   speed: 3000
   maxSpeed: 5
-  jumpSpeed: 700
+  jumpSpeed: 900
   runStamina: 0.5
   runSpeedMultiply: 1.25
   runMaxSpeed: 10
@@ -28825,6 +28826,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1617177569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617177557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43f8bd9700dea643aab4490f223c69d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1634583710
 GameObject:
   m_ObjectHideFlags: 0
