@@ -1,15 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
-namespace CK_Tutorial_GameJam_April
+namespace CK_Tutorial_GameJam_April.StageScene.Character
 {
 	/// <summary>
 	/// 캐릭터 애니매이션 관리
 	/// </summary>
 	public class CharacterAnim : MonoBehaviour
 	{
+		[SerializeField]
 		private SpriteRenderer spriteRenderer;
 
 		[SerializeField]
@@ -26,43 +27,15 @@ namespace CK_Tutorial_GameJam_April
 
 		private float time = 0f;
 
-		[SerializeField]
-		private bool onWalk = false;
-		[SerializeField]
-		private bool onEat = false;
-		[SerializeField]
-		private bool onPickUp = false;
-		[SerializeField]
-		private bool onSuprized = false;
-
-		private void Start()
-		{
-			spriteRenderer = GetComponent<SpriteRenderer>();
-		}
+		public bool onWalk = false;
+		public bool onEat = false;
+		public bool onPickUp = false;
+		public bool onSuprized = false;
 
 		private void Update()
 		{
-			if (onWalk)
-			{
-				time += Time.deltaTime;
-				if (time > 0f && time <= 0.5f)
-				{
-					spriteRenderer.sprite = Walk[0];
-				}
-				else if (time > 0.5f && time <= 1f)
-				{
-					spriteRenderer.sprite = Walk[1];
-				}
-				else if (time > 1f && time <= 1.5f)
-				{
-					spriteRenderer.sprite = Walk[2];
-				}
-				else
-				{
-					time = 0f; // 루프되야하니까
-				}
-			}
-			else if (onEat)
+			spriteRenderer.sprite = Walk[0];
+			if (onEat)
 			{
 				time += Time.deltaTime;
 				if (time > 0f && time <= 0.5f)
@@ -101,6 +74,26 @@ namespace CK_Tutorial_GameJam_April
 				{
 					time = 0f; // 루프되야하니까
 					onSuprized = false;
+				}
+			}
+			else if (onWalk)
+			{
+				time += Time.deltaTime;
+				if (time > 0f && time <= 0.5f)
+				{
+					spriteRenderer.sprite = Walk[0];
+				}
+				else if (time > 0.5f && time <= 1f)
+				{
+					spriteRenderer.sprite = Walk[1];
+				}
+				else if (time > 1f && time <= 1.5f)
+				{
+					spriteRenderer.sprite = Walk[2];
+				}
+				else
+				{
+					time = 0f; // 루프되야하니까
 				}
 			}
 			else
