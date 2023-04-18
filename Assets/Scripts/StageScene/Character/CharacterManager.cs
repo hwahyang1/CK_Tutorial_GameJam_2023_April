@@ -26,20 +26,20 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		private Npc npc;
 
 		private bool isTrigger = false;
-		
+
 		private bool isNpc = false;
-		
+
 		private bool rollbackInventory;
 
 		private void Update()
 		{
 			if (GameManager.Instance.status != GameStatus.Playing) return;
-			
+
 			if (Input.GetMouseButtonDown(0) && isNpc)
 			{
 				npc.Interaction();
 			}
-			
+
 			if (itemManager.CurrentItemCode != 0) return;
 
 			if (rollbackInventory)
@@ -50,7 +50,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 			if (Input.GetMouseButton(0) && isTrigger) // 2초간 클릭하면 아이템이 먹어지므로 time에 deltatime을 더해서 구함
 			{
-				item.ChangeProgressBar(true, time/2f);
+				item.ChangeProgressBar(true, time / 2f);
 				time += Time.deltaTime;
 			}
 

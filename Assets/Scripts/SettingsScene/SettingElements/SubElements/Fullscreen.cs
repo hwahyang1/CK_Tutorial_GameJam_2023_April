@@ -25,7 +25,7 @@ namespace CK_Tutorial_GameJam_April.SettingsScene.SettingElements.SubElements
 			SettingsManager.Instance.SetSettings(oldData);
 			SettingsManager.Instance.ApplySettings();
 			SettingsManager.Instance.SaveSettings();
-			
+
 			base.OnValueChanged();
 		}
 	}

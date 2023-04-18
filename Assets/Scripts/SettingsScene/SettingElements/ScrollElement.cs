@@ -53,7 +53,8 @@ namespace CK_Tutorial_GameJam_April.SettingsScene.SettingElements
 		protected virtual void OnValueChanged(float currentValue)
 		{
 			this.currentValue = currentValue;
-			elementValue.GetComponent<Text>().text = (int)((currentValue - minValue) / (maxValue - minValue) * 100) + "%";
+			elementValue.GetComponent<Text>().text =
+				(int)((currentValue - minValue) / (maxValue - minValue) * 100) + "%";
 		}
 	}
 }

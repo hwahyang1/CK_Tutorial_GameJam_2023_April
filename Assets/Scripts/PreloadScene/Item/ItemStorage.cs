@@ -18,7 +18,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Item
 		/// 전체 아이템 목록을 반환합니다.
 		/// </summary>
 		public List<DefineItem> GetItems() => items;
-		
+
 		/// <summary>
 		/// 특정 아이템의 ID를 반환합니다.
 		/// </summary>

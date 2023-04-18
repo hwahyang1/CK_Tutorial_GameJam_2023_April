@@ -17,6 +17,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		private SlotsManager slotsManager;
 
 		private int level = 0;
+
 		public int Level
 		{
 			get => level;
@@ -31,12 +32,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		[Header("Stamina")]
 		[SerializeField]
 		private float staminaRecover;
-		
+
 		[SerializeField]
 		private List<float> maxStamina = new List<float>();
+
 		public float MaxStamina => maxStamina[level];
-		
+
 		private float stamina;
+
 		public float Stamina
 		{
 			get => stamina;
@@ -47,13 +50,15 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				else stamina = value;
 			}
 		}
-		
+
 		[Header("Exp")]
 		[SerializeField]
 		private List<int> maxExp = new List<int>();
+
 		public int MaxExp => maxExp[level];
-		
+
 		private int exp;
+
 		public int Exp
 		{
 			get => exp;
@@ -67,6 +72,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		[HideInInspector]
 		public bool isPlayerStay;
+
 		private readonly float[] deltaTime = new float[2]; // 초반 3초, 후반 1초마다 회복
 
 		private void Start()
@@ -74,8 +80,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			Level = 0;
 			Stamina = maxStamina[Level];
 			Exp = 0;
-			
-			
+
+
 			int[][] inventory = new int[][]
 			                    {
 				                    new int[] { -1, -1, -1, -1, -1 },
@@ -86,14 +92,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				                    new int[] { -1, -1, -1, -1, -1 },
 			                    };
 			int[][] uid = new int[][]
-			                    {
-				                    new int[] { 0, 0, 0, 0, 0 },
-				                    new int[] { 0, 0, 0, 0, 0 },
-				                    new int[] { 0, 0, 0, 0, 0 },
-				                    new int[] { 0, 0, 0, 0, 0 },
-				                    new int[] { 0, 0, 0, 0, 0 },
-				                    new int[] { 0, 0, 0, 0, 0 },
-			                    };
+			              {
+				              new int[] { 0, 0, 0, 0, 0 },
+				              new int[] { 0, 0, 0, 0, 0 },
+				              new int[] { 0, 0, 0, 0, 0 },
+				              new int[] { 0, 0, 0, 0, 0 },
+				              new int[] { 0, 0, 0, 0, 0 },
+				              new int[] { 0, 0, 0, 0, 0 },
+			              };
 			slotsManager.InitFromArray(inventory, uid);
 		}
 
@@ -107,7 +113,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				Stamina = maxStamina[Level];
 				ChangeInventory();
 			}
-			
+
 			// 플레이어가 3초간 가만히 있으면 -> 1초마다 특정 스태미너 회복
 			if (isPlayerStay)
 			{

@@ -31,7 +31,7 @@ namespace CK_Tutorial_GameJam_April
 		_1440, // QHD
 		_2160, // 4K UHD
 	}
-	
+
 	/// <summary>
 	/// 사용 가능한 설정값을 정의합니다.
 	/// </summary>
@@ -40,8 +40,10 @@ namespace CK_Tutorial_GameJam_April
 	{
 		public ResolutionHeight resolutionHeight;
 		public DisplayMode displayMode;
-		
-		[SerializeField] private float master;
+
+		[SerializeField]
+		private float master;
+
 		public float Master
 		{
 			get => master;
@@ -52,7 +54,10 @@ namespace CK_Tutorial_GameJam_April
 				else master = value;
 			}
 		}
-		[SerializeField] private float background;
+
+		[SerializeField]
+		private float background;
+
 		public float Background
 		{
 			get => background;
@@ -63,7 +68,10 @@ namespace CK_Tutorial_GameJam_April
 				else background = value;
 			}
 		}
-		[SerializeField] private float effect;
+
+		[SerializeField]
+		private float effect;
+
 		public float Effect
 		{
 			get => effect;
@@ -75,7 +83,7 @@ namespace CK_Tutorial_GameJam_April
 			}
 		}
 
-		[SerializeField] public bool isFirst;
+		public bool isFirstRun;
 
 		public DefineSettings()
 		{
@@ -86,7 +94,7 @@ namespace CK_Tutorial_GameJam_April
 			Background = 1f;
 			Effect = 1f;
 
-			isFirst = true;
+			isFirstRun = true;
 		}
 
 		public DefineSettings(
@@ -95,17 +103,17 @@ namespace CK_Tutorial_GameJam_April
 			float master,
 			float background,
 			float effect,
-			bool isFirst
+			bool isFirstRun
 		)
 		{
 			this.resolutionHeight = resolutionHeight;
 			this.displayMode = displayMode;
-			
+
 			this.Master = master;
 			this.Background = background;
 			this.Effect = effect;
-			
-			this.isFirst = isFirst;
+
+			this.isFirstRun = isFirstRun;
 		}
 	}
 }

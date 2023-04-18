@@ -80,7 +80,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Settings
 					fullScreenMode = FullScreenMode.Windowed;
 					break;
 			}
-			
+
 			int resolutionHeight = 0;
 			switch (settings.resolutionHeight)
 			{
@@ -103,11 +103,12 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Settings
 					resolutionHeight = 2160;
 					break;
 			}
+
 			Screen.SetResolution(resolutionHeight / 9 * 16, resolutionHeight, fullScreenMode);
 
 			QualitySettings.vSyncCount = 1;
 			Application.targetFrameRate = 60; // 사실 의미 없음
-			
+
 			backgroundVolume = settings.Master * settings.Background;
 			effectVolume = settings.Master * settings.Effect;
 		}
