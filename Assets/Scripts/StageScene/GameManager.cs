@@ -16,7 +16,8 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		Playing,
 		Eating,
 		MessageViewing,
-		Paused
+		Paused,
+		Dead
 	}
 
 	/// <summary>

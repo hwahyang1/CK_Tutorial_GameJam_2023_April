@@ -545,7 +545,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420035}
-  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -611,19 +610,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf4cac07cb826ce4a8a5ce9c50883adb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeoutSecond: 0
 --- !u!81 &519420035
 AudioListener:
   m_ObjectHideFlags: 0
@@ -886,7 +872,6 @@ GameObject:
   - component: {fileID: 733776259}
   - component: {fileID: 733776258}
   - component: {fileID: 733776257}
-  - component: {fileID: 733776260}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -944,19 +929,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &733776260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 733776256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf4cac07cb826ce4a8a5ce9c50883adb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeoutSecond: 0
 --- !u!1 &770488732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,6 +2225,9 @@ MonoBehaviour:
   flowSpeed: 40
   flowSpeedMultiply: 3.5
   backButton: {fileID: 779534253}
+  targetObjects:
+  - {fileID: 519420028}
+  - {fileID: 733776256}
 --- !u!1 &1785433573
 GameObject:
   m_ObjectHideFlags: 0

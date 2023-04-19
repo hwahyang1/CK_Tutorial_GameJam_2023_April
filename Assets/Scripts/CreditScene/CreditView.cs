@@ -30,12 +30,23 @@ namespace CK_Tutorial_GameJam_April.CreditScene
 
 		[SerializeField]
 		private GameObject backButton;
+
+		[SerializeField]
+		private List<GameObject> targetObjects = new List<GameObject>();
 		
 		private void Start()
 		{
 			parent.anchoredPosition = startAt;
 			
 			backButton.SetActive(CreditParams.Instance.isControllable);
+
+			foreach (GameObject currentObject in targetObjects)
+			{
+				if (CreditParams.Instance.isControllable)
+				{
+					Destroy(currentObject);
+				}
+			}
 		}
 
 		private void Update()
