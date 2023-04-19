@@ -20,6 +20,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		[SerializeField]
 		private ItemManager itemManager;
 
+		[SerializeField]
+		private BossManager bossManager;
+
 		private float time = 0f;
 
 		private Item item;
@@ -30,6 +33,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		private bool isNpc = false;
 
 		private bool rollbackInventory;
+
+		private bool getItem = false;
 
 		private void Update()
 		{
@@ -69,6 +74,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				itemManager.SetCurrentItem(item.ItemId);
 				//Destroy(item.gameObject);
 				item.gameObject.SetActive(false);
+				bossManager.GetItem();
 			}
 		}
 
