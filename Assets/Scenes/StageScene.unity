@@ -815,7 +815,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 3cf3f98b90ffd12418457ed89edbbaac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -30810,6 +30810,7 @@ MonoBehaviour:
   beforeColor: {r: 1, g: 1, b: 1, a: 1}
   afterColor: {r: 1, g: 1, b: 1, a: 0.29803923}
   useTrigger: 1
+  isTrigger: 0
 --- !u!1 &1570981510
 GameObject:
   m_ObjectHideFlags: 0
@@ -31391,8 +31392,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a160c0bfe20a10d4e9040f19963ae32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  down: 20
   playerIndicator: {fileID: 444261733}
+  hideObjectManager: {fileID: 1530009262}
+  characterAnim: {fileID: 1617177569}
+  down: 20
   indicator:
   - {fileID: 21300000, guid: 3cf3f98b90ffd12418457ed89edbbaac, type: 3}
   - {fileID: 21300000, guid: 93f4251f7d1c6bb44873e5fef1f34693, type: 3}
@@ -31400,6 +31403,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 91723a4d94b7a6543b9d847794f3f58e, type: 3}
   - {fileID: 21300000, guid: dbcae8811cc854545b394e9987fa83e4, type: 3}
   - {fileID: 21300000, guid: 2055a3777a79e1240b2323337138ac28, type: 3}
+  - {fileID: 21300000, guid: a0225b11b872adf4c9253e52b042cddd, type: 3}
 --- !u!1 &1700594372
 GameObject:
   m_ObjectHideFlags: 0
@@ -119254,6 +119258,7 @@ MonoBehaviour:
   beforeColor: {r: 1, g: 1, b: 1, a: 0}
   afterColor: {r: 1, g: 1, b: 1, a: 0.2509804}
   useTrigger: 0
+  isTrigger: 0
 --- !u!1 &2077027271
 GameObject:
   m_ObjectHideFlags: 0

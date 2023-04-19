@@ -24,6 +24,8 @@ namespace CK_Tutorial_GameJam_April.StageScene
 
 		private Color targetColor;
 
+		public bool isTrigger = false;
+
 		private void Start()
 		{
 			tilemap = GetComponent<Tilemap>();
@@ -63,6 +65,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 			{
 				//tilemap.color = afterColor;
 				targetColor = afterColor;
+				isTrigger = true;
 			}
 		}
 
@@ -73,6 +76,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 			{
 				//tilemap.color = beforeColor;
 				targetColor = beforeColor;
+				isTrigger = false;
 			}
 		}
 	}
