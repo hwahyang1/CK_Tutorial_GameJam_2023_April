@@ -23,6 +23,9 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 		private Image loadingCover;
 
 		[SerializeField]
+		private Image loadingSpinner;
+
+		[SerializeField]
 		private Text loadingPercent;
 
 		[Header("Speed")]
@@ -55,6 +58,8 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 			{
 				loadingCover.color = new Color(1f, 1f, 1f, 0f);
 				loadingCover.gameObject.SetActive(true);
+				loadingSpinner.color = new Color(1f, 1f, 1f, 0f);
+				loadingSpinner.gameObject.SetActive(true);
 				canvas.SetActive(true);
 			}
 
@@ -66,6 +71,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 					accumulateTime += Time.deltaTime;
 					Color color = new Color(1f, 1f, 1f, accumulateTime / transitionTime);
 					loadingCover.color = color;
+					loadingSpinner.color = color;
 					await UniTask.DelayFrame(1);
 				}
 
@@ -77,6 +83,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 				loadingPercent.gameObject.SetActive(true);
 				loadingPercent.text = "0%";
 				loadingCover.color = new Color(1f, 1f, 1f, 1f);
+				loadingSpinner.color = new Color(1f, 1f, 1f, 1f);
 				await UniTask.Delay(TimeSpan.FromMilliseconds(250));
 			}
 
@@ -102,6 +109,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 					accumulateTime += Time.deltaTime;
 					Color color = new Color(1f, 1f, 1f, 1f - (accumulateTime / transitionTime));
 					loadingCover.color = color;
+					loadingSpinner.color = color;
 					await UniTask.DelayFrame(1);
 				}
 			}
@@ -109,6 +117,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 			if (fadeIn || fadeOut)
 			{
 				loadingCover.gameObject.SetActive(false);
+				loadingSpinner.gameObject.SetActive(false);
 				canvas.SetActive(false);
 			}
 
