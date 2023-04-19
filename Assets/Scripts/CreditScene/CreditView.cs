@@ -14,7 +14,7 @@ namespace CK_Tutorial_GameJam_April.CreditScene
 	public class CreditView : MonoBehaviour
 	{
 		[SerializeField]
-		private Transform parent;
+		private RectTransform parent;
 
 		[SerializeField]
 		private Vector2 startAt;
@@ -28,12 +28,9 @@ namespace CK_Tutorial_GameJam_April.CreditScene
 		[SerializeField]
 		private float flowSpeedMultiply; // 마우스 눌렀을 때 속도 가중치
 
-		private RectTransform rectTransform;
-
 		private void Start()
 		{
-			rectTransform = parent.GetComponent<RectTransform>();
-			rectTransform.anchoredPosition = startAt;
+			parent.anchoredPosition = startAt;
 		}
 
 		private void Update()
@@ -41,11 +38,11 @@ namespace CK_Tutorial_GameJam_April.CreditScene
 			EventSystem.current.SetSelectedGameObject(null);
 
 			float multiply = 1f;
-			if (Input.GetMouseButton(0)) multiply = flowSpeedMultiply;
+			if (Input.GetMouseButton(0) && CreditParams.Instance.isControllable) multiply = flowSpeedMultiply;
 
-			rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y + (flowSpeed * multiply * Time.deltaTime));
+			parent.anchoredPosition = new Vector2(parent.anchoredPosition.x, parent.anchoredPosition.y + (flowSpeed * multiply * Time.deltaTime));
 
-			if (rectTransform.anchoredPosition.x >= endAt.x && rectTransform.anchoredPosition.y >= endAt.y)
+			if (parent.anchoredPosition.x >= endAt.x && parent.anchoredPosition.y >= endAt.y)
 			{
 				Exit();
 			}
@@ -53,7 +50,16 @@ namespace CK_Tutorial_GameJam_April.CreditScene
 
 		public void Exit()
 		{
-			SceneChange.Instance.Unload("CreditScene");
+			if (CreditParams.Instance.isControllable)
+			{
+				CreditParams.Instance.Exit();
+				SceneChange.Instance.Unload("CreditScene");
+			}
+			else
+			{
+				CreditParams.Instance.Exit();
+				SceneChange.Instance.ChangeScene("MenuScene");
+			}
 		}
 	}
 }
