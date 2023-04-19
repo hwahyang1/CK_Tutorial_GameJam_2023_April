@@ -99,7 +99,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		public async UniTaskVoid ToggleEat()
 		{
 			characterAnim.onEat = true;
-			GameManager.Instance.status = GameStatus.Paused;
+			GameManager.Instance.status = GameStatus.Eating;
 			await UniTask.Delay(TimeSpan.FromSeconds(eatTime));
 			GameManager.Instance.status = GameStatus.Playing;
 			characterAnim.onEat = false;

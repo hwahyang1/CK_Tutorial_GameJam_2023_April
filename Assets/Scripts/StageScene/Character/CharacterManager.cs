@@ -33,20 +33,20 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		private void Update()
 		{
+			if ((GameManager.Instance.status == GameStatus.Playing || GameManager.Instance.status == GameStatus.Eating) && itemManager.CurrentItemCode == 0 && rollbackInventory)
+			{
+				slotsManager.SetTabActive(false);
+				rollbackInventory = false;
+			}
+			
 			if (GameManager.Instance.status != GameStatus.Playing) return;
-
+			
 			if (Input.GetMouseButtonDown(0) && isNpc)
 			{
 				npc.Interaction();
 			}
 
 			if (itemManager.CurrentItemCode != 0) return;
-
-			if (rollbackInventory)
-			{
-				slotsManager.SetTabActive(false);
-				rollbackInventory = false;
-			}
 
 			if (Input.GetMouseButton(0) && isTrigger) // 2초간 클릭하면 아이템이 먹어지므로 time에 deltatime을 더해서 구함
 			{
