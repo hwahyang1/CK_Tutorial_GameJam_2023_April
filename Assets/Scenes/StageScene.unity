@@ -30889,7 +30889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1905099584}
   itemManager: {fileID: 3545119063430740537}
-  eatTime: 0.5
+  eatTime: 0.6
   speed: 3000
   maxSpeed: 5
   jumpSpeed: 900
