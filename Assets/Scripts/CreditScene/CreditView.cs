@@ -28,9 +28,25 @@ namespace CK_Tutorial_GameJam_April.CreditScene
 		[SerializeField]
 		private float flowSpeedMultiply; // 마우스 눌렀을 때 속도 가중치
 
+		[SerializeField]
+		private GameObject backButton;
+
+		[SerializeField]
+		private List<GameObject> targetObjects = new List<GameObject>();
+		
 		private void Start()
 		{
 			parent.anchoredPosition = startAt;
+			
+			backButton.SetActive(CreditParams.Instance.isControllable);
+
+			foreach (GameObject currentObject in targetObjects)
+			{
+				if (CreditParams.Instance.isControllable)
+				{
+					Destroy(currentObject);
+				}
+			}
 		}
 
 		private void Update()

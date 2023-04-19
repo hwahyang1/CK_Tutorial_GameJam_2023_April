@@ -80,6 +80,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 			Init();
 		}
 
+		private void Update()
+		{
+			if (GameManager.Instance.status == GameStatus.MessageViewing && IsActive)
+			{
+				SetTabActive(false);
+			}
+		}
+
 		/// <summary>
 		/// 인벤토리 탭의 표시 여부를 변경합니다.
 		/// </summary>

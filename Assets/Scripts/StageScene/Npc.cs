@@ -23,6 +23,9 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		private MessageManager messageManager;
 
 		[SerializeField]
+		private PlayerAdditional playerAdditional;
+
+		[SerializeField]
 		private NpcAdditional npcAdditional;
 
 		[Header("Npc Data")]
@@ -109,7 +112,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 				case DefineNpcFlow.Thanks:
 					messageManager.Show(name, thanksMessages, () =>
 					                                          {
-						                                          // TODO: 열쇠 지급 필요
+						                                          playerAdditional.SetKeyCount(playerAdditional.CurrentKeysCount+1);
 						                                          SetStatus(false, DefineNpcFlow.Ended);
 					                                          });
 					break;

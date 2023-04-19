@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+
 using CK_Tutorial_GameJam_April.StageScene.Character;
+using CK_Tutorial_GameJam_April.StageScene.Audio;
+using CK_Tutorial_GameJam_April.StageScene.Items;
 
 namespace CK_Tutorial_GameJam_April.StageScene.Boss
 {
@@ -20,7 +24,16 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 		private CharacterAnim characterAnim;
 		
 		[SerializeField]
+		private ItemSpawnManager itemSpawnManager;
+		
+		[SerializeField]
+		private FmodFoundAdjuster fmodFoundAdjuster;
+		
+		[SerializeField]
 		private float down = 0f;
+		
+		[SerializeField]
+		private float maxTime = 500f;
 		
 		[SerializeField]
 		private Sprite[] indicator = new Sprite[2];
@@ -32,18 +45,15 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 		private Camera mainCamera;
 
 		private float time;
-		private float maxTime;
 		private float animTime;
 		private float bossTime;
 
 		private bool isTrigged = false;
 		private bool onBoss = false;
 
-
 		private void Start()
 		{
 			animTime = 0f;
-			maxTime = 100f;
 			mainCamera = Camera.main;
 			spriteRenderer = GetComponent<SpriteRenderer>();
 		}
@@ -52,7 +62,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 		{
 			playerIndicator.sprite = null; // 평소에는 아무것도 띄우지 않음.
 
-			if (time >= maxTime && animTime <= 2) // ?
+			if (time >= maxTime + 0.5f && animTime <= 2f) // ?
 			{
 				playerIndicator.sprite = indicator[0];
 			}
@@ -105,6 +115,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 				if (bossTime <= 4)
 				{
 					StartCoroutine(ZoomIn());
+					GameManager.Instance.status = GameStatus.Dead;
 					playerIndicator.sprite = indicator[1]; //!를 띄웁니다.
 				}
 				else
@@ -115,8 +126,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 			}
 			else if (onBoss && animTime > 10f) // 숨어있었다면 보스가 퇴장
 			{
-				Debug.Log("good");
 				StartCoroutine(Down());
+				itemSpawnManager.RespawnItem();
 				onBoss = false;
 				isTrigged = false;
 				time = 0f;
@@ -144,6 +155,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 			for (float p = 20f; p >= 0f; p--)
 			{
 				down = p;
+				fmodFoundAdjuster.ChangeValue(-(p - 20f) / 20f);
 				yield return null;
 			}
 		}
@@ -153,6 +165,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 			for (float p = 0f; p <= 60f; p++)
 			{
 				down = p/3;
+				fmodFoundAdjuster.ChangeValue(1f - (p / 60f));
 				yield return null;
 			}
 		}
@@ -168,7 +181,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 					Vector3.Lerp(spriteRenderer.transform.localScale, new Vector3(1.6f, 1.6f, 1f), 0.05f);
 				yield return null;
 			}
-
+			// TODO: 플레이어 사망
 		}
 	}
 }
