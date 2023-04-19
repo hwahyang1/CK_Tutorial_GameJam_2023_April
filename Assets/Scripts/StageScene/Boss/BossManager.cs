@@ -43,7 +43,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 		private void Start()
 		{
 			animTime = 0f;
-			maxTime = 10f;
+			maxTime = 100f;
 			mainCamera = Camera.main;
 			spriteRenderer = GetComponent<SpriteRenderer>();
 		}
@@ -75,7 +75,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 			{
 				animTime += Time.deltaTime;
 
-				if (animTime <= 12f)
+				if (animTime <= 10f)
 				{
 					if (animTime % 5 > 0f && animTime % 5 <= 2.0f)
 					{
@@ -96,7 +96,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 				}
 			}
 
-			if (onBoss && !hideObjectManager.isTrigger && animTime > 12f) // 숨어있지 않으면 죽음
+			if (onBoss && !hideObjectManager.isTrigger && animTime > 10f) // 숨어있지 않으면 죽음
 			{
 				bossTime += Time.deltaTime; // 보스에게 걸렸을떄의 타이머
 				spriteRenderer.sprite = bossAnim[3]; // 발견으로 이미지 변경
@@ -113,7 +113,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 					playerIndicator.sprite = null;
 				}
 			}
-			else if (onBoss && animTime > 12f) // 숨어있었다면 보스가 퇴장
+			else if (onBoss && animTime > 10f) // 숨어있었다면 보스가 퇴장
 			{
 				Debug.Log("good");
 				StartCoroutine(Down());
@@ -141,7 +141,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 
 		IEnumerator Up()
 		{
-			for (float p = 20f; p > 0f; p--)
+			for (float p = 20f; p >= 0f; p--)
 			{
 				down = p;
 				yield return null;
@@ -150,9 +150,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 
 		IEnumerator Down()
 		{
-			for (float p = 0f; p > 80f; p++)
+			for (float p = 0f; p <= 60f; p++)
 			{
-				down = p / 4;
+				down = p/3;
 				yield return null;
 			}
 		}
