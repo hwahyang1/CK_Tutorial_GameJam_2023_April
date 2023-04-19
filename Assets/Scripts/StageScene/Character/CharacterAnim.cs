@@ -34,7 +34,6 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		private void Update()
 		{
-			//spriteRenderer.sprite = Walk[0];
 			if (onEat)
 			{
 				time += Time.deltaTime;
@@ -98,6 +97,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			}
 			else
 			{
+				spriteRenderer.sprite = Walk[0];
 				time = 0f;
 			}
 		}
