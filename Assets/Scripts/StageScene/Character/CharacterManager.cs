@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using CK_Tutorial_GameJam_April.StageScene.Boss;
 using CK_Tutorial_GameJam_April.StageScene.Items;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
