@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace CK_Tutorial_GameJam_April
+namespace CK_Tutorial_GameJam_April.StageScene.Boss
 {
 	/// <summary>
 	/// Description
@@ -13,16 +13,19 @@ namespace CK_Tutorial_GameJam_April
 		private float time;
 		private float maxTime;
 		private SpriteRenderer spriteRenderer;
+		private Camera mainCamera;
+		
 		private void Start()
 		{
 			maxTime = 300f;
+			mainCamera = Camera.main;
 			spriteRenderer = GetComponent<SpriteRenderer>();
 		}
 
 		private void Update()
 		{
 			time += Time.deltaTime;
-			spriteRenderer.transform.position = Camera.main.transform.position;
+			spriteRenderer.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0f);
 
 		}
 
