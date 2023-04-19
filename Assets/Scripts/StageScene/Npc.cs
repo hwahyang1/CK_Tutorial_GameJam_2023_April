@@ -76,7 +76,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 
 			Tuple<int[][], int[][]> data = slotsManager.ExportAllTilesIdsUids();
 
-			foreach (int[] currentH in data.Item2)
+			foreach (int[] currentH in data.Item1)
 			{
 				foreach (int currentV in currentH)
 				{

@@ -34,19 +34,19 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		private void Update()
 		{
-			spriteRenderer.sprite = Walk[0];
+			//spriteRenderer.sprite = Walk[0];
 			if (onEat)
 			{
 				time += Time.deltaTime;
-				if (time > 0f && time <= 0.5f)
+				if (time > 0f && time <= 0.25f)
 				{
 					spriteRenderer.sprite = Eat[0];
 				}
-				else if (time > 0.5f && time <= 1f)
+				else if (time > 0.25f && time <= 0.5f)
 				{
 					spriteRenderer.sprite = Eat[1];
 				}
-				else if (time > 1f && time <= 1.5f)
+				else if (time > 0.5f && time <= 0.75f)
 				{
 					spriteRenderer.sprite = Eat[2];
 				}
