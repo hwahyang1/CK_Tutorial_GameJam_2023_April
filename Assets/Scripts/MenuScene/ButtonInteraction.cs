@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CK_Tutorial_GameJam_April.CreditScene;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -27,6 +28,7 @@ namespace CK_Tutorial_GameJam_April.MenuScene
 
 		public void OnSettingsButtonClicked()
 		{
+			CreditParams.Instance.isControllable = true;
 			SceneChange.Instance.Add("SettingsScene");
 		}
 
