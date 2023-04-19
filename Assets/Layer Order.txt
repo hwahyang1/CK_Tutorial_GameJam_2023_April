@@ -1,6 +1,7 @@
 Layer Order
 
-Background - 0
+Background - -1
+Boss - 0
 Exit - 1
 Box - 2
 Npc - 3

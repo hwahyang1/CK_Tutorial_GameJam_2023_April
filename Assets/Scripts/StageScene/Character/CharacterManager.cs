@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using CK_Tutorial_GameJam_April.StageScene.Boss;
 using CK_Tutorial_GameJam_April.StageScene.Items;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
@@ -20,6 +21,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		[SerializeField]
 		private ItemManager itemManager;
 
+		[SerializeField]
+		private BossManager bossManager;
+
 		private float time = 0f;
 
 		private Item item;
@@ -31,22 +35,24 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		private bool rollbackInventory;
 
+		private bool getItem = false;
+
 		private void Update()
 		{
+			if ((GameManager.Instance.status == GameStatus.Playing || GameManager.Instance.status == GameStatus.Eating) && itemManager.CurrentItemCode == 0 && rollbackInventory)
+			{
+				slotsManager.SetTabActive(false);
+				rollbackInventory = false;
+			}
+			
 			if (GameManager.Instance.status != GameStatus.Playing) return;
-
+			
 			if (Input.GetMouseButtonDown(0) && isNpc)
 			{
 				npc.Interaction();
 			}
 
 			if (itemManager.CurrentItemCode != 0) return;
-
-			if (rollbackInventory)
-			{
-				slotsManager.SetTabActive(false);
-				rollbackInventory = false;
-			}
 
 			if (Input.GetMouseButton(0) && isTrigger) // 2초간 클릭하면 아이템이 먹어지므로 time에 deltatime을 더해서 구함
 			{
@@ -69,6 +75,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				itemManager.SetCurrentItem(item.ItemId);
 				//Destroy(item.gameObject);
 				item.gameObject.SetActive(false);
+				bossManager.GetItem();
 			}
 		}
 

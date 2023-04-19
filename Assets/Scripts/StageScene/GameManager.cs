@@ -14,8 +14,10 @@ namespace CK_Tutorial_GameJam_April.StageScene
 	public enum GameStatus
 	{
 		Playing,
+		Eating,
 		MessageViewing,
-		Paused
+		Paused,
+		Dead
 	}
 
 	/// <summary>

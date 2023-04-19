@@ -44,6 +44,7 @@ namespace CK_Tutorial_GameJam_April.SettingsScene.SettingElements
 			elementSlider.GetComponent<Slider>().minValue = minValue;
 			elementSlider.GetComponent<Slider>().maxValue = maxValue;
 			elementSlider.GetComponent<Slider>().value = currentValue;
+			OnValueChanged(currentValue);
 		}
 
 		/// <summary>
