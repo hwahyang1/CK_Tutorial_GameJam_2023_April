@@ -15,6 +15,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 
 		[SerializeField]
 		private Color beforeColor;
+
 		[SerializeField]
 		private Color afterColor;
 
@@ -22,7 +23,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		private bool useTrigger = true;
 
 		private Color targetColor;
-		
+
 		private void Start()
 		{
 			tilemap = GetComponent<Tilemap>();

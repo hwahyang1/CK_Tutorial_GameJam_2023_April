@@ -53,7 +53,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Alert
 			if ((int)alertType != buttons.Count)
 			{
 				Debug.LogWarning(
-					"The value of 'AlertType' and the number of 'buttons(Dictionary)' do not match each other. The notification window may not work as intended.");
+				                 "The value of 'AlertType' and the number of 'buttons(Dictionary)' do not match each other. The notification window may not work as intended.");
 			}
 
 			EventSystem.current?.SetSelectedGameObject(null);

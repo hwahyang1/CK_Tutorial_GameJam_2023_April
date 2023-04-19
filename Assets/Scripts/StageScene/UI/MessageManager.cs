@@ -1,7 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Action = System.Action;
-using TimeSpan = System.TimeSpan;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,13 +20,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 
 		[SerializeField]
 		private Text name;
+
 		[SerializeField]
 		private Text messageArea;
 
 		[Header("Settings")]
 		[SerializeField]
 		private float messageDelay;
-		
+
 		private List<string> messages;
 		private int currentIndex;
 		private bool clicked = false;
@@ -53,7 +53,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 			messageArea.text = "";
 			parent.SetActive(true);
 			GameManager.Instance.status = GameStatus.MessageViewing;
-			
+
 			ShowMessage(callback).Forget();
 		}
 
@@ -70,7 +70,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 						clicked = false;
 						break;
 					}
-					
+
 					if (currentMessage[i] == ' ') // 공백은 한번에 한해 제함
 					{
 						messageArea.text += currentMessage[i];

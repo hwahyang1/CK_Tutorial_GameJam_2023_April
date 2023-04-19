@@ -42,7 +42,7 @@ namespace CK_Tutorial_GameJam_April.SettingsScene.SettingElements.SubElements
 						resolutionHeight = 2160;
 						break;
 				}
-				
+
 				dropdown.options.Add(new Dropdown.OptionData($"{resolutionHeight / 9 * 16} x {resolutionHeight}px"));
 			}
 
@@ -64,7 +64,7 @@ namespace CK_Tutorial_GameJam_April.SettingsScene.SettingElements.SubElements
 			SettingsManager.Instance.SetSettings(oldData);
 			SettingsManager.Instance.ApplySettings();
 			SettingsManager.Instance.SaveSettings();
-			
+
 			UpdateUI();
 		}
 	}

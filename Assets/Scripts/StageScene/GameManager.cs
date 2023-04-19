@@ -17,7 +17,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		MessageViewing,
 		Paused
 	}
-	
+
 	/// <summary>
 	/// 게임의 전반적인 실행을 관리합니다.
 	/// </summary>

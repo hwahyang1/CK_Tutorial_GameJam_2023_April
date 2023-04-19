@@ -13,13 +13,16 @@ namespace CK_Tutorial_GameJam_April.SettingsScene.SettingElements
 	{
 		[SerializeField]
 		protected List<string> selections = new List<string>(); // 사용 가능한 선택지들
+
 		protected int currentSelection = 0;
 
 		[Header("GameObjects")]
 		[SerializeField]
 		protected GameObject elementLeftArrow;
+
 		[SerializeField]
 		protected GameObject elementSelected;
+
 		[SerializeField]
 		protected GameObject elementRightArrow;
 
@@ -57,8 +60,10 @@ namespace CK_Tutorial_GameJam_April.SettingsScene.SettingElements
 			{
 				currentSelection -= 1;
 			}
+
 			OnValueChanged();
 		}
+
 		protected virtual void OnRightArrowClicked()
 		{
 			if (currentSelection == selections.Count - 1)
@@ -69,6 +74,7 @@ namespace CK_Tutorial_GameJam_April.SettingsScene.SettingElements
 			{
 				currentSelection += 1;
 			}
+
 			OnValueChanged();
 		}
 	}

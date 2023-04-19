@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
+using Cysharp.Threading.Tasks;
+
 using CK_Tutorial_GameJam_April.PreloadScene.Item;
+using CK_Tutorial_GameJam_April.PreloadScene.Alert;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 
 namespace CK_Tutorial_GameJam_April.StageScene.Character
@@ -14,7 +18,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 	public class CharacterController : MonoBehaviour
 	{
 		[SerializeField]
+		private SpriteRenderer spriteRenderer;
+		
+		[SerializeField]
 		private ItemManager itemManager;
+
+		[Header("Eat")]
+		[SerializeField]
+		private float eatTime = 0.5f;
 
 		[Header("Walk")]
 		[SerializeField]
@@ -46,20 +57,22 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		}
 
 		private Rigidbody2D rb;
+		private Animator animator;
 		private LevelManager levelManager;
-		private SpriteRenderer spriteRenderer;
+		private CharacterAnim characterAnim;
 
 		private void Start()
 		{
 			rb = GetComponent<Rigidbody2D>();
+			animator = GetComponent<Animator>();
 			levelManager = GetComponent<LevelManager>();
-			spriteRenderer = GetComponent<SpriteRenderer>();
+			characterAnim = GetComponent<CharacterAnim>();
 		}
 
 		private void Update()
 		{
 			if (GameManager.Instance.status != GameStatus.Playing) return;
-			
+
 			if (itemManager.CurrentItemCode != 0)
 			{
 				DefineItem item = ItemStorage.Instance.GetItems()[itemManager.CurrentItemCode];
@@ -67,12 +80,15 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				// 아이템 버리기
 				if (Input.GetKeyDown(KeyCode.Z) && item.dropable)
 				{
-					itemManager.SetCurrentItem(0);
+					AlertManager.Instance.Show(AlertType.Double, "확인", "정말로 아이템을 버릴까요?",
+					                           new Dictionary<string, Action>()
+					                           { { "예", () => itemManager.SetCurrentItem(0) }, { "아니요", null } });
 				}
 
 				// 아이템 먹기
 				if (Input.GetKeyDown(KeyCode.F))
 				{
+					ToggleEat().Forget();
 					levelManager.Stamina += item.stamina;
 					levelManager.Exp += item.exp;
 					itemManager.SetCurrentItem(0);
@@ -80,12 +96,29 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			}
 		}
 
+		public async UniTaskVoid ToggleEat()
+		{
+			characterAnim.onEat = true;
+			GameManager.Instance.status = GameStatus.Paused;
+			await UniTask.Delay(TimeSpan.FromSeconds(eatTime));
+			GameManager.Instance.status = GameStatus.Playing;
+			characterAnim.onEat = false;
+		}
+
 		private void FixedUpdate()
 		{
+			animator.SetBool("Idle", true);
+			characterAnim.onWalk = false;
+
 			if (GameManager.Instance.status != GameStatus.Playing) return;
-			
+
 			// 이동 (걷기 + 점프 + 달리기)
 			levelManager.isPlayerStay = isJumpable;
+
+			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+			{
+				characterAnim.onWalk = true;
+			}
 
 			if (Input.GetKey(KeyCode.LeftShift) && levelManager.Stamina > 0)
 			{
@@ -127,6 +160,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				rb.AddForce(new Vector2(0f, jumpSpeed));
 				isJumpable = false;
 			}
+
+			animator.SetBool("Idle", levelManager.isPlayerStay);
 		}
 
 		/*private void OnCollisionEnter2D(Collision2D other)

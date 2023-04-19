@@ -1,7 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Action = System.Action;
-using TimeSpan = System.TimeSpan;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -159,7 +158,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Scene
 			}
 			#pragma warning restore CS0618 // Type or member is obsolete
 			if (!found) return;
-			
+
 			UnloadSceneTask(sceneName, callback).Forget();
 		}
 

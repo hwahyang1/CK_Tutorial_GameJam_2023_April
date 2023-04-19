@@ -38,7 +38,7 @@ namespace CK_Tutorial_GameJam_April.MenuScene
 		public void OnExitButtonClicked()
 		{
 			#if UNITY_EDITOR
-				EditorApplication.ExecuteMenuItem("Edit/Play");
+			EditorApplication.ExecuteMenuItem("Edit/Play");
 			#else
 				Application.Quit();
 			#endif

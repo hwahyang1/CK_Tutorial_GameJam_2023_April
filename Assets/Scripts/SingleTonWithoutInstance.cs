@@ -1,9 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using FuncBool = System.Func<bool>;
-using Action = System.Action;
 
 using UnityEngine;
+
 using UnityEngine.SceneManagement;
 
 namespace CK_Tutorial_GameJam_April
@@ -17,7 +17,7 @@ namespace CK_Tutorial_GameJam_April
 		/// 자식 스크립트가 자동으로 Destroy 될 조건을 지정합니다.
 		/// null(기본값)일 경우, Destroy를 하지 않습니다.
 		/// </summary>
-		protected FuncBool destroyCondition = null;
+		protected Func<bool> destroyCondition = null;
 
 		/// <summary>
 		/// 자식 스크립트가 자동으로 Destroy 될 때 실행할 코드를 지정합니다.
