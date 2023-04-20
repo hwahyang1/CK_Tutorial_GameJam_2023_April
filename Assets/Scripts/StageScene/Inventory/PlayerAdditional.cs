@@ -24,6 +24,11 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory
 		private int currentKeysCount = 0;
 		public int CurrentKeysCount => currentKeysCount;
 
+		private void Awake()
+		{
+			UpdateUI();
+		}
+
 		public void SetKeyCount(int count)
 		{
 			currentKeysCount = count;
@@ -39,7 +44,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory
 				current.color = i < currentKeysCount ? enabledColor : disabledColor;
 			}
 			
-			exit.SetDoorActive(currentKeysCount == 2);
+			exit.SetDoorActive(currentKeysCount >= 3);
 		}
 	}
 }

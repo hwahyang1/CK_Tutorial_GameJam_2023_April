@@ -96,6 +96,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 				}
 			}
 
+
+			messages = new List<string>(){""};
+			messageArea.text = "";
 			callback?.Invoke();
 			parent.SetActive(false);
 			GameManager.Instance.status = GameStatus.Playing;

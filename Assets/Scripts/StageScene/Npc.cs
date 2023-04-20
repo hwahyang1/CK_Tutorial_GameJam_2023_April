@@ -28,6 +28,9 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		[SerializeField]
 		private NpcAdditional npcAdditional;
 
+		[SerializeField]
+		private ItemEarn itemEarn;
+
 		[Header("Npc Data")]
 		[Tooltip("0과 -1만 사용합니다. 공백으로 구분합니다.")]
 		public List<string> slotSize;
@@ -38,6 +41,9 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		[SerializeField]
 		[Tooltip("줄바꿈은 \\n로 입력합니다.")]
 		private string description;
+
+		[SerializeField]
+		private Sprite npcSprite;
 
 		[SerializeField]
 		[Tooltip("줄바꿈은 \\n로 입력합니다.")]
@@ -75,7 +81,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 
 		private void Update()
 		{
-			if (currentFlow != DefineNpcFlow.Inventory) return;
+			if (currentFlow != DefineNpcFlow.Inventory && slotsManager.IsActive) return;
 
 			Tuple<int[][], int[][]> data = slotsManager.ExportAllTilesIdsUids();
 
@@ -101,18 +107,19 @@ namespace CK_Tutorial_GameJam_April.StageScene
 					messageManager.Show(name, greetingMessages, () =>
 					                                            {
 						                                            SetStatus(true, DefineNpcFlow.Inventory);
-						                                            npcAdditional.Set(name, description);
+						                                            npcAdditional.Set(name, description, npcSprite);
 						                                            OpenInventory();
 					                                            });
 					break;
 				case DefineNpcFlow.Inventory:
-					npcAdditional.Set(name, description);
+					npcAdditional.Set(name, description, npcSprite);
 					OpenInventory();
 					break;
 				case DefineNpcFlow.Thanks:
 					messageManager.Show(name, thanksMessages, () =>
 					                                          {
 						                                          playerAdditional.SetKeyCount(playerAdditional.CurrentKeysCount+1);
+						                                          itemEarn.Show();
 						                                          SetStatus(false, DefineNpcFlow.Ended);
 					                                          });
 					break;

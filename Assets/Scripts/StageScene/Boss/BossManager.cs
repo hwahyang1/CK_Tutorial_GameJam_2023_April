@@ -62,7 +62,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 		{
 			playerIndicator.sprite = null; // 평소에는 아무것도 띄우지 않음.
 
-			if (time >= maxTime + 0.5f && animTime <= 2f) // ?
+			if (time >= maxTime - 2f && animTime <= 5f) // ?
 			{
 				playerIndicator.sprite = indicator[0];
 			}
