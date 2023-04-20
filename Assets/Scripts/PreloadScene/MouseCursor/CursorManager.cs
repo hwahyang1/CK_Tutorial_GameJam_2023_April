@@ -8,7 +8,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.MouseCursor
 	/// <summary>
 	/// 커서를 관리합니다.
 	/// </summary>
-	public class CursorManager : Singleton<CursorManager>
+	public class CursorManager : SingleTon<CursorManager>
 	{
 		[SerializeField]
 		private Texture2D[] cursor;

@@ -8,7 +8,7 @@ namespace CK_Tutorial_GameJam_April
 	/// <summary>
 	/// 싱글톤 디자인 패턴 템플릿입니다.
 	/// </summary>
-	public abstract class Singleton<T> : SingleTonWithoutInstance<T> where T : Singleton<T>
+	public abstract class SingleTon<T> : SingleTonWithoutInstance<T> where T : SingleTon<T>
 	{
 		private static T instance;
 
@@ -22,7 +22,7 @@ namespace CK_Tutorial_GameJam_April
 
 					if (instance == null)
 					{
-						instance = new GameObject("Singleton_" + typeof(T).Name).AddComponent<T>();
+						instance = new GameObject("SingleTon_" + typeof(T).Name).AddComponent<T>();
 					}
 				}
 

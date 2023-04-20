@@ -9,6 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/PreloadScene.unity
     guid: e85d4b654b1ca994ebf423acbb80058a
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/OpeningScene.unity
+    guid: d3cbf1faaba337f42a4cceaf150c2d38
+  - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+    guid: 764ab88c16315614f80350a7e7b8bf1b
+  - enabled: 1
+    path: Assets/Scenes/StageScene.unity
+    guid: 0931591b925ea0e4681eed7181c48cf9
+  - enabled: 1
+    path: Assets/Scenes/SettingsScene.unity
+    guid: 4a2579cbba764ef409013bdcb1a2e6c8
+  - enabled: 1
+    path: Assets/Scenes/CreditScene.unity
+    guid: 269e41bb78a8c04498dce5e355e19a0b
+  - enabled: 1
+    path: Assets/Scenes/BlankScene.unity
+    guid: 75dc9629dbf4d3540869a27af0dce085
   m_configObjects: {}

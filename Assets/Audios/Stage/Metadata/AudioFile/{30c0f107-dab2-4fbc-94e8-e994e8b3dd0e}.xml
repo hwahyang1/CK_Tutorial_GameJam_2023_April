@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{30c0f107-dab2-4fbc-94e8-e994e8b3dd0e}">
+		<property name="assetPath">
+			<value>Hamster_2_PianoMelody, untitled.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>44.799999999999997</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d3dcde8d-c4d2-4455-b1a9-f1a57f04a53b}</destination>
+		</relationship>
+	</object>
+</objects>

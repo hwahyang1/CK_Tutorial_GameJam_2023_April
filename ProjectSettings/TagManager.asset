@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - DontDestroyOnLoadRoot
+  - CursorPositionTargetCanvas
+  - Item
+  - ItemPosition
+  - NPC
+  - Ground
+  - SavingSpinner
+  - PlayerInventory
   layers:
   - Default
   - TransparentFX
@@ -12,9 +19,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Layer 0 - Background
+  - Layer 1 - Main
+  - Layer 2 - Overlay
   - 
   - 
   - 
