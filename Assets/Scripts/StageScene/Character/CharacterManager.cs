@@ -6,6 +6,7 @@ using UnityEngine;
 using CK_Tutorial_GameJam_April.StageScene.Boss;
 using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.StageScene.Items;
+using CK_Tutorial_GameJam_April.PreloadScene.Audio;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
 
@@ -16,6 +17,10 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 	/// </summary>
 	public class CharacterManager : MonoBehaviour
 	{
+		[SerializeField]
+		private AudioClip getClip;
+		
+		[Header("Scripts")]
 		[SerializeField]
 		private SlotsManager slotsManager;
 
@@ -35,8 +40,6 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		private bool isNpc = false;
 
 		private bool rollbackInventory;
-
-		private bool getItem = false;
 
 		private void Start()
 		{
@@ -65,6 +68,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 			if (Input.GetMouseButton(0) && isTrigger) // 2초간 클릭하면 아이템이 먹어지므로 time에 deltatime을 더해서 구함
 			{
+				if (time == 0f) AudioManager.Instance.PlayEffectAudio(getClip);
 				item.ChangeProgressBar(true, time / 2f);
 				time += Time.deltaTime;
 			}

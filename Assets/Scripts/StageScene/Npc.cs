@@ -9,6 +9,7 @@ using CK_Tutorial_GameJam_April.StageScene.UI;
 using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.StageScene.Inventory;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
+using UnityEngine.Serialization;
 
 namespace CK_Tutorial_GameJam_April.StageScene
 {
@@ -47,7 +48,8 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		public List<string> slotSize;
 
 		[SerializeField]
-		private string name;
+		[FormerlySerializedAs("name")]
+		private string npcName;
 
 		[SerializeField]
 		[Tooltip("줄바꿈은 \\n로 입력합니다.")]

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using CK_Tutorial_GameJam_April.PreloadScene.Scene;
+
 using UnityEngine;
 
 using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.StageScene.Audio;
 using CK_Tutorial_GameJam_April.StageScene.Items;
+using CK_Tutorial_GameJam_April.PreloadScene.Scene;
+using CK_Tutorial_GameJam_April.PreloadScene.Audio;
 using CK_Tutorial_GameJam_April.StageScene.Character;
 
 namespace CK_Tutorial_GameJam_April.StageScene.Boss
@@ -15,6 +17,15 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 	/// </summary>
 	public class BossManager : MonoBehaviour
 	{
+		[Header("AudioClips")]
+		[SerializeField]
+		private AudioClip enterClip;
+		[SerializeField]
+		private AudioClip watchClip;
+		[SerializeField]
+		private AudioClip deathClip;
+		
+		[Header("Scripts")]
 		[SerializeField]
 		private SpriteRenderer playerIndicator;
 
@@ -30,6 +41,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 		[SerializeField]
 		private FmodFoundAdjuster fmodFoundAdjuster;
 		
+		[Header("Settings")]
 		[SerializeField]
 		private float down = 0f;
 		
@@ -45,39 +57,50 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 		private SpriteRenderer spriteRenderer;
 		private Camera mainCamera;
 
-		private float time;
+		private float elapsedTime;
+		public float ElapsedTime => elapsedTime;
 		private float animTime;
 		private float bossTime;
 
 		private bool isTrigged = false;
 		private bool onBoss = false;
+		private bool deadTriggered = false;
 
-		private void Start()
+		private void Awake()
 		{
 			animTime = 0f;
 			mainCamera = Camera.main;
 			spriteRenderer = GetComponent<SpriteRenderer>();
 		}
 
+		private void Start()
+		{
+			DefineSaveData data = GameSaveData.Instance.SaveData;
+			if (data == null) return;
+
+			elapsedTime = data.bossTime - 5f;
+		}
+
 		private void Update()
 		{
 			playerIndicator.sprite = null; // 평소에는 아무것도 띄우지 않음.
 
-			if (time >= maxTime - 2f && animTime <= 5f) // ?
+			if (elapsedTime >= maxTime - 2f && animTime <= 10f) // ?
 			{
 				playerIndicator.sprite = indicator[0];
 			}
 
-			if (time >= maxTime)
+			if (elapsedTime >= maxTime)
 			{
 				if (!isTrigged)
 				{
+					AudioManager.Instance.PlayEffectAudio(enterClip);
 					StartCoroutine(Up());
 					isTrigged = true;
 				}
 			}
 
-			if (time > maxTime) // 보스 출현
+			if (elapsedTime > maxTime) // 보스 출현
 			{
 				onBoss = true;
 			}
@@ -115,14 +138,19 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 				
 				if (bossTime <= 4)
 				{
-					StartCoroutine(ZoomIn());
+					if (!deadTriggered)
+					{
+						AudioManager.Instance.PlayEffectAudio(watchClip);
+						StartCoroutine(ZoomIn());
+						deadTriggered = true;
+					}
 					GameManager.Instance.status = GameStatus.Dead;
 					playerIndicator.sprite = indicator[1]; //!를 띄웁니다.
 				}
 				else
 				{
-					spriteRenderer.transform.localScale = new Vector3(1f, 1f, 1f); // bossTime이 4초 이상이라면 스케일을 다시 줄여줍니다.
-					playerIndicator.sprite = null;
+					//spriteRenderer.transform.localScale = new Vector3(1f, 1f, 1f); // bossTime이 4초 이상이라면 스케일을 다시 줄여줍니다.
+					//playerIndicator.sprite = null;
 				}
 			}
 			else if (onBoss && animTime > 10f) // 숨어있었다면 보스가 퇴장
@@ -132,7 +160,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 				itemSpawnManager.RespawnItem();
 				onBoss = false;
 				isTrigged = false;
-				time = 0f;
+				elapsedTime = 0f;
 				animTime = 0f;
 			}
 
@@ -142,14 +170,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 				return;
 			}
 
-			time += Time.deltaTime;
+			elapsedTime += Time.deltaTime;
 			spriteRenderer.transform.position =
 				new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y - down, 0f);
 		}
 
 		public void GetItem()
 		{
-			time += 20f;
+			elapsedTime += 20f;
 		}
 
 		IEnumerator Up()
@@ -183,6 +211,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 					Vector3.Lerp(spriteRenderer.transform.localScale, new Vector3(1.6f, 1.6f, 1f), 0.05f);
 				yield return null;
 			} 
+			AudioManager.Instance.PlayEffectAudio(deathClip);
 			GameSaveData.Instance.Exit();
 			SceneChange.Instance.ChangeScene("BlankScene", true, false, () =>
 			                                                            {

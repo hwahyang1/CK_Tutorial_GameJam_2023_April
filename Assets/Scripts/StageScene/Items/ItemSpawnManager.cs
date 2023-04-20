@@ -1,7 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using Random = UnityEngine.Random;
+
+using CK_Tutorial_GameJam_April.StageScene.Save;
+using CK_Tutorial_GameJam_April.PreloadScene.Item;
 
 namespace CK_Tutorial_GameJam_April.StageScene.Items
 {
@@ -32,6 +37,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 			RespawnItem();
 		}
 
+		private void Start()
+		{
+			DefineSaveData data = GameSaveData.Instance.SaveData;
+			if (data == null) return;
+
+			CustomSpawnItem(data.droppedItems);
+		}
+
 		/// <summary>
 		/// 소환가능 위치를 다시 불러옵니다.
 		/// </summary>
@@ -49,6 +62,33 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 				positions.Add(item);
 				child.SetActive(false);
 			}
+		}
+
+		public void CustomSpawnItem(List<Tuple<int, bool>> data)
+		{
+			List<DefineItem> items = ItemStorage.Instance.GetItems();
+			for (int i = 0; i < positions.Count; i++)
+			{
+				Item position = positions[i];
+				position.gameObject.SetActive(true);
+				position.SetItem(data[i].Item1, effectColors[(int)items[data[i].Item1].rank]);
+				position.ChangeProgressBar(false, 0f);
+				position.gameObject.SetActive(data[i].Item2);
+			}
+		}
+
+		public List<Tuple<int, bool>> ExportAllItems()
+		{
+			List<Tuple<int, bool>> data = new List<Tuple<int, bool>>();
+			
+			if (positions.Count == 0) return data;
+
+			foreach (Item item in positions)
+			{
+				data.Add(new Tuple<int, bool>(item.ItemId, item.gameObject.activeInHierarchy));
+			}
+			
+			return data;
 		}
 
 		/// <summary>

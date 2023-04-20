@@ -28,6 +28,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		private float time = 0f;
 
 		public bool onWalk = false;
+		public bool onRun = false;
 		public bool onEat = false;
 		public bool onPickUp = false;
 		public bool onSuprized = false;
@@ -77,6 +78,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			}
 			else if (onWalk)
 			{
+				if (onRun) time += Time.deltaTime * 2f;
 				time += Time.deltaTime;
 				if (time > 0f && time <= 0.5f)
 				{

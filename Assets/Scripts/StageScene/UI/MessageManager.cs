@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using Cysharp.Threading.Tasks;
+using UnityEngine.Serialization;
 
 namespace CK_Tutorial_GameJam_April.StageScene.UI
 {
@@ -19,7 +20,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 		private GameObject parent;
 
 		[SerializeField]
-		private Text name;
+		[FormerlySerializedAs("name")]
+		private Text nameText;
 
 		[SerializeField]
 		private Text messageArea;
@@ -51,7 +53,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 		public void Show(string name, List<string> messages, Sprite sprite = null, Action callback = null)
 		{
 			currentIndex = 0;
-			this.name.text = name;
+			nameText.text = name;
 			this.messages = messages;
 			messageArea.text = "";
 			parent.SetActive(true);

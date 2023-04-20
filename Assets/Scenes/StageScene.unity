@@ -603,6 +603,87 @@ Transform:
   m_Father: {fileID: 1572107581}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &311962659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 311962660}
+  - component: {fileID: 311962662}
+  - component: {fileID: 311962661}
+  m_Layer: 5
+  m_Name: Guide Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &311962660
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311962659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3545119063247004871}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -415}
+  m_SizeDelta: {x: 500, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &311962661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311962659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 51ced0109e03fb94587c4466ef2a939c, type: 3}
+    m_FontSize: 18
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u203B \uC870\uB825\uC790\uC640 \uBA40\uC5B4\uC9C0\uBA74 \uC778\uBCA4\uD1A0\uB9AC\uAC00
+    \uC790\uB3D9\uC73C\uB85C \uB2EB\uD799\uB2C8\uB2E4."
+--- !u!222 &311962662
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311962659}
+  m_CullTransparentMesh: 1
 --- !u!1 &379526090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,7 +1655,7 @@ MonoBehaviour:
   - -1 0 0 0 -1
   - -1 0 0 0 -1
   - -1 -1 0 -1 -1
-  name: "\uAE50\uAE50 \uD584\uC2A4\uD130"
+  npcName: "\uAE50\uAE50 \uD584\uC2A4\uD130"
   description: "\uACE0\uAE09 \uC0AC\uB8CC\uB97C \uC8FC\uB294 \uC88B\uC740 \uC8FC\uC778
     \uC9D1\uC5D0\uC11C \uC0B4\uB2E4\uAC00 \uBC84\uB824\uC9C4 \uD584\uC2A4\uD130\uC774\uB2E4.\\n\uC785\uB9DB\uC774
     \uC5C4\uCCAD \uAE4C\uB2E4\uB86D\uC9C0\uB9CC, \uC9C0\uAE08\uC740 \uADF9\uC2EC\uD55C
@@ -1904,7 +1985,7 @@ MonoBehaviour:
   - -1 -1 0 0 -1
   - -1 -1 -1 -1 -1
   - -1 -1 -1 -1 -1
-  name: "\uB69C\uAED1 \uD584\uC2A4\uD130"
+  npcName: "\uB69C\uAED1 \uD584\uC2A4\uD130"
   description: "\uBCD1\uB69C\uAED1\uC744 \uBA38\uB9AC\uC5D0 \uC4F0\uACE0 \uC788\uB294
     \uD584\uC2A4\uD130\uC774\uB2E4.\\n\uB208\uC774 \uC548\uBCF4\uC5EC\uC11C, \uC790\uC2E0\uC774
     \uC544\uC8FC \uBA4B\uC9C4 \uBAA8\uC790\uB97C \uC4F0\uACE0\uC788\uB2E4\uACE0 \uBBFF\uACE0\uC788\uB2E4. "
@@ -20620,7 +20701,7 @@ MonoBehaviour:
   - -1 0 0 0 0
   - -1 0 0 0 0
   - -1 -1 0 -1 -1
-  name: "\uC678\uD314 \uD584\uC2A4\uD130"
+  npcName: "\uC678\uD314 \uD584\uC2A4\uD130"
   description: "\uC950\uB36B\uC5D0 \uC788\uB294 \uCE58\uC988\uB97C \uBAB0\uB798 \uB54C\uC5B4\uAC00\uB824\uB2E4
     \uD314\uC744 \uD558\uB098 \uC783\uC5C8\uB2E4.\\n\uD314\uC744 \uD558\uB098 \uC783\uACE0,
     \uC74C\uC2DD\uC744 \uCC3E\uC73C\uB7EC \uB3CC\uC544\uB2E4\uB2C8\uC9C0 \uBABB\uD574
@@ -27961,7 +28042,7 @@ MonoBehaviour:
   - 0 0 -1 0 0
   - 0 -1 -1 -1 0
   - 0 -1 -1 -1 0
-  name: "\uD241\uD241 \uD584\uC2A4\uD130"
+  npcName: "\uD241\uD241 \uD584\uC2A4\uD130"
   description: "\uB2E4\uC774\uC5B4\uD2B8\uB97C \uC704\uD574\uC11C \uCF00\uC774\uBE14\uD0C0\uC774\uB85C
     \uD6CC\uB77C\uD6C4\uD504\uB97C \uB9CC\uB4E4\uC5B4 \uC6B4\uB3D9\uC744 \uC2DC\uC791\uD588\uC73C\uB098,\\n\uBE44\uB300\uD55C
     \uBAB8\uC5D0 \uD6CC\uB77C\uD6C4\uD504\uAC00 \uB091\uACA8\uC11C \uC6C0\uC9C1\uC774\uC9C0
@@ -28146,7 +28227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1948539967}
-  name: {fileID: 1794280795}
+  nameText: {fileID: 1794280795}
   messageArea: {fileID: 1641840254}
   image: {fileID: 1171696653}
   messageDelay: 0.1
@@ -28162,6 +28243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e481ad9052c62c44a54225f130de2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectClip: {fileID: 8300000, guid: 43f555b7922d52d48abe7846a96af2a1, type: 3}
   alertParent: {fileID: 1951964042}
 --- !u!114 &1224695614
 MonoBehaviour:
@@ -33108,6 +33190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a562abcec7a6284eb7fd94e4485642d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getClip: {fileID: 8300000, guid: d490b481b162c764685420c0dcc5bab8, type: 3}
   slotsManager: {fileID: 3545119063951255148}
   itemManager: {fileID: 3545119063430740537}
   bossManager: {fileID: 1679710037}
@@ -33165,6 +33248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d16c4df03317e48bb7aad330e3e30f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eatClip: {fileID: 8300000, guid: fac7f58c8f03d5f4faf6702df889ea92, type: 3}
   spriteRenderer: {fileID: 1905099584}
   itemManager: {fileID: 3545119063430740537}
   eatTime: 0.6
@@ -33235,6 +33319,7 @@ MonoBehaviour:
   pickUp: {fileID: 21300000, guid: d56fec3bfc355ce4fab14b4727b95a86, type: 3}
   suprized: {fileID: 21300000, guid: 3c2e4ac9c9a4781488c1359d2a2e67ba, type: 3}
   onWalk: 0
+  onRun: 0
   onEat: 0
   onPickUp: 0
   onSuprized: 0
@@ -33553,6 +33638,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a160c0bfe20a10d4e9040f19963ae32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enterClip: {fileID: 8300000, guid: 7b4b1a5b977279e479107c70c70f2649, type: 3}
+  watchClip: {fileID: 8300000, guid: 88d47bcd2e1a08c45ac4215b57d3cce9, type: 3}
+  deathClip: {fileID: 8300000, guid: e69e6868489bf6f4ea10320e85f9bcc9, type: 3}
   playerIndicator: {fileID: 444261733}
   hideObjectManager: {fileID: 1530009262}
   characterAnim: {fileID: 1617177569}
@@ -33828,7 +33916,7 @@ MonoBehaviour:
   - -1 0 0 0 -1
   - -1 0 0 0 -1
   - -1 -1 -1 -1 -1
-  name: "\uAC74\uB2EC \uD584\uC2A4\uD130"
+  npcName: "\uAC74\uB2EC \uD584\uC2A4\uD130"
   description: "\uD558\uB8E8 \uB2E4\uC12F\uB07C\uB97C \uAF2C\uBC15 \uAF2C\uBC15 \uBA39\uC73C\uBA70,
     \uAF2C\uB9C8\uC5D0\uAC8C\uC11C \uD0C8\uCD9C\uD558\uAE30 \uC704\uD574 \uC6B4\uB3D9\uD588\uB358
     \uD584\uC2A4\uD130\uC774\uB2E4."
@@ -34111,8 +34199,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -20}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 30, y: -13.6979}
+  m_SizeDelta: {x: 300, y: 62.6042}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1794280795
 MonoBehaviour:
@@ -34141,7 +34229,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -42587,7 +42675,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: -150, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3545119062106040624
@@ -42964,7 +43052,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 0b79ba893a0547948a57631a661a3736, type: 3}
-    m_FontSize: 30
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -42975,7 +43063,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tab
+  m_Text: 'Inventory
+
+    (Tab)'
 --- !u!222 &3545119062557610067
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -43161,7 +43251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: -150, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &3545119062794550554
@@ -43435,6 +43525,7 @@ RectTransform:
   - {fileID: 721733520}
   - {fileID: 3545119062034350307}
   - {fileID: 3545119062758263979}
+  - {fileID: 311962660}
   m_Father: {fileID: 3545119062794550554}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43546,6 +43637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab6f420697ab384fb66da2f35a2ca42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemClip: {fileID: 8300000, guid: eed61e77ec4f838429a9ed2669ebc3d6, type: 3}
   itemManager: {fileID: 3545119063430740537}
   inventoryParent: {fileID: 3545119062794550555}
   slotsParent: {fileID: 3545119062034350307}
@@ -43553,6 +43645,7 @@ MonoBehaviour:
   imagePrefab: {fileID: 4376088668043289799, guid: 6817cc57308b05046b5cd04835fe5ed0, type: 3}
   overlaySizeMultiply: 100
   inventoryMaxSize: {x: 6, y: 5}
+  initInventory: 1
   currentInventoryPosition: {x: -1, y: -1}
   activeSprite: {fileID: 21300000, guid: 24a960277104af242875d799eb68f2c0, type: 3}
   inactiveSprite: {fileID: 21300000, guid: 563ecd423a5ab584bb424ae0989fa69a, type: 3}
@@ -44129,6 +44222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab6f420697ab384fb66da2f35a2ca42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemClip: {fileID: 8300000, guid: eed61e77ec4f838429a9ed2669ebc3d6, type: 3}
   itemManager: {fileID: 3545119063430740537}
   inventoryParent: {fileID: 3545119063488707644}
   slotsParent: {fileID: 3545119062295749210}
@@ -44136,6 +44230,7 @@ MonoBehaviour:
   imagePrefab: {fileID: 4376088668043289799, guid: 6817cc57308b05046b5cd04835fe5ed0, type: 3}
   overlaySizeMultiply: 100
   inventoryMaxSize: {x: 6, y: 5}
+  initInventory: 0
   currentInventoryPosition: {x: -1, y: -1}
   activeSprite: {fileID: 21300000, guid: 24a960277104af242875d799eb68f2c0, type: 3}
   inactiveSprite: {fileID: 21300000, guid: 563ecd423a5ab584bb424ae0989fa69a, type: 3}

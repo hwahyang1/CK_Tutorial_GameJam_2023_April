@@ -16,6 +16,8 @@ namespace CK_Tutorial_GameJam_April
 		public float playerStamina;
 		public int playerLevel;
 		public int playerExp;
+		public float bossTime;
+		public List<Tuple<int, bool>> droppedItems;
 		public Tuple<int[][], int[][]> playerInventory;
 		public Dictionary<string, Tuple<DefineNpcFlow, int[][], int[][]>> npcInventory;
 		
@@ -28,6 +30,8 @@ namespace CK_Tutorial_GameJam_April
 			float playerStamina,
 			int playerLevel,
 			int playerExp,
+			float bossTime,
+			List<Tuple<int, bool>> droppedItems,
 			Tuple<int[][], int[][]> playerInventory,
 			Dictionary<string, Tuple<DefineNpcFlow, int[][], int[][]>> npcInventory
 		)
@@ -38,6 +42,8 @@ namespace CK_Tutorial_GameJam_April
 			this.playerStamina = playerStamina;
 			this.playerLevel = playerLevel;
 			this.playerExp = playerExp;
+			this.bossTime = bossTime;
+			this.droppedItems = droppedItems;
 			this.playerInventory = playerInventory;
 			this.npcInventory = npcInventory;
 		}

@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.PreloadScene.Alert;
 
 namespace CK_Tutorial_GameJam_April.StageScene
@@ -31,9 +33,13 @@ namespace CK_Tutorial_GameJam_April.StageScene
 
 		private bool toggleWhenAlertDisabled = false;
 
+		private bool toggleFirstSave = false;
+
 		protected override void Awake()
 		{
 			base.Awake();
+			
+			toggleFirstSave = false;
 
 			destroyCondition = () => SceneManager.GetActiveScene().name != "StageScene";
 		}
@@ -41,6 +47,12 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		protected override void Update()
 		{
 			base.Update();
+
+			if (!toggleFirstSave)
+			{
+				GameSaveData.Instance.ExportData();
+				toggleFirstSave = true;
+			}
 
 			if (AlertManager.Instance.IsRunning)
 			{

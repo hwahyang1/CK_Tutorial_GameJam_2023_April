@@ -92,7 +92,7 @@ namespace CK_Tutorial_GameJam_April
 
 			Master = 1f;
 			Background = 1f;
-			Effect = 1f;
+			Effect = 0.75f;
 
 			isFirstRun = true;
 		}

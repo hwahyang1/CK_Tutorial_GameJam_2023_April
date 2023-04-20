@@ -12,6 +12,7 @@ using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.PreloadScene.Save;
 using CK_Tutorial_GameJam_April.PreloadScene.Scene;
 using CK_Tutorial_GameJam_April.PreloadScene.Alert;
+using CK_Tutorial_GameJam_April.PreloadScene.Audio;
 
 namespace CK_Tutorial_GameJam_April.MenuScene
 {
@@ -20,11 +21,15 @@ namespace CK_Tutorial_GameJam_April.MenuScene
 	/// </summary>
 	public class ButtonInteraction : MonoBehaviour
 	{
+		[SerializeField]
+		private AudioClip backgroundClip;
+		
 		private DefineSaveData saveData;
 		
 		private void Start()
 		{
 			saveData = SaveManager.Instance.GetSaveData();
+			AudioManager.Instance.PlayBackgroundAudio(backgroundClip);
 		}
 		
 		public void OnLoadGameButtonClicked()
@@ -35,6 +40,7 @@ namespace CK_Tutorial_GameJam_April.MenuScene
 				return;
 			}
 
+			AudioManager.Instance.StopBackgroundAudio();
 			SceneChange.Instance.ChangeScene("StageScene");
 		}
 
@@ -51,6 +57,7 @@ namespace CK_Tutorial_GameJam_April.MenuScene
 				return;
 			}
 			
+			AudioManager.Instance.StopBackgroundAudio();
 			GameSaveData.Instance.ResetData();
 			SceneChange.Instance.ChangeScene("StageScene");
 		}

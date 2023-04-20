@@ -27,7 +27,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Settings
 		{
 			base.Awake();
 
-			configPath = Application.persistentDataPath + @"\Data.cfg";
+			configPath = Application.persistentDataPath + @"\DrawerHamster.cfg";
 
 			LoadSettings();
 			ApplySettings();

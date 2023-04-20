@@ -14,6 +14,9 @@ namespace CK_Tutorial_GameJam_April.OpeningScene
 	public class GameManager : MonoBehaviour
 	{
 		[SerializeField]
+		private GameObject guideText;
+		
+		[SerializeField]
 		private float time;
 
 		private bool protectInput = true;
@@ -25,6 +28,7 @@ namespace CK_Tutorial_GameJam_April.OpeningScene
 		private void Start()
 		{
 			isFirstRun = SettingsManager.Instance.GetSettings().isFirstRun;
+			guideText.SetActive(isFirstRun);
 			StartCoroutine(ToggleProtectCoroutine());
 			active = StartCoroutine(WaitForAnimatorCoroutine());
 		}

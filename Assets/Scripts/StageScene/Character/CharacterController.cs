@@ -9,6 +9,7 @@ using Cysharp.Threading.Tasks;
 using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.PreloadScene.Item;
 using CK_Tutorial_GameJam_April.PreloadScene.Alert;
+using CK_Tutorial_GameJam_April.PreloadScene.Audio;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 
 namespace CK_Tutorial_GameJam_April.StageScene.Character
@@ -18,6 +19,10 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 	/// </summary>
 	public class CharacterController : MonoBehaviour
 	{
+		[SerializeField]
+		private AudioClip eatClip;
+		
+		[Header("Scripts")]
 		[SerializeField]
 		private SpriteRenderer spriteRenderer;
 		
@@ -98,6 +103,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				if (Input.GetKeyDown(KeyCode.F))
 				{
 					ToggleEat().Forget();
+					AudioManager.Instance.PlayEffectAudio(eatClip);
 					levelManager.Stamina += item.stamina;
 					levelManager.Exp += item.exp;
 					itemManager.SetCurrentItem(0);
@@ -118,6 +124,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		{
 			animator.SetBool("Idle", true);
 			characterAnim.onWalk = false;
+			characterAnim.onRun = false;
 
 			if (GameManager.Instance.status != GameStatus.Playing) return;
 
@@ -127,6 +134,10 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
 			{
 				characterAnim.onWalk = true;
+				if (Input.GetKey(KeyCode.LeftShift) && levelManager.Stamina > 0)
+				{
+					characterAnim.onRun = true;
+				}
 			}
 
 			if (Input.GetKey(KeyCode.LeftShift) && levelManager.Stamina > 0)

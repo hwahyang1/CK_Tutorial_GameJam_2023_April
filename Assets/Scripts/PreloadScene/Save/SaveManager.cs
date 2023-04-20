@@ -21,7 +21,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Save
 		{
 			base.Awake();
 
-			filePath = Application.persistentDataPath + @"\Data.dat";
+			filePath = Application.persistentDataPath + @"\DrawerHamster.dat";
 
 			LoadFromFile();
 		}

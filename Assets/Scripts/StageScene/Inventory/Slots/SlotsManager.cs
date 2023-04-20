@@ -10,6 +10,7 @@ using NaughtyAttributes;
 using Cysharp.Threading.Tasks;
 
 using CK_Tutorial_GameJam_April.PreloadScene.Item;
+using CK_Tutorial_GameJam_April.PreloadScene.Audio;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 
 namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
@@ -19,6 +20,11 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 	/// </summary>
 	public class SlotsManager : MonoBehaviour
 	{
+		[Header("AudioClips")]
+		[SerializeField]
+		private AudioClip itemClip;
+		
+		[Header("Scripts")]
 		[SerializeField]
 		private ItemManager itemManager;
 
@@ -39,6 +45,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 
 		[SerializeField]
 		private Vector2Int inventoryMaxSize;
+
+		[SerializeField]
+		private bool initInventory = true;
 
 		private Slot[][] inventory;
 
@@ -70,7 +79,6 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 
 		[Header("Status")]
 		private bool isActive = false;
-
 		public bool IsActive => isActive;
 
 		private bool protectModify = false;
@@ -80,7 +88,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 
 		private void Awake()
 		{
-			Init();
+			if (initInventory) Init();
 		}
 
 		private void Update()
@@ -356,6 +364,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 		/// </remarks>
 		public int PlaceItem(List<List<Slot>> targetSlots, int id, bool replaceSlot, int replaceUid = -1)
 		{
+			AudioManager.Instance.PlayEffectAudio(itemClip);
+			
 			long timestamp = System.DateTimeOffset.Now.ToUnixTimeSeconds();
 			float random = Random.Range(0.01f, 1.2f);
 			int uid = Mathf.RoundToInt(timestamp * random);
@@ -480,6 +490,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 
 			Slot targetSlot = inventory[currentInventoryPosition.x][currentInventoryPosition.y];
 			if (targetSlot.ItemId <= 0) return;
+			
+			AudioManager.Instance.PlayEffectAudio(itemClip);
 
 			itemManager.SetCurrentItem(targetSlot.ItemId);
 			DeleteItem(targetSlot.Uid);

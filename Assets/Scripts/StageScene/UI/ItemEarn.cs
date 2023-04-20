@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using CK_Tutorial_GameJam_April.PreloadScene.Audio;
+
 namespace CK_Tutorial_GameJam_April.StageScene.UI
 {
 	/// <summary>
@@ -10,6 +12,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 	/// </summary>
 	public class ItemEarn : MonoBehaviour
 	{
+		[SerializeField]
+		private AudioClip effectClip;
+		
 		[SerializeField]
 		private GameObject alertParent;
 
@@ -32,6 +37,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 		public void Show()
 		{
 			GameManager.Instance.status = GameStatus.ItemEarn;
+			AudioManager.Instance.PlayEffectAudio(effectClip);
 			alertParent.SetActive(true);
 		}
 	}

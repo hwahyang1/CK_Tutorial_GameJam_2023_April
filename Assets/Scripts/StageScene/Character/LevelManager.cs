@@ -82,7 +82,6 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 			Stamina = maxStamina[Level];
 			Exp = 0;
 
-
 			int[][] inventory = new int[][]
 			                    {
 				                    new int[] { -1, -1, -1, -1, -1 },

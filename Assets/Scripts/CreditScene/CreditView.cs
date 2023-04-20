@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 using CK_Tutorial_GameJam_April.PreloadScene.Scene;
+using CK_Tutorial_GameJam_April.PreloadScene.Audio;
 
 namespace CK_Tutorial_GameJam_April.CreditScene
 {
@@ -13,6 +14,9 @@ namespace CK_Tutorial_GameJam_April.CreditScene
 	/// </summary>
 	public class CreditView : MonoBehaviour
 	{
+		[SerializeField]
+		private AudioClip backgroundClip;
+		
 		[SerializeField]
 		private RectTransform parent;
 
@@ -47,6 +51,11 @@ namespace CK_Tutorial_GameJam_April.CreditScene
 					Destroy(currentObject);
 				}
 			}
+
+			if (!CreditParams.Instance.isControllable)
+			{
+				AudioManager.Instance.PlayBackgroundAudio(backgroundClip);
+			}
 		}
 
 		private void Update()
@@ -74,6 +83,7 @@ namespace CK_Tutorial_GameJam_April.CreditScene
 			else
 			{
 				CreditParams.Instance.Exit();
+				AudioManager.Instance.StopBackgroundAudio();
 				SceneChange.Instance.ChangeScene("MenuScene");
 			}
 		}

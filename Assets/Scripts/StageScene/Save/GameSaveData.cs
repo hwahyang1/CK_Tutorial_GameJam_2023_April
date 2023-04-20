@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 using Cysharp.Threading.Tasks;
 
+using CK_Tutorial_GameJam_April.StageScene.Boss;
+using CK_Tutorial_GameJam_April.StageScene.Items;
 using CK_Tutorial_GameJam_April.PreloadScene.Save;
 using CK_Tutorial_GameJam_April.StageScene.Inventory;
 using CK_Tutorial_GameJam_April.StageScene.Character;
@@ -76,6 +78,12 @@ namespace CK_Tutorial_GameJam_April.StageScene.Save
 			saveData.playerLevel = levelManager.Level;
 			saveData.playerExp = levelManager.Exp;
 
+			BossManager bossManager = GameObject.FindAnyObjectByType<BossManager>();
+			saveData.bossTime = bossManager.ElapsedTime;
+
+			ItemSpawnManager itemSpawnManager = GameObject.FindAnyObjectByType<ItemSpawnManager>();
+			saveData.droppedItems = itemSpawnManager.ExportAllItems();
+			
 			Tuple<int[][], int[][]> playerInventory = GameObject.FindGameObjectWithTag("PlayerInventory")
 			                                                    .GetComponent<SlotsManager>().ExportAllTilesIdsUids();
 			saveData.playerInventory = playerInventory;
