@@ -85,7 +85,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 		{
 			playerIndicator.sprite = null; // 평소에는 아무것도 띄우지 않음.
 
-			if (elapsedTime >= maxTime - 2f && animTime <= 10f) // ?
+			if (elapsedTime >= maxTime + 0.5f && animTime <= 5f) // ?
 			{
 				playerIndicator.sprite = indicator[0];
 			}
@@ -109,7 +109,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 			{
 				animTime += Time.deltaTime;
 
-				if (animTime <= 10f)
+				if (animTime <= 5f)
 				{
 					if (animTime % 5 > 0f && animTime % 5 <= 2.0f)
 					{
@@ -130,7 +130,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 				}
 			}
 
-			if (onBoss && !hideObjectManager.isTrigger && animTime > 10f) // 숨어있지 않으면 죽음
+			if (onBoss && !hideObjectManager.isTrigger && animTime > 5f) // 숨어있지 않으면 죽음
 			{
 				bossTime += Time.deltaTime; // 보스에게 걸렸을떄의 타이머
 				spriteRenderer.sprite = bossAnim[3]; // 발견으로 이미지 변경
@@ -153,7 +153,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 					//playerIndicator.sprite = null;
 				}
 			}
-			else if (onBoss && animTime > 10f) // 숨어있었다면 보스가 퇴장
+			else if (onBoss && animTime > 5f) // 숨어있었다면 보스가 퇴장
 			{
 				StartCoroutine(Down());
 				GameSaveData.Instance.ExportData();
@@ -163,7 +163,6 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 				elapsedTime = 0f;
 				animTime = 0f;
 			}
-
 
 			if (GameManager.Instance.status != GameStatus.Playing)
 			{
@@ -177,7 +176,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 
 		public void GetItem()
 		{
-			elapsedTime += 20f;
+			elapsedTime += 30f;
 		}
 
 		IEnumerator Up()

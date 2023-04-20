@@ -53,7 +53,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				else
 				{
 					time = 0f; // 루프되야하니까
-					onEat = false;
+					//onEat = false;
 				}
 			}
 			else if (onPickUp)
