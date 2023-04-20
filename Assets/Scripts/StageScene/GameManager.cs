@@ -18,6 +18,7 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		ItemEarn,
 		MessageViewing,
 		Paused,
+		ExitSaving,
 		Dead
 	}
 

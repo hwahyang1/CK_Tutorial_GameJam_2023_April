@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using CK_Tutorial_GameJam_April.StageScene.Save;
+
 namespace CK_Tutorial_GameJam_April.StageScene.Inventory
 {
 	/// <summary>
@@ -13,6 +15,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory
 	{
 		[SerializeField]
 		private Transform keysParent;
+
+		[SerializeField]
+		private Text keysAdditionalText;
 
 		[SerializeField]
 		private Exit exit;
@@ -29,6 +34,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory
 			UpdateUI();
 		}
 
+		private void Start()
+		{
+			DefineSaveData data = GameSaveData.Instance.SaveData;
+			if (data == null) return;
+
+			SetKeyCount(data.playerKeys);
+		}
+
 		public void SetKeyCount(int count)
 		{
 			currentKeysCount = count;
@@ -42,6 +55,12 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory
 			{
 				Image current = keysParent.GetChild(i).GetChild(0).GetComponent<Image>();
 				current.color = i < currentKeysCount ? enabledColor : disabledColor;
+			}
+
+			keysAdditionalText.gameObject.SetActive(keysParent.childCount <= currentKeysCount);
+			if (keysParent.childCount <= currentKeysCount)
+			{
+				keysAdditionalText.text = $"+{currentKeysCount - keysParent.childCount}";
 			}
 			
 			exit.SetDoorActive(currentKeysCount >= 3);

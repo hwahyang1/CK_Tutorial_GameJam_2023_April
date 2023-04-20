@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using UnityEngine;
-
 namespace CK_Tutorial_GameJam_April
 {
 	/// <summary>
@@ -13,22 +11,33 @@ namespace CK_Tutorial_GameJam_April
 	public class DefineSaveData
 	{
 		public Tuple<float, float> playerPosition;
-		public Time playtime;
-		public List<bool> playerKeySlots;
+		public float playtime;
+		public int playerKeys;
+		public float playerStamina;
+		public int playerLevel;
+		public int playerExp;
 		public Tuple<int[][], int[][]> playerInventory;
-		public Dictionary<int, Tuple<DefineNpcFlow, int[][], int[][]>> npcInventory;
+		public Dictionary<string, Tuple<DefineNpcFlow, int[][], int[][]>> npcInventory;
+		
+		public DefineSaveData(){}
 
 		public DefineSaveData(
 			Tuple<float, float> playerPosition,
-			Time playtime,
-			List<bool> playerKeySlots,
+			float playtime,
+			int playerKeys,
+			float playerStamina,
+			int playerLevel,
+			int playerExp,
 			Tuple<int[][], int[][]> playerInventory,
-			Dictionary<int, Tuple<DefineNpcFlow, int[][], int[][]>> npcInventory
+			Dictionary<string, Tuple<DefineNpcFlow, int[][], int[][]>> npcInventory
 		)
 		{
 			this.playerPosition = playerPosition;
 			this.playtime = playtime;
-			this.playerKeySlots = playerKeySlots;
+			this.playerKeys = playerKeys;
+			this.playerStamina = playerStamina;
+			this.playerLevel = playerLevel;
+			this.playerExp = playerExp;
 			this.playerInventory = playerInventory;
 			this.npcInventory = npcInventory;
 		}

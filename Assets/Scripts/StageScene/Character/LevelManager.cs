@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
 
 namespace CK_Tutorial_GameJam_April.StageScene.Character
@@ -75,7 +76,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 
 		private readonly float[] deltaTime = new float[2]; // 초반 3초, 후반 1초마다 회복
 
-		private void Start()
+		private void Awake()
 		{
 			Level = 0;
 			Stamina = maxStamina[Level];
@@ -101,6 +102,16 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 				              new int[] { 0, 0, 0, 0, 0 },
 			              };
 			slotsManager.InitFromArray(inventory, uid);
+		}
+
+		private void Start()
+		{
+			DefineSaveData data = GameSaveData.Instance.SaveData;
+			if (data == null) return;
+
+			Stamina = data.playerStamina;
+			Level = data.playerLevel;
+			Exp = data.playerExp;
 		}
 
 		private void Update()
