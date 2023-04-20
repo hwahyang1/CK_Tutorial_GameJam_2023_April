@@ -10,6 +10,8 @@ TagManager:
   - ItemPosition
   - NPC
   - Ground
+  - SavingSpinner
+  - PlayerInventory
   layers:
   - Default
   - TransparentFX

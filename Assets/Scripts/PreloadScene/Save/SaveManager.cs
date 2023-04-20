@@ -12,7 +12,7 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Save
 	/// </summary>
 	public class SaveManager : SingleTon<SaveManager>
 	{
-		private DefineSaveData currentSaveData;
+		private DefineSaveData currentSaveData = null;
 		private string filePath;
 
 		private BinaryFormatter formatter = new BinaryFormatter();

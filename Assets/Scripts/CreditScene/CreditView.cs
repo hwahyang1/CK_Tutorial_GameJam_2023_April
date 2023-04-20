@@ -54,7 +54,7 @@ namespace CK_Tutorial_GameJam_April.CreditScene
 			EventSystem.current.SetSelectedGameObject(null);
 
 			float multiply = 1f;
-			if (Input.GetMouseButton(0) && CreditParams.Instance.isControllable) multiply = flowSpeedMultiply;
+			if (Input.GetMouseButton(0)) multiply = flowSpeedMultiply;
 
 			parent.anchoredPosition = new Vector2(parent.anchoredPosition.x, parent.anchoredPosition.y + (flowSpeed * multiply * Time.deltaTime));
 

@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 using CK_Tutorial_GameJam_April.StageScene.UI;
+using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.StageScene.Inventory;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
 
@@ -15,6 +17,15 @@ namespace CK_Tutorial_GameJam_April.StageScene
 	/// </summary>
 	public class Npc : MonoBehaviour
 	{
+		[SerializeField]
+		private List<Sprite> sprites = new List<Sprite>();
+
+		[SerializeField]
+		private float spritesTime = 0.25f;
+
+		private int currentSpriteIndex = 0;
+		private float currentTime = 0f;
+		
 		[Header("Scripts")]
 		[SerializeField]
 		private SlotsManager slotsManager;
@@ -28,6 +39,9 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		[SerializeField]
 		private NpcAdditional npcAdditional;
 
+		[SerializeField]
+		private ItemEarn itemEarn;
+
 		[Header("Npc Data")]
 		[Tooltip("0과 -1만 사용합니다. 공백으로 구분합니다.")]
 		public List<string> slotSize;
@@ -40,6 +54,9 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		private string description;
 
 		[SerializeField]
+		private Sprite npcSprite;
+
+		[SerializeField]
 		[Tooltip("줄바꿈은 \\n로 입력합니다.")]
 		private List<string> greetingMessages;
 
@@ -48,11 +65,18 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		private List<string> thanksMessages;
 
 		private Tuple<int[][], int[][]> backup;
+		public Tuple<int[][], int[][]> Backup => backup;
 
 		private DefineNpcFlow currentFlow = DefineNpcFlow.Greeting;
+		public DefineNpcFlow CurrentFlow => currentFlow;
+
+		private SpriteRenderer spriteRenderer;
 
 		private void Awake()
 		{
+			spriteRenderer = GetComponent<SpriteRenderer>();
+			currentSpriteIndex = Random.Range(0, sprites.Count);
+			
 			int horizontalCount = slotSize[0].Split(' ').Length;
 			int[][] uidData = new int[slotSize.Count][];
 			int[][] slotData = new int[slotSize.Count][];
@@ -73,9 +97,29 @@ namespace CK_Tutorial_GameJam_April.StageScene
 			backup = new Tuple<int[][], int[][]>(slotData, uidData);
 		}
 
+		private void Start()
+		{
+			DefineSaveData data = GameSaveData.Instance.SaveData;
+			if (data == null) return;
+			if (!data.npcInventory.ContainsKey(gameObject.name)) return;
+			Tuple<DefineNpcFlow, int[][], int[][]> previousInventory = data.npcInventory[gameObject.name];
+
+			SetStatus(previousInventory.Item1 != DefineNpcFlow.Ended, previousInventory.Item1);
+			backup = new Tuple<int[][], int[][]>(previousInventory.Item2, previousInventory.Item3);
+		}
+
 		private void Update()
 		{
-			if (currentFlow != DefineNpcFlow.Inventory) return;
+			if (currentTime >= spritesTime)
+			{
+				currentSpriteIndex++;
+				if (currentSpriteIndex >= sprites.Count) currentSpriteIndex = 0;
+				spriteRenderer.sprite = sprites[currentSpriteIndex];
+				currentTime = 0f;
+			}
+			currentTime += Time.deltaTime;
+			
+			if (currentFlow != DefineNpcFlow.Inventory || slotsManager.current != gameObject.name || !slotsManager.IsActive) return;
 
 			Tuple<int[][], int[][]> data = slotsManager.ExportAllTilesIdsUids();
 
@@ -86,7 +130,8 @@ namespace CK_Tutorial_GameJam_April.StageScene
 					if (currentV == 0) return;
 				}
 			}
-
+			
+			// 여기까지 왔으면 다 채운거임
 			backup = slotsManager.ExportAllTilesIdsUids();
 			slotsManager.SetTabActive(false);
 			currentFlow = DefineNpcFlow.Thanks;
@@ -98,21 +143,23 @@ namespace CK_Tutorial_GameJam_April.StageScene
 			switch (currentFlow)
 			{
 				case DefineNpcFlow.Greeting:
-					messageManager.Show(name, greetingMessages, () =>
+					messageManager.Show(name, greetingMessages, npcSprite, () =>
 					                                            {
 						                                            SetStatus(true, DefineNpcFlow.Inventory);
-						                                            npcAdditional.Set(name, description);
+						                                            npcAdditional.Set(name, description, npcSprite);
 						                                            OpenInventory();
 					                                            });
 					break;
 				case DefineNpcFlow.Inventory:
-					npcAdditional.Set(name, description);
+					npcAdditional.Set(name, description, npcSprite);
 					OpenInventory();
 					break;
 				case DefineNpcFlow.Thanks:
-					messageManager.Show(name, thanksMessages, () =>
+					messageManager.Show(name, thanksMessages, npcSprite, () =>
 					                                          {
+						                                          GameManager.Instance.status = GameStatus.ItemEarn;
 						                                          playerAdditional.SetKeyCount(playerAdditional.CurrentKeysCount+1);
+						                                          itemEarn.Show();
 						                                          SetStatus(false, DefineNpcFlow.Ended);
 					                                          });
 					break;
@@ -131,6 +178,8 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		{
 			if (slotsManager.IsActive) return;
 
+			slotsManager.current = gameObject.name;
+
 			slotsManager.InitFromArray(backup.Item1, backup.Item2);
 			slotsManager.SetTabActive(true);
 		}
@@ -139,6 +188,8 @@ namespace CK_Tutorial_GameJam_April.StageScene
 		{
 			if (!slotsManager.IsActive) return;
 
+			slotsManager.current = "";
+			
 			backup = slotsManager.ExportAllTilesIdsUids();
 			slotsManager.SetTabActive(false);
 		}

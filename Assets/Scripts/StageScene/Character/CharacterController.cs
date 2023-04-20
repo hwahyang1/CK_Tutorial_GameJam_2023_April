@@ -6,6 +6,7 @@ using UnityEngine;
 
 using Cysharp.Threading.Tasks;
 
+using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.PreloadScene.Item;
 using CK_Tutorial_GameJam_April.PreloadScene.Alert;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
@@ -61,12 +62,20 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		private LevelManager levelManager;
 		private CharacterAnim characterAnim;
 
-		private void Start()
+		private void Awake()
 		{
 			rb = GetComponent<Rigidbody2D>();
 			animator = GetComponent<Animator>();
 			levelManager = GetComponent<LevelManager>();
 			characterAnim = GetComponent<CharacterAnim>();
+		}
+
+		private void Start()
+		{
+			DefineSaveData data = GameSaveData.Instance.SaveData;
+			if (data == null) return;
+
+			transform.position = new Vector3(data.playerPosition.Item1, data.playerPosition.Item2, 0f);
 		}
 
 		private void Update()

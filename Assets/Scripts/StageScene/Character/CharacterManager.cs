@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using CK_Tutorial_GameJam_April.StageScene.Boss;
+using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.StageScene.Items;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Item;
 using CK_Tutorial_GameJam_April.StageScene.Inventory.Slots;
@@ -36,6 +37,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.Character
 		private bool rollbackInventory;
 
 		private bool getItem = false;
+
+		private void Start()
+		{
+			DefineSaveData data = GameSaveData.Instance.SaveData;
+			if (data == null) return;
+			
+			slotsManager.InitFromArray(data.playerInventory.Item1, data.playerInventory.Item2);
+		}
 
 		private void Update()
 		{
