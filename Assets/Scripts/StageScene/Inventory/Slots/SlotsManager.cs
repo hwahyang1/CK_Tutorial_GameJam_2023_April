@@ -75,6 +75,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory.Slots
 
 		private bool protectModify = false;
 
+		[HideInInspector]
+		public string current = "";
+
 		private void Awake()
 		{
 			Init();

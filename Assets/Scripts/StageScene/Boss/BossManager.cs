@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-
+using CK_Tutorial_GameJam_April.PreloadScene.Scene;
 using UnityEngine;
 
-using CK_Tutorial_GameJam_April.StageScene.Character;
+using CK_Tutorial_GameJam_April.StageScene.Save;
 using CK_Tutorial_GameJam_April.StageScene.Audio;
 using CK_Tutorial_GameJam_April.StageScene.Items;
+using CK_Tutorial_GameJam_April.StageScene.Character;
 
 namespace CK_Tutorial_GameJam_April.StageScene.Boss
 {
@@ -62,7 +63,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 		{
 			playerIndicator.sprite = null; // 평소에는 아무것도 띄우지 않음.
 
-			if (time >= maxTime + 0.5f && animTime <= 2f) // ?
+			if (time >= maxTime - 2f && animTime <= 5f) // ?
 			{
 				playerIndicator.sprite = indicator[0];
 			}
@@ -127,6 +128,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 			else if (onBoss && animTime > 10f) // 숨어있었다면 보스가 퇴장
 			{
 				StartCoroutine(Down());
+				GameSaveData.Instance.ExportData();
 				itemSpawnManager.RespawnItem();
 				onBoss = false;
 				isTrigged = false;
@@ -180,8 +182,12 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 				spriteRenderer.transform.localScale =
 					Vector3.Lerp(spriteRenderer.transform.localScale, new Vector3(1.6f, 1.6f, 1f), 0.05f);
 				yield return null;
-			}
-			// TODO: 플레이어 사망
+			} 
+			GameSaveData.Instance.Exit();
+			SceneChange.Instance.ChangeScene("BlankScene", true, false, () =>
+			                                                            {
+				                                                            SceneChange.Instance.ChangeScene("StageScene", false, true);
+			                                                            });
 		}
 	}
 }

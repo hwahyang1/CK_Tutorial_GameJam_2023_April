@@ -24,6 +24,9 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 		[SerializeField]
 		private Text messageArea;
 
+		[SerializeField]
+		private Image image;
+
 		[Header("Settings")]
 		[SerializeField]
 		private float messageDelay;
@@ -45,7 +48,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 			}
 		}
 
-		public void Show(string name, List<string> messages, Action callback = null)
+		public void Show(string name, List<string> messages, Sprite sprite = null, Action callback = null)
 		{
 			currentIndex = 0;
 			this.name.text = name;
@@ -54,11 +57,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 			parent.SetActive(true);
 			GameManager.Instance.status = GameStatus.MessageViewing;
 
-			ShowMessage(callback).Forget();
+			ShowMessage(sprite, callback).Forget();
 		}
 
-		private async UniTaskVoid ShowMessage(Action callback)
+		private async UniTaskVoid ShowMessage(Sprite sprite, Action callback)
 		{
+			image.sprite = sprite;
+			image.color = new Color(1f, 1f, 1f, sprite == null ? 0f : 1f);
+			
 			for (; currentIndex < messages.Count; currentIndex++)
 			{
 				messageArea.text = "";
@@ -95,10 +101,10 @@ namespace CK_Tutorial_GameJam_April.StageScene.UI
 					await UniTask.DelayFrame(1);
 				}
 			}
-
-			callback?.Invoke();
+			
 			parent.SetActive(false);
 			GameManager.Instance.status = GameStatus.Playing;
+			callback?.Invoke();
 		}
 	}
 }

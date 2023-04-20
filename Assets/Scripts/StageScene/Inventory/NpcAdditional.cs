@@ -17,10 +17,14 @@ namespace CK_Tutorial_GameJam_April.StageScene.Inventory
 		[SerializeField]
 		private Text descriptionText;
 
-		public void Set(string name, string description)
+		[SerializeField]
+		private Image npcImage;
+
+		public void Set(string name, string description, Sprite npcSprite)
 		{
 			nameText.text = name;
 			descriptionText.text = description.Replace("\\n", "\n");
+			npcImage.sprite = npcSprite;
 		}
 	}
 }

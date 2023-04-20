@@ -15,8 +15,10 @@ namespace CK_Tutorial_GameJam_April.StageScene
 	{
 		Playing,
 		Eating,
+		ItemEarn,
 		MessageViewing,
 		Paused,
+		ExitSaving,
 		Dead
 	}
 
