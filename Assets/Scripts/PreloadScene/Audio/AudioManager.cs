@@ -56,7 +56,8 @@ namespace CK_Tutorial_GameJam_April.PreloadScene.Audio
 		/// </summary>
 		public void StopBackgroundAudio()
 		{
-			StartCoroutine(nameof(StopBackgroundAudioCoroutine));
+			backgroundAudio.Stop();
+			//StartCoroutine(nameof(StopBackgroundAudioCoroutine));
 		}
 
 		private IEnumerator StopBackgroundAudioCoroutine()

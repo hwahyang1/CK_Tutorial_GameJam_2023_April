@@ -10,6 +10,7 @@ namespace CK_Tutorial_GameJam_April
 	[Serializable]
 	public class DefineSaveData
 	{
+		public bool viewedTutorial;
 		public Tuple<float, float> playerPosition;
 		public float playtime;
 		public int playerKeys;
@@ -24,6 +25,7 @@ namespace CK_Tutorial_GameJam_April
 		public DefineSaveData(){}
 
 		public DefineSaveData(
+			bool viewedTutorial,
 			Tuple<float, float> playerPosition,
 			float playtime,
 			int playerKeys,
@@ -36,6 +38,7 @@ namespace CK_Tutorial_GameJam_April
 			Dictionary<string, Tuple<DefineNpcFlow, int[][], int[][]>> npcInventory
 		)
 		{
+			this.viewedTutorial = viewedTutorial;
 			this.playerPosition = playerPosition;
 			this.playtime = playtime;
 			this.playerKeys = playerKeys;

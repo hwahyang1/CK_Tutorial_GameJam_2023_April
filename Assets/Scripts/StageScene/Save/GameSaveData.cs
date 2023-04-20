@@ -66,6 +66,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Save
 
 			// 없을 경우 생성
 			saveData ??= new DefineSaveData();
+			
+			saveData.viewedTutorial = GameManager.Instance.viewedTutorial;
 
 			Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
 			saveData.playerPosition = new Tuple<float, float>(playerPosition.x, playerPosition.y);

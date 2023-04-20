@@ -2338,7 +2338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e226e8a62546c46a8be709155dd23e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundClip: {fileID: 8300000, guid: c43f15849ec6eff438894bc24c8b9281, type: 3}
+  backgroundClip: {fileID: 8300000, guid: 83c075936c001f047a93d60f614654d7, type: 3}
   parent: {fileID: 269451038}
   startAt: {x: 0, y: -1080}
   endAt: {x: 0, y: 3100}
