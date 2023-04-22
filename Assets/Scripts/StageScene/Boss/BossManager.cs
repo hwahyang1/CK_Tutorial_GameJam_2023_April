@@ -164,7 +164,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Boss
 				animTime = 0f;
 			}
 
-			if (GameManager.Instance.status != GameStatus.Playing)
+			if (GameManager.Instance.status != GameStatus.Playing && GameManager.Instance.status != GameStatus.Eating)
 			{
 				return;
 			}

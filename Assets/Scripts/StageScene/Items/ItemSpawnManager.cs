@@ -113,7 +113,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 				availablePositions.Remove(current);
 			}
 
-			// 레어 8개 (당근(6) 3개, 귤(7) 3개, 딸기(8) 4개)
+			// 레어 10개 (당근(6) 3개, 귤(7) 3개, 딸기(8) 4개)
 			for (int i = 0; i < 3; i++)
 			{
 				Item current = availablePositions[Random.Range(0, availablePositions.Count)];
@@ -138,7 +138,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 				availablePositions.Remove(current);
 			}
 
-			// 일반 8개 (아몬드(1) 2개, 해바라기씨(2) 2개, 캐슈넛(3) 6개, 호두(4) 2개, 샐러리(5) 7개)
+			// 일반 19개 (아몬드(1) 2개, 해바라기씨(2) 2개, 캐슈넛(3) 6개, 호두(4) 2개, 샐러리(5) 7개)
 			for (int i = 0; i < 2; i++)
 			{
 				Item current = availablePositions[Random.Range(0, availablePositions.Count)];
@@ -163,7 +163,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 				availablePositions.Remove(current);
 			}
 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 2; i++)
 			{
 				Item current = availablePositions[Random.Range(0, availablePositions.Count)];
 				current.SetItem(4, effectColors[0]);
