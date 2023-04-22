@@ -104,8 +104,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 
 			/* 기획서 보니까 하드코딩이 빠르게 생김 */
 
-			// 전설 2개 (고구마(9) 2개)
-			for (int i = 0; i < 2; i++)
+			// 전설 1개 (고구마(9) 1개)
+			for (int i = 0; i < 1; i++)
 			{
 				Item current = availablePositions[Random.Range(0, availablePositions.Count)];
 				current.SetItem(9, effectColors[2]);
@@ -113,7 +113,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 				availablePositions.Remove(current);
 			}
 
-			// 레어 8개 (당근(6) 3개, 귤(7) 3개, 딸기(8) 2개)
+			// 레어 8개 (당근(6) 3개, 귤(7) 3개, 딸기(8) 4개)
 			for (int i = 0; i < 3; i++)
 			{
 				Item current = availablePositions[Random.Range(0, availablePositions.Count)];
@@ -130,7 +130,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 				availablePositions.Remove(current);
 			}
 
-			for (int i = 0; i < 2; i++)
+			for (int i = 0; i < 4; i++)
 			{
 				Item current = availablePositions[Random.Range(0, availablePositions.Count)];
 				current.SetItem(8, effectColors[1]);
@@ -138,8 +138,8 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 				availablePositions.Remove(current);
 			}
 
-			// 일반 8개 (아몬드(1) 4개, 해바라기씨(2) 4개, 캐슈넛(3) 4개, 호두(4) 4개, 샐러리(5) 4개)
-			for (int i = 0; i < 4; i++)
+			// 일반 8개 (아몬드(1) 2개, 해바라기씨(2) 2개, 캐슈넛(3) 6개, 호두(4) 2개, 샐러리(5) 7개)
+			for (int i = 0; i < 2; i++)
 			{
 				Item current = availablePositions[Random.Range(0, availablePositions.Count)];
 				current.SetItem(1, effectColors[0]);
@@ -147,7 +147,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 				availablePositions.Remove(current);
 			}
 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 2; i++)
 			{
 				Item current = availablePositions[Random.Range(0, availablePositions.Count)];
 				current.SetItem(2, effectColors[0]);
@@ -155,7 +155,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 				availablePositions.Remove(current);
 			}
 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 6; i++)
 			{
 				Item current = availablePositions[Random.Range(0, availablePositions.Count)];
 				current.SetItem(3, effectColors[0]);
@@ -171,7 +171,7 @@ namespace CK_Tutorial_GameJam_April.StageScene.Items
 				availablePositions.Remove(current);
 			}
 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 7; i++)
 			{
 				Item current = availablePositions[Random.Range(0, availablePositions.Count)];
 				current.SetItem(5, effectColors[0]);
